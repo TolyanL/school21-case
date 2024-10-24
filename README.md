@@ -2,11 +2,11 @@
 Hello programmers 👋🎃!
 
 ## 📚 Table of contents:
-1. [Installation](#-installation)
-2. [Update to latest stable version](#-update)
+1. [Installation](#installation)
+2. [Update to latest stable version](#update)
 
 
-## 📦 Installation
+## Installation
 1. Clone repo
 ```bash
 git clone https://github.com/TolyanL/school21-case.git
@@ -28,7 +28,7 @@ python manage.py runserver
 ```
 
 
-## ⬇️ Update
+## Update
 1. Switch to `main` branch
 ```bash
 git checkout main
