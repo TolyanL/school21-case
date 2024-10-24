@@ -11,3 +11,10 @@ git clone https://github.com/TolyanL/school21-case.git
 ```
 docker compose -f docker_compose.yaml up -d --build
 ```
+
+3. Run server
+```bash
+python school21_case/manage.py makemigrations
+python school21_case/manage.py migrate
+python school21_case/manage.py runserver
+```
