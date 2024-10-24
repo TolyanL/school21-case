@@ -5,6 +5,7 @@ description = "case for school21"
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
+    "django-debug-toolbar>=4.4.6",
     "django==5.1.2",
     "psycopg2-binary>=2.9.10",
 ]

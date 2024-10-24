@@ -1,3 +1,4 @@
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -11,7 +12,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-m8@6hk%1ru&^wlv)5hwta-#v%c3$th7@qeq-8)zijnqf4#+4-!"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# DEBUG = True
+DJANGO_ENV = os.environ.get("DJANGO_ENV", default="development")
+DEBUG = DJANGO_ENV == "development"
 
 ALLOWED_HOSTS = []
 
@@ -25,6 +28,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "home",
 ]
 
 MIDDLEWARE = [
@@ -37,12 +41,21 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
+if DEBUG:
+    INSTALLED_APPS += [
+        "debug_toolbar",
+    ]
+
+    MIDDLEWARE += [
+        "debug_toolbar.middleware.DebugToolbarMiddleware",
+    ]
+
 ROOT_URLCONF = "school21_case.urls"
 
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [BASE_DIR.joinpath("templates")],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
