@@ -8,17 +8,28 @@ Hello programmers 👋🎃!
 
 
 ## Installation
-1. Clone repo
+### 1. Clone repo
 ```bash
 git clone https://github.com/TolyanL/school21-case.git
 ```
 
-2. Run Docker container (development)
+### 2. Install requirements
+  #### 1. Uv
+  ```bash
+  uv sync
+  ```
+  #### 2. Poetry
+  ```bash
+  poetry shell
+  poetry install
+  ```
+
+### 2. Run Docker container (development)
 ```
 docker compose -f docker_compose.yaml up -d --build
 ```
 
-3. Run server
+### 3. Run server
 ```bash
 cd school21_case
 ```
