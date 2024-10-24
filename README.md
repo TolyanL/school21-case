@@ -24,12 +24,12 @@ git clone https://github.com/TolyanL/school21-case.git
   poetry install
   ```
 
-### 2. Run Docker container (development)
+### 3. Run Docker container (development)
 ```
-docker compose -f docker_compose.yaml up -d --build
+docker compose -f docker-compose.dev.yaml up -d --build
 ```
 
-### 3. Run server
+### 4. Run server
 ```bash
 cd school21_case
 ```
