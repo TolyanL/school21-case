@@ -1,5 +1,12 @@
 from django.contrib import admin
 from .models import Group, Interest
 
-admin.register(Group)
-admin.register(Interest)
+
+class GroupAdmin(admin.ModelAdmin):
+    list_display = ["name", "created_by", "created_at", "hide"]
+    search_fields = ["name"]
+    filter_horizontal = ["tags", "members"]
+
+
+admin.site.register(Group, GroupAdmin)
+admin.site.register(Interest)
