@@ -29,6 +29,8 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "home",
+    "users",
+    "groups",
 ]
 
 MIDDLEWARE = [
@@ -80,7 +82,7 @@ DATABASES = {
         "NAME": "case_db",
         "USER": "case_db",
         "PASSWORD": 12345,
-        "HOST": "localhost",  # 0.0.0.0",  # "fortnitegg_db",
+        "HOST": "localhost",
         "PORT": 5432,
     }
 }
