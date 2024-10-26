@@ -7,6 +7,9 @@ school21_case/media/
 school21-case/media
 media
 
+*.png
+*.jpg
+
 # C extensions
 *.so
 
