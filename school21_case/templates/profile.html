@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Home page{% endblock %}
+{% block description %}Home description{%endblock %}
+
+{% block content %}
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="card card-round">
+      <div class="card-header">
+        <div class="card-head-row card-tools-still-right">
+          <h4 class="card-title">Users Geolocation</h4>
+        </div>
+        <p class="card-category">
+          Map of the distribution of users around the world
+        </p>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <p class="card-category">{{ user.profile.nickname }}</p>
+          <img src="{{ user.profile.avatar.url }}" alt="" style="width: 25%;">
+          <p class="card-category">{{ user.profile.interests }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

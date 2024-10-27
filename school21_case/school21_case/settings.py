@@ -16,8 +16,10 @@ SECRET_KEY = "django-insecure-m8@6hk%1ru&^wlv)5hwta-#v%c3$th7@qeq-8)zijnqf4#+4-!
 DJANGO_ENV = os.environ.get("DJANGO_ENV", default="development")
 DEBUG = DJANGO_ENV == "development"
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
 
+INTERNAL_IPS = ["127.0.0.1"]
+CSRF_TRUSTED_ORIGINS = ["https://fortnitegg.ru", "https://www.fortnitegg.ru"]
 
 # Application definition
 
