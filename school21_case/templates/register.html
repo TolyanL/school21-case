@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% load static %}
+{% load add_class %}
+
+{% block title %}Login / Registration{% endblock %}
+{% block description %}Home description{%endblock %}
+
+{% block content %}
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="card card-round" style="background-color: aliceblue;">
+      <div class="card-header">
+        <div class="card-head-row card-tools-still-right">
+          <h4 class="card-title">Users Logi / Registration</h4>
+        </div>
+        <p class="card-category">
+          Map of the distribution of users around the world
+        </p>
+      </div>
+      <div class="card-body">
+
+        <form class="row g-3" method="POST">
+          {% csrf_token %}
+          {% for field in reg_form %}
+            <div class="col-md-4">
+              <div class="form-label">{{ field.label_tag }}</div>
+              {{ field|add_class:"form-control" }}
+            </div>
+          {% endfor %}
+
+          {% if reg_form.errors %}
+            {{ reg_form.errors }}
+          {% endif %}
+
+          <div class="col-12">
+            <button class="btn btn-primary" type="submit" value="Register">Submit form</button>
+          </div>
+          
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

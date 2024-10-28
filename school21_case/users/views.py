@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpRequest
 from django.contrib.auth.models import User
 
-from .forms import ProfileSearchForm
+from .forms import ProfileSearchForm, LoginForm, RegistrationForm
 
 
 def profile(request: HttpRequest, username: str):
@@ -24,10 +24,29 @@ def search_profile(request: HttpRequest):
             profile = profile.filter(profile__interests__id__in=interests).distinct()
 
         if profile:
-            print(profile.first().profile.interests.all())
             return render(request, "user_search.html", context={"users": profile.all()})
 
     return redirect("home")
+
+
+def sign_up(request: HttpRequest):
+    if request.method == "POST":
+        form = RegistrationForm(request.POST)
+        if not form.errors:
+            print(form.is_valid)
+            print(form.errors)
+            print(form.cleaned_data)
+            form.save()
+            return redirect("home")
+        print(form.errors)
+        return render(request, "register.html", {"reg_form": form})
+
+    form = RegistrationForm()
+    return render(request, "register.html", {"reg_form": form})
+
+
+def register_profile(request: HttpRequest):
+    pass
 
 
 def my_profile(request: HttpRequest, username: str):
