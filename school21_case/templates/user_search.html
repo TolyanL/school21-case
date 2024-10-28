@@ -1,0 +1,146 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Search Results{% endblock %}
+{% block description %}Search results{%endblock %}
+
+{% block content %}
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="card card-round">
+      <div class="card-header">
+        <div class="card-head-row card-tools-still-right">
+          <h4 class="card-title">Users</h4>
+        </div>
+        <p class="card-category">
+          Results for {{ search_query }}
+        </p>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <!-- <div class="col-12"> -->
+
+        {% for user in users %}
+
+          <div class="col-12 col-sm-6 col-lg-4">
+            <div class="card card-attention">
+                <div class="card-body user-card">
+
+                  <div class="avatar avatar-xxl">
+                    <img class="avatar-img avatar-xxl rounded-circle img-fluid" src="{{ user.profile.avatar.url }}" alt="">
+                  </div>
+                  <div class="user-info">
+                    <span class="card-title">{{ user.profile.nickname }}</span>
+                    <span class="card-text" style="color: azure; font-size: 15px;">{{ user.profile.description }}</span>
+                    <p class="card-category">{% for tag in user.profile.interests.all %}#{{ tag }} {% endfor %}</p>
+                  </div>
+
+                </div>
+
+            </div>
+          </div>
+
+
+
+
+          <div class="col-12 col-sm-6 col-lg-4">
+            <div class="card card-attention">
+                <div class="card-body user-card">
+
+                  <div class="avatar avatar-xxl">
+                    <img class="avatar-img avatar-xxl rounded-circle img-fluid" src="{{ user.profile.avatar.url }}" alt="">
+                  </div>
+                  <div class="user-info">
+                    <span class="card-title">{{ user.profile.nickname }}</span>
+                    <span class="card-text" style="color: azure; font-size: 15px;">{{ user.profile.description }}</span>
+                    <p class="card-category">{% for tag in user.profile.interests.all %}#{{ tag }} {% endfor %}</p>
+                  </div>
+
+                </div>
+
+            </div>
+          </div>
+
+          <div class="col-12 col-sm-6 col-lg-4">
+            <div class="card card-attention">
+                <div class="card-body user-card">
+
+                  <div class="avatar avatar-xxl">
+                    <img class="avatar-img avatar-xxl rounded-circle img-fluid" src="{{ user.profile.avatar.url }}" alt="">
+                  </div>
+                  <div class="user-info">
+                    <span class="card-title">{{ user.profile.nickname }}</span>
+                    <span class="card-text" style="color: azure; font-size: 15px;">{{ user.profile.description }}</span>
+                    <p class="card-category">{% for tag in user.profile.interests.all %}#{{ tag }} {% endfor %}</p>
+                  </div>
+
+                </div>
+
+            </div>
+          </div>
+
+          <div class="col-12 col-sm-6 col-lg-4">
+            <div class="card card-attention">
+                <div class="card-body user-card">
+
+                  <div class="avatar avatar-xxl">
+                    <img class="avatar-img avatar-xxl rounded-circle img-fluid" src="{{ user.profile.avatar.url }}" alt="">
+                  </div>
+                  <div class="user-info">
+                    <span class="card-title">{{ user.profile.nickname }}</span>
+                    <span class="card-text" style="color: azure; font-size: 15px;">{{ user.profile.description }}</span>
+                    <p class="card-category">{% for tag in user.profile.interests.all %}#{{ tag }} {% endfor %}</p>
+                  </div>
+
+                </div>
+
+            </div>
+          </div>
+
+          <div class="col-12 col-sm-6 col-lg-4">
+            <div class="card card-attention">
+                <div class="card-body user-card">
+
+                  <div class="avatar avatar-xxl">
+                    <img class="avatar-img avatar-xxl rounded-circle img-fluid" src="{{ user.profile.avatar.url }}" alt="">
+                  </div>
+                  <div class="user-info">
+                    <span class="card-title">{{ user.profile.nickname }}</span>
+                    <span class="card-text" style="color: azure; font-size: 15px;">{{ user.profile.description }}</span>
+                    <p class="card-category">{% for tag in user.profile.interests.all %}#{{ tag }} {% endfor %}</p>
+                  </div>
+
+                </div>
+
+            </div>
+          </div>
+
+          <div class="col-12 col-sm-6 col-lg-4">
+            <div class="card card-attention">
+                <div class="card-body user-card">
+
+                  <div class="avatar avatar-xxl">
+                    <img class="avatar-img avatar-xxl rounded-circle img-fluid" src="{{ user.profile.avatar.url }}" alt="">
+                  </div>
+                  <div class="user-info">
+                    <span class="card-title">{{ user.profile.nickname }}</span>
+                    <span class="card-text" style="color: azure; font-size: 15px;">{{ user.profile.description }}</span>
+                    <p class="card-category">{% for tag in user.profile.interests.all %}#{{ tag }} {% endfor %}</p>
+                  </div>
+
+                </div>
+
+            </div>
+          </div>
+
+        {% endfor %}
+      </div>
+      <!-- </div> -->
+
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

@@ -10,8 +10,6 @@ def profile(request: HttpRequest, username: str):
 
 
 def search_profile(request: HttpRequest):
-    form = ProfileSearchForm()
-
     search_query = ProfileSearchForm(request.POST)
 
     if request.method == "POST" and search_query.is_valid():
@@ -20,15 +18,16 @@ def search_profile(request: HttpRequest):
         username = search_query.get("username")
         interests = search_query.get("interests")
 
-        profile = User.objects.filter(username__icontains=username)
+        profile = User.objects.filter(profile__nickname__icontains=username)
 
         if interests:
             profile = profile.filter(profile__interests__id__in=interests).distinct()
 
         if profile:
-            return render(request, "profile.html", context={"user": profile.first()})
+            print(profile.first().profile.interests.all())
+            return render(request, "user_search.html", context={"users": profile.all()})
 
-    return redirect("home", {"form": form})
+    return redirect("home")
 
 
 def my_profile(request: HttpRequest, username: str):

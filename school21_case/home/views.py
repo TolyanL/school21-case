@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpRequest
-from .forms import ProfileSearchForm
+
+from users.forms import ProfileSearchForm
 
 
 def home(request: HttpRequest):

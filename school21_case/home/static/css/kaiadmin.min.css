@@ -592,6 +592,25 @@ body {
     overflow-y: auto
 }
 
+
+.card-attention {
+    background-color: #111926 !important;
+}
+
+.user-card {
+    display: flex;
+    flex-basis: 100px;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+}
+
+.user-info {
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px;
+}
+
 @media (min-width: 1200.5px) {
     .page-sidebar {
         transform:translateZ(0);
