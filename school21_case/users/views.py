@@ -1,7 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpRequest
 
-from django.contrib import messages
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.models import User
 
@@ -74,7 +73,6 @@ def register(request: HttpRequest):
 
             if not exist_item:
                 data = form.cleaned_data
-                print(data)
 
                 form.save()
                 user = authenticate(request, username=data["username"], password=data["password1"])

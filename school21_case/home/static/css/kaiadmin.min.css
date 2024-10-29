@@ -4877,6 +4877,10 @@ label.error {
     color: #00eba1;
 }
 
+.border-slimegreen {
+    border-color: #00eba1 !important;
+}
+
 .nav-search .btn-search {
     background: 0 0!important;
     padding: .375rem 1rem;

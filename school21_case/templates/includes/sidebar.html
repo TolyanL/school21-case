@@ -94,21 +94,27 @@
           </a>
         </li>
         
+        <li class="nav-item register">
         {% if request.user.is_authenticated %}
-        <li class="nav-item register">
           <a href="{% url "sign_up" %}">
-            <i class="fas fa-user"></i>
-            <p>My profile</p>
+            <!-- <i class="fas fa-user"></i> -->
+            <div class="avatar avatar-xs">
+              {% if request.user.profile.avatar %}
+                <img src="{{ request.user.profile.avatar.url }}" alt="..." class="avatar-img rounded-circle border border-slimegreen">
+              {% else %}
+                <img src="{% static 'img/noavatar.png' %}" alt="..." class="avatar-img rounded-circle border border-slimegreen">
+              {% endif %}
+            </div>
+            <p style="margin-left: 12px;">My profile</p>
+
           </a>
-        </li>
         {% else %}
-        <li class="nav-item register">
           <a href="{% url "sign_up" %}">
             <i class="fas fa-sign-in-alt"></i>
             <p>Login / Register</p>
           </a>
+          {% endif %}
         </li>
-        {% endif %}
 
       </ul>
     </div>
