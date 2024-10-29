@@ -1,21 +1,14 @@
-<!-- <nav class="navbar navbar-header-left navbar-expand-lg navbar-form nav-search p-0 d-none d-lg-flex"> -->
-<!--   <div class="input-group"> -->
-<!--     <div class="input-group-prepend"> -->
-<!--       <button type="submit" class="btn btn-search pe-1"> -->
-<!--         <i class="fa fa-search search-icon"></i> -->
-<!--       </button> -->
-<!--     </div> -->
-    <form class="search-widget" id="search" action="{% url 'profile_search' %}" method="POST">
-        {% csrf_token %}
-        {{ form }}
-        <button><i class="fa fa-search"></i></button>
+<nav class="navbar navbar-header-left nav-search">
+    <form class="search-widget container-fluid" id="search" action="{% url 'profile_search' %}" method="POST">
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <button class="btn btn-search pe-1"><i class="fa fa-search"></i></button>
+            </div>
+            {% csrf_token %}
+            {% for field in search_form %}
+                {{ field }}
+            {% endfor %}
+        </div>
     </form>
-    <!-- <input -->
-    <!--   type="text" -->
-    <!--   placeholder="Search ..." -->
-    <!--   class="form-control" -->
-    <!-- /> -->
-
-<!--   </div> -->
-<!-- </nav> -->
+</nav>
 

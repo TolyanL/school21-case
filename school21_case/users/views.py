@@ -15,16 +15,24 @@ def search_profile(request: HttpRequest):
     if request.method == "POST" and search_query.is_valid():
         search_query = search_query.cleaned_data
 
-        username = search_query.get("username")
+        nickname = search_query.get("nickname")
         interests = search_query.get("interests")
 
-        profile = User.objects.filter(profile__nickname__icontains=username)
+        profile = User.objects.filter(profile__nickname__icontains=nickname)
 
         if interests:
             profile = profile.filter(profile__interests__id__in=interests).distinct()
 
         if profile:
-            return render(request, "user_search.html", context={"users": profile.all()})
+            return render(
+                request,
+                "user_search.html",
+                context={
+                    "users": profile.all(),
+                    "search_form": ProfileSearchForm(),
+                    "search_query": nickname,
+                },
+            )
 
     return redirect("home")
 
@@ -38,7 +46,9 @@ def sign_up(request: HttpRequest):
             print(form.cleaned_data)
             form.save()
             return redirect("home")
+        print(form.is_valid)
         print(form.errors)
+        print(form.cleaned_data)
         return render(request, "register.html", {"reg_form": form})
 
     form = RegistrationForm()

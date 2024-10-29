@@ -5,4 +5,4 @@ from users.forms import ProfileSearchForm
 
 
 def home(request: HttpRequest):
-    return render(request, "index.html", {"form": ProfileSearchForm()})
+    return render(request, "index.html", {"search_form": ProfileSearchForm()})

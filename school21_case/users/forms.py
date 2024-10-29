@@ -7,12 +7,20 @@ from .models import Profile
 
 
 class ProfileSearchForm(forms.Form):
-    username = forms.CharField(label="Username", max_length=32)
-    intersets = forms.ModelMultipleChoiceField(
-        label="Interests",
-        queryset=apps.get_model("groups.Interest").objects.all(),
-        required=False,
+    nickname = forms.CharField(
+        max_length=32,
+        widget=forms.TextInput(
+            attrs={
+                "class": "form-control input-field",
+                "placeholder": "Enter nickname...",
+            }
+        ),
     )
+    # intersets = forms.ModelMultipleChoiceField(
+    #     label="Interests",
+    #     queryset=apps.get_model("groups.Interest").objects.all(),
+    #     required=False,
+    # )
 
 
 class LoginForm(forms.Form):
