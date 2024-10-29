@@ -1,5 +1,6 @@
 from django import forms
-from django.apps import apps
+
+# from django.apps import apps
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 
@@ -24,7 +25,7 @@ class ProfileSearchForm(forms.Form):
 
 
 class LoginForm(forms.Form):
-    email = forms.EmailField(label="Email")
+    email = forms.EmailField(label="Email", widget=forms.EmailInput)
     password = forms.CharField(label="Password", widget=forms.PasswordInput)
 
 

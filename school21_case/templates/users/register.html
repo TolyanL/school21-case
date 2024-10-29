@@ -12,18 +12,41 @@
     <div class="card card-round" style="background-color: aliceblue;">
       <div class="card-header">
         <div class="card-head-row card-tools-still-right">
-          <h4 class="card-title">Users Logi / Registration</h4>
+          <h4 class="card-title">Users Registration</h4>
         </div>
         <p class="card-category">
           Map of the distribution of users around the world
         </p>
       </div>
-      <div class="card-body">
+
+      {% if request.user.is_authenticated %}
+      <div class="card-body d-grid gap-3 justify-content-center">
+        <div class="col">
+          <h1>You already logged as {{ request.user.profile.nickname }}</h1>
+          <h2>Logout?</h2>
+        </div>
+
+        <div class="col">
+          <button class="btn btn-primary">
+            <a href="{% url 'logout' %}" style="color: whitesmoke;">Yes</a>
+          </button>
+        </div>
+        
+        <div class="col">
+          <button class="btn btn-primary">
+            <a href="{% url 'home' %}" style="color: whitesmoke;">Back me to home</a>
+          </button>
+        </div>
+      </div>
+
+      {% else %}
+
+      <div class="card-body d-flex justify-content-center">
 
         <form class="row g-3" method="POST">
           {% csrf_token %}
           {% for field in reg_form %}
-            <div class="col-md-4">
+            <div class="row-md-4">
               <div class="form-label">{{ field.label_tag }}</div>
               {{ field|add_class:"form-control" }}
             </div>
@@ -40,6 +63,8 @@
         </form>
 
       </div>
+
+      {% endif %}
     </div>
   </div>
 </div>

@@ -93,13 +93,22 @@
             <p>About</p>
           </a>
         </li>
-
+        
+        {% if request.user.is_authenticated %}
+        <li class="nav-item register">
+          <a href="{% url "sign_up" %}">
+            <i class="fas fa-user"></i>
+            <p>My profile</p>
+          </a>
+        </li>
+        {% else %}
         <li class="nav-item register">
           <a href="{% url "sign_up" %}">
             <i class="fas fa-sign-in-alt"></i>
             <p>Login / Register</p>
           </a>
         </li>
+        {% endif %}
 
       </ul>
     </div>
