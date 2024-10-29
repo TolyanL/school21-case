@@ -73,7 +73,13 @@ def register(request: HttpRequest):
             exist_item = User.objects.filter(email=form.cleaned_data["email"]).first()
 
             if not exist_item:
+                data = form.cleaned_data
+                print(data)
+
                 form.save()
+                user = authenticate(request, username=data["username"], password=data["password1"])
+
+                login(request, user)
                 return redirect("home")
 
             form.add_error("email", "User with this email already exists")
