@@ -6,27 +6,130 @@
 
 {% block content %}
 
-<div class="row">
-  <div class="col-md-12">
-    <div class="card card-round">
-      <div class="card-header">
-        <div class="card-head-row card-tools-still-right">
-          <h4 class="card-title">Users Geolocation</h4>
-        </div>
-        <p class="card-category">
-          Map of the distribution of users around the world
-        </p>
+<div class="container">
+  <div class="row">
+    <div class="col-md-3 text-center">
+      <div class="avatar-container">
+        {% if user.is_authenticated %}
+          <a href="{% url 'my_profile' %}">
+            <div class="avatar-img">
+              {% if user.profile.avatar %}
+                <img src="{{ user.profile.avatar.url }}" alt="Avatar" class="rounded-circle" style="width: 100%; height: auto;">
+              {% else %}
+                <img src="{% static 'img/noavatar.png' %}" alt="Avatar" class="rounded-circle" style="width: 100%; height: auto;">
+              {% endif %}
+            </div>
+          </a>
+        {% else %}
+          <a href="{% url 'sign_up' %}">
+            <i class="fas fa-sign-in-alt"></i>
+            <p>Login / Register</p>
+          </a>
+        {% endif %}
       </div>
-      <div class="card-body">
-        <div class="row">
-          <p class="card-category">{{ user.profile.nickname }}</p>
-          <img src="{{ user.profile.avatar.url }}" alt="" style="width: 25%;">
-          <p class="card-category">{{ user.profile.description }}</p>
-          <p class="card-category">{{ user.profile.interests }}</p>
+    </div>
+
+    <div class="col-md-9">
+      <div class="card card-round">
+        <div class="card-body">
+          <div class="form-group">
+            <label for="first_name">Имя:</label>
+            <input type="text" class="form-control" id="first_name" value="{{ user.first_name }}" readonly>
+          </div>
+          <div class="form-group">
+            <label for="last_name">Фамилия:</label>
+            <input type="text" class="form-control" id="last_name" value="{{ user.last_name }}" readonly>
+          </div>
+          <div class="form-group">
+            <label for="middle_name">Отчество:</label>
+            <input type="text" class="form-control" id="middle_name" value="{{ user.profile.middle_name }}" readonly>
+          </div>
+          <div class="form-group">
+            <label for="telegram_nickname">Ник в Telegram:</label>
+            <input type="text" class="form-control" id="telegram_nickname" value="{{ user.profile.telegram_nickname }}" readonly>
+          </div>
+          <div class="form-group">
+            <label for="platform_nickname">Ник на платформе:</label>
+            <input type="text" class="form-control" id="platform_nickname" value="{{ user.username }}" readonly>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-3">
+    <div class="col-md-12">
+      <div class="card card-round">
+        <div class="card-body">
+          <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" class="form-control" id="email" value="{{ user.email }}" readonly>
+          </div>
+          <div class="form-group">
+            <label for="password">Password:</label>
+            <div class="input-group">
+              <input type="password" class="form-control" id="password" value="********" readonly>
+              <div class="input-group-append">
+                <span class="input-group-text" id="togglePassword" style="cursor: pointer;">
+                  <i class="fas fa-eye-slash"></i>
+                </span>
+              </div>
+            </div>
+          </div>
+          <button class="btn btn-primary" onclick="changePassword()">Change Password</button>
         </div>
       </div>
     </div>
   </div>
 </div>
+
+<script>
+  function changePassword() {
+    alert('Change password functionality not implemented yet.');
+  }
+
+  document.getElementById('togglePassword').addEventListener('click', function () {
+    const passwordField = document.getElementById('password');
+    const passwordFieldType = passwordField.getAttribute('type');
+    if (passwordFieldType === 'password') {
+      passwordField.setAttribute('type', 'text');
+      this.innerHTML = '<i class="fas fa-eye"></i>'; // Иконка открытого глаза
+    } else {
+      passwordField.setAttribute('type', 'password');
+      this.innerHTML = '<i class="fas fa-eye-slash"></i>'; // Иконка закрытого глаза
+    }
+  });
+</script>
+
+<style>
+  .avatar-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    width: 100%; /* Занимает всю ширину родительского контейнера */
+  }
+
+  .avatar-img {
+    border-radius: 50%; /* Круглая форма */
+    overflow: hidden; /* Скрыть лишнее */
+    width: 100%; /* Занимает всю ширину контейнера */
+    max-width: 200px; /* Максимальная ширина аватарки */
+    height: auto; /* Автоматическая высота для сохранения пропорций */
+  }
+
+  .input-group {
+    display: flex;
+    align-items: center;
+  }
+
+  .input-group-append {
+    margin-left: -1px; /* Убираем двойной бордер */
+  }
+</style>
+
+
+
+
 
 {% endblock %}

@@ -96,7 +96,7 @@
         
         <li class="nav-item register">
         {% if request.user.is_authenticated %}
-          <a href="{% url "sign_up" %}">
+          <a href="{% url "my_profile" %}">
             <!-- <i class="fas fa-user"></i> -->
             <div class="avatar avatar-xs">
               {% if request.user.profile.avatar %}
@@ -106,14 +106,13 @@
               {% endif %}
             </div>
             <p style="margin-left: 12px;">My profile</p>
-
           </a>
         {% else %}
           <a href="{% url "sign_up" %}">
             <i class="fas fa-sign-in-alt"></i>
             <p>Login / Register</p>
           </a>
-          {% endif %}
+        {% endif %}
         </li>
 
       </ul>

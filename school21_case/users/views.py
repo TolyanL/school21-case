@@ -94,8 +94,8 @@ def user_logout(request: HttpRequest):
     return redirect("sign_up")
 
 
-def my_profile(request: HttpRequest, username: str):
-    return render(request, "profile.html", {"profile": 0})
+def my_profile(request: HttpRequest):
+    return render(request, "users/profile.html", {"user:": request.user})
 
 
 def edit_profile(request: HttpRequest):
