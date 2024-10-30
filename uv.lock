@@ -176,7 +176,7 @@ dependencies = [
 requires-dist = [
     { name = "django", specifier = "==5.1.2" },
     { name = "django-debug-toolbar", specifier = ">=4.4.6" },
-    { name = "pillow" },
+    { name = "pillow", specifier = ">=11.0.0" },
     { name = "psycopg2-binary", specifier = ">=2.9.10" },
 ]
 

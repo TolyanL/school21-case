@@ -5,9 +5,6 @@ __pycache__/
 
 school21_case/media/*
 
-*.png
-*.jpg
-
 # C extensions
 *.so
 

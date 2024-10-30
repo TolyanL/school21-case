@@ -52,7 +52,7 @@ def sign_up(request: HttpRequest):
             email = form.cleaned_data["email"]
             password = form.cleaned_data["password"]
 
-            user_item = User.objects.get(email=email)
+            user_item = User.objects.filter(email=email).first()
 
             if user_item:
                 user = authenticate(request, username=user_item.username, password=password)
