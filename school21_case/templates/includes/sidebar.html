@@ -100,9 +100,9 @@
             <!-- <i class="fas fa-user"></i> -->
             <div class="avatar avatar-xs">
               {% if request.user.profile.avatar %}
-                <img src="{{ request.user.profile.avatar.url }}" alt="..." class="avatar-img rounded-circle border border-slimegreen">
+                <img src="{{ request.user.profile.avatar.url }}" class="avatar-img rounded-circle border border-slimegreen">
               {% else %}
-                <img src="{% static 'img/noavatar.png' %}" alt="..." class="avatar-img rounded-circle border border-slimegreen">
+                <img src="{% static 'img/noavatar.png' %}"class="avatar-img rounded-circle border border-slimegreen">
               {% endif %}
             </div>
             <p style="margin-left: 12px;">My profile</p>

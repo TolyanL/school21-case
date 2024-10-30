@@ -95,7 +95,7 @@ def user_logout(request: HttpRequest):
 
 
 def my_profile(request: HttpRequest):
-    return render(request, "users/profile.html", {"user:": request.user})
+    return render(request, "users/profile.html", {"user": request.user, "search_form": ProfileSearchForm()})
 
 
 def edit_profile(request: HttpRequest):
