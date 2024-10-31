@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Search Results{% endblock %}
+{% block description %}Search results{%endblock %}
+
+{% block content %}
+
+<div class="container">
+    <div class="card" style="background-color: #495057;"> <!-- Темный серый цвет -->
+      <div class="card-header">
+        <h4 class="card-title">Создать группу</h4>
+      </div>
+      <div class="card-body">
+        <form id="createGroupForm"> <!-- Обернули в форму -->
+          <div class="row">
+            <div class="col-md-4">
+              <div class="card" style="background-color: #343a40; color: white;"> <!-- Темный цвет для внутреннего card -->
+                <div class="card-body text-center">
+                  <div class="avatar-container">
+                    <div class="avatar-img">
+                      <img id="avatar" src="{% static 'img/noavatar.png' %}" alt="Avatar" class="rounded-circle img-fluid" style="width: 100px; height: 100px;">
+                    </div>
+                    <div class="mt-2">
+                      <input type="file" id="fileInput" accept="image/*" style="display: none;" onchange="previewImage(event)">
+                      <button class="btn btn-light" onclick="document.getElementById('fileInput').click();">Добавить фото</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-8">
+              <div class="card" style="background-color: #343a40; color: white;"> <!-- Темный цвет для внутреннего card -->
+                <div class="card-body">
+                  <div class="form-group">
+                    <label for="description">Описание:</label>
+                    <textarea class="form-control" id="description" name="description" rows="3" placeholder="Введите описание группы" style="background-color: white; color: black;"></textarea> <!-- Белый фон для textarea -->
+                  </div>
+                  <div class="form-group">
+                    <label for="interests">Интересы группы:</label>
+                    <textarea class="form-control" id="interests" name="interests" rows="3" placeholder="Введите интересы группы" style="background-color: white; color: black;"></textarea> <!-- Белый фон для textarea -->
+                  </div>
+                  <div class="d-flex justify-content-end">
+                    <button type="submit" class="btn btn-primary">Создать группу</button> <!-- Изменен тип на submit -->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    function previewImage(event) {
+      const file = event.target.files[0];
+      const reader = new FileReader();
+      
+      reader.onload = function(e) {
+        const avatar = document.getElementById('avatar');
+        avatar.src = e.target.result; // Устанавливаем загруженное изображение как источник для аватарки
+      }
+      
+      if (file) {
+        reader.readAsDataURL(file); // Читаем файл как Data URL
+      }
+    }
+
+    // Обработчик события для отправки формы
+    document.getElementById('createGroupForm').addEventListener('submit', function(event) {
+      event.preventDefault(); // Предотвращаем стандартное поведение формы
+
+      // Получаем значения из полей ввода
+      const description = document.getElementById('description').value;
+      const interests = document.getElementById('interests').value;
+
+      // Здесь вы можете добавить код для отправки данных на сервер
+      console.log('Описание:', description);
+      console.log('Интересы:', interests);
+
+    });
+  </script>
+
+
+
+
+  
+{% endblock %}
+
