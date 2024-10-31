@@ -17,21 +17,19 @@
     <div class="card-body">
       <div class="row">
 
-        <div class="col-md-3">
+        <div class="col-md-4">
           <div class="card card-attention">
 
             <div class="card-body">
               <div class="avatar-container">
                 {% if user.is_authenticated %}
-                <a href="{% url 'my_profile' %}">
-                  <div class="avatar-img">
-                    {% if user.profile.avatar %}
-                      <img src="{{ user.profile.avatar.url }}" alt="Avatar" class="rounded-circle img-fluid">
-                    {% else %}
-                      <img src="{% static 'img/noavatar.png' %}" alt="Avatar" class="rounded-circle img-fluid">
-                    {% endif %}
-                  </div>
-                </a>
+                <div class="avatar-img">
+                  {% if user.profile.avatar %}
+                    <img src="{{ user.profile.avatar.url }}" alt="Avatar" class="rounded-circle img-fluid">
+                  {% else %}
+                    <img src="{% static 'img/noavatar.png' %}" alt="Avatar" class="rounded-circle img-fluid">
+                  {% endif %}
+                </div>
                 {% else %}
                 <a href="{% url 'sign_up' %}">
                   <i class="fas fa-sign-in-alt"></i>
@@ -54,29 +52,29 @@
           </div>
         </div>
 
-        <div class="col-md-9">
+        <div class="col-md-8">
           <div class="card card-attention">
             <div class="card-body">
               <div class="form-group">
                 <label for="first_name">Имя:</label>
-                <input type="text" class="form-control" id="first_name" value="{{ user.first_name }}" readonly>
+                <input type="text" class="form-control" id="first_name" value="{{ user.profile.name|default:"" }}" readonly>
               </div>
 
               <div class="form-group">
                 <label for="last_name">Фамилия:</label>
-                <input type="text" class="form-control" id="last_name" value="{{ user.last_name }}" readonly>
+                <input type="text" class="form-control" id="last_name" value="{{ user.profile.surname|default:"" }}" readonly>
               </div>
               <div class="form-group">
                 <label for="middle_name">Отчество:</label>
-                <input type="text" class="form-control" id="middle_name" value="{{ user.profile.middle_name }}" readonly>
+                <input type="text" class="form-control" id="middle_name" value="{{ user.profile.lastname|default:"" }}" readonly>
               </div>
               <div class="form-group">
                 <label for="telegram_nickname">Ник в Telegram:</label>
-                <input type="text" class="form-control" id="telegram_nickname" value="{{ user.profile.telegram_nickname }}" readonly>
+                <input type="text" class="form-control" id="telegram_nickname" value="{{ user.profile.nickname_tg|default:"" }}" readonly>
               </div>
               <div class="form-group">
                 <label for="platform_nickname">Ник на платформе:</label>
-                <input type="text" class="form-control" id="platform_nickname" value="{{ user.username }}" readonly>
+                <input type="text" class="form-control" id="platform_nickname" value="{{ user.profile.nickname_ds|default:"" }}" readonly>
               </div>
 
             </div>
@@ -96,16 +94,23 @@
           </div>
 
           <div class="d-flex justify-content-center">
+
             <div class="p-2">
-              <button class="btn btn-primary ">Edit profile</button>
+              <a href="{% url 'profile_edit' %}">
+                <button class="btn btn-primary">Edit profile</button>
+              </a>
             </div>
             <div class="p-2">
-              <button class="btn btn-primary ">Edit profile</button>
+              <a href="{% url 'logout' %}">
+                <button class="btn btn-danger">Logout</button>
+              </a>
             </div>
             <div class="p-2">
-              <button class="btn btn-primary ">Edit profile</button>
+              <a href="{% url 'profile_edit' %}">
+                <button class="btn btn-danger">...</button>
+              </a>
             </div>
-          </div>
+
         </div>
       </div>
 

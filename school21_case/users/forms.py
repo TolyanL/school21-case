@@ -43,3 +43,16 @@ class RegistrationForm(UserCreationForm):
             profile.save()
 
         return user
+
+
+class ProfileEditForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        exclude = [
+            "user",
+            "created_at",
+            "is_active",
+            "groups",
+            "interests",
+            "avatar",
+        ]
