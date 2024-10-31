@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Search Results{% endblock %}
+{% block description %}Search results{%endblock %}
+
+{% block content %}
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="card card-round">
+      <div class="container-fluid" style="background-color: #1d2633; color: #fff; padding-top: 1rem; padding-bottom: 1rem; border-radius: 30px;">
+        <div class="container">
+          <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Поиск групп" aria-label="Поиск групп" aria-describedby="button-addon2" style="background-color: #17393e; color: #00eba1; border-color: #00eba1;">
+            <button class="btn btn-outline-secondary" type="button" id="button-addon2" style="background-color: #17393e; color: #00eba1; border-color: #00eba1;">Поиск</button>
+          </div>
+          <div class="row">
+            <div class="col-12 mb-3">
+              <p class="mb-0">Результаты поиска:</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12 mb-3">
+              <div class="card mb-3" style="background-color: #17393e; color: #fff; border-radius: 20px;">
+                <div class="row g-0">
+                  <div class="col-md-2">
+                    <img src="https://via.placeholder.com/150" class="img-fluid rounded-start avatar-xxl" alt="Аватар группы">
+                  </div>
+                  <div class="col-md-8">
+                    <div class="card-body">
+                      <h5 class="card-title">Название группы</h5>
+                      <p class="card-text">Описание группы</p>
+                    </div>
+                  </div>
+                  <div class="col-md-2 d-flex align-items-center justify-content-center">
+                    <p class="mb-0">100 участников</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12 mb-3">
+              <div class="card mb-3" style="background-color: #17393e; color: #fff; border-radius: 20px;">
+                <div class="row g-0">
+                  <div class="col-md-2">
+                    <img src="https://via.placeholder.com/150" class="img-fluid rounded-start avatar-xxl" alt="Аватар группы">
+                  </div>
+                  <div class="col-md-8">
+                    <div class="card-body">
+                      <h5 class="card-title">Название группы 2</h5>
+                      <p class="card-text">Описание группы 2</p>
+                    </div>
+                  </div>
+                  <div class="col-md-2 d-flex align-items-center justify-content-center">
+                    <p class="mb-0">50 участников</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- </div> -->
+
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
