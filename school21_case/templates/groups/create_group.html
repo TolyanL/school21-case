@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load add_class %}
 
 {% block title %}Search Results{% endblock %}
 {% block description %}Search results{%endblock %}
@@ -7,85 +8,96 @@
 {% block content %}
 
 <div class="container">
-    <div class="card" style="background-color: #495057;"> <!-- Темный серый цвет -->
+    <div class="card">
       <div class="card-header">
         <h4 class="card-title">Создать группу</h4>
       </div>
       <div class="card-body">
-        <form id="createGroupForm"> <!-- Обернули в форму -->
+        <form method="POST" enctype="multipart/form-data">
           <div class="row">
+            {% csrf_token %}
             <div class="col-md-4">
-              <div class="card" style="background-color: #343a40; color: white;"> <!-- Темный цвет для внутреннего card -->
-                <div class="card-body text-center">
+
+              <div class="card card-attention">
+                <div class="card-header">
+                  <h4 class="card-title">Icon</h4>
+                </div>
+                <div class="card-body">
                   <div class="avatar-container">
-                    <div class="avatar-img">
-                      <img id="avatar" src="{% static 'img/noavatar.png' %}" alt="Avatar" class="rounded-circle img-fluid" style="width: 100px; height: 100px;">
-                    </div>
-                    <div class="mt-2">
-                      <input type="file" id="fileInput" accept="image/*" style="display: none;" onchange="previewImage(event)">
-                      <button class="btn btn-light" onclick="document.getElementById('fileInput').click();">Добавить фото</button>
+                    <div class="avatar-img avatar avatar-xl">
+                      <img src="{% static 'img/noavatar.png' %}" class="rounded-circle img-fluid" id="icon">
                     </div>
                   </div>
+                  <input type="file" name="icon" accept="image/*" class="form-control" id="id_icon">
                 </div>
               </div>
+
             </div>
 
             <div class="col-md-8">
-              <div class="card" style="background-color: #343a40; color: white;"> <!-- Темный цвет для внутреннего card -->
+
+              <div class="card card-attention"> 
+                <div class="card-header">
+                  <h4 class="card-title">Group info</h4>
+                </div>
                 <div class="card-body">
-                  <div class="form-group">
-                    <label for="description">Описание:</label>
-                    <textarea class="form-control" id="description" name="description" rows="3" placeholder="Введите описание группы" style="background-color: white; color: black;"></textarea> <!-- Белый фон для textarea -->
+                  {% for field in create_form %}
+                  <div class="row-md-4 mb-3">
+                    <div class="form-label">{{ field.label_tag }}</div>
+                    {{ field|add_class:"form-control" }}
                   </div>
-                  <div class="form-group">
-                    <label for="interests">Интересы группы:</label>
-                    <textarea class="form-control" id="interests" name="interests" rows="3" placeholder="Введите интересы группы" style="background-color: white; color: black;"></textarea> <!-- Белый фон для textarea -->
-                  </div>
-                  <div class="d-flex justify-content-end">
-                    <button type="submit" class="btn btn-primary">Создать группу</button> <!-- Изменен тип на submit -->
-                  </div>
+                  {% endfor %}
                 </div>
               </div>
+
+              <div class="card card-attention"> 
+                <div class="card-header">
+                  <h4 class="card-title">Group interests</h4>
+                </div>
+                <div class="card-body">
+                  {% for tag in interests %}
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="{{ tag.id }}" id="id_{{ tag|lower }}" name="interests[]">
+                    <label class="form-check-label" for="id_{{ tag|lower }}">
+                      {{ tag.name }}
+                    </label>
+                  </div>
+                  {% endfor %}
+                </div>
+              </div>
+
             </div>
+
+            {% if create_form.errors %}
+              <div class="row">
+                <div class="alert alert-danger">
+                  {{ create_form.non_field_errors }}
+                </div>
+              </div>
+            {% endif %}
+            
+            <div class="d-flex justify-content-center">
+              <button type="submit" class="btn btn-primary">Create</button>
+            </div>
+
           </div>
         </form>
       </div>
     </div>
-  </div>
-  
-  <script>
-    function previewImage(event) {
-      const file = event.target.files[0];
+</div>
+
+<script>
+  document.getElementById('id_icon').addEventListener('change', function(event) {
+    const file = event.target.files[0];
+    if (file) {
       const reader = new FileReader();
-      
       reader.onload = function(e) {
-        const avatar = document.getElementById('avatar');
-        avatar.src = e.target.result; // Устанавливаем загруженное изображение как источник для аватарки
+        const iconImg = document.getElementById('icon');
+        iconImg.src = e.target.result;
       }
-      
-      if (file) {
-        reader.readAsDataURL(file); // Читаем файл как Data URL
-      }
+      reader.readAsDataURL(file);
     }
-
-    // Обработчик события для отправки формы
-    document.getElementById('createGroupForm').addEventListener('submit', function(event) {
-      event.preventDefault(); // Предотвращаем стандартное поведение формы
-
-      // Получаем значения из полей ввода
-      const description = document.getElementById('description').value;
-      const interests = document.getElementById('interests').value;
-
-      // Здесь вы можете добавить код для отправки данных на сервер
-      console.log('Описание:', description);
-      console.log('Интересы:', interests);
-
-    });
-  </script>
-
-
-
-
-  
+  });
+</script>
 {% endblock %}
 

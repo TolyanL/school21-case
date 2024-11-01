@@ -31,12 +31,6 @@
             <p>Home</p>
           </a>
         </li>
-        <!-- <li class="nav-section">
-          <span class="sidebar-mini-icon">
-            <i class="fa fa-ellipsis-h"></i>
-          </span>
-          <h4 class="text-section">Components</h4>
-        </li> -->
         <li class="nav-item">
           <a data-bs-toggle="collapse" href="#groups">
             <i class="fas fa-users"></i>
@@ -53,7 +47,7 @@
               <li>
                 <a href="{% url 'my_groups' %}">
                   <span class="sub-item">My Groups</span>
-                  <span class="badge badge-success">0</span>
+                  <span class="badge badge-success">{{ request.user.group_members.all|length }}</span>
                 </a>
               </li>
               <li>
@@ -97,7 +91,6 @@
         <li class="nav-item register">
         {% if request.user.is_authenticated %}
           <a href="{% url "my_profile" %}">
-            <!-- <i class="fas fa-user"></i> -->
             <div class="avatar avatar-xs">
               {% if request.user.profile.avatar %}
                 <img src="{{ request.user.profile.avatar.url }}" class="avatar-thumbnail rounded-circle border border-slimegreen">

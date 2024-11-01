@@ -19,131 +19,32 @@
       </div>
       <div class="card-body">
         <div class="row">
-          <!-- <div class="col-12"> -->
 
-        {% for user in users %}
-
+        {% for group in groups %}
         <div class="col-12 col-sm-6 col-lg-4">
           <div class="card card-attention">
               <div class="card-body user-card">
 
                 <div class="avatar avatar-xxl">
-                  {% if user.profile.avatar %}
-                    <img class="avatar-img avatar-xxl rounded-circle img-fluid" src="{{ user.profile.avatar.url }}" alt="">
+                  {% if group.icon %}
+                    <img class="avatar-xxl rounded-circle" src="{{ group.icon.url }}" alt="">
                   {% else %}
-                    <img class="avatar-img avatar-xxl rounded-circle img-fluid" src="{% static "img/noavatar.png" %}" alt="">
+                    <img class="avatar-xxl rounded-circle" src="{% static "img/noavatar.png" %}" alt="">
                   {% endif %}
                 </div>
                 <div class="user-info">
-                  <span class="card-title">{{ user.profile.nickname }}</span>
-                  
-                  <span class="card-text" style="color: azure; font-size: 15px;">
-                    {% if user.profile.description %}
-                      {{ user.profile.description }}
-                    {% else %}
-                      {{ user.profile.created_at }}
-                    {% endif %}
-                  </span>
-                  <p class="card-category">{% for tag in user.profile.interests.all %}#{{ tag }} {% endfor %}</p>
+                  <span class="card-title">{{ group.name }}</span>
+                  <span class="card-text" style="color: azure; font-size: 15px;">{{ group.description }}</span>
+                  <span class="card-text" style="color: azure; font-size: 15px;">{{ group.created_at }}</span>
+                  <p class="card-category">{% for tag in group.tags.all %}#{{ tag }} {% endfor %}</p>
                 </div>
 
               </div>
 
           </div>
         </div>
-
-
-
-        <div class="col-12 col-sm-6 col-lg-4">
-          <div class="card card-attention">
-              <div class="card-body user-card">
-
-                <div class="avatar avatar-xxl">
-                  {% if user.profile.avatar %}
-                    <img class="avatar-img avatar-xxl rounded-circle img-fluid" src="{{ user.profile.avatar.url }}" alt="">
-                  {% else %}
-                    <img class="avatar-img avatar-xxl rounded-circle img-fluid" src="{% static "img/noavatar.png" %}" alt="">
-                  {% endif %}
-                </div>
-                <div class="user-info">
-                  <span class="card-title">{{ user.profile.nickname }}</span>
-                  
-                  <span class="card-text" style="color: azure; font-size: 15px;">
-                    {% if user.profile.description %}
-                      {{ user.profile.description }}
-                    {% else %}
-                      {{ user.profile.created_at }}
-                    {% endif %}
-                  </span>
-                  <p class="card-category">{% for tag in user.profile.interests.all %}#{{ tag }} {% endfor %}</p>
-                </div>
-
-              </div>
-
-          </div>
-        </div>
-
-        <div class="col-12 col-sm-6 col-lg-4">
-          <div class="card card-attention">
-              <div class="card-body user-card">
-
-                <div class="avatar avatar-xxl">
-                  {% if user.profile.avatar %}
-                    <img class="avatar-img avatar-xxl rounded-circle img-fluid" src="{{ user.profile.avatar.url }}" alt="">
-                  {% else %}
-                    <img class="avatar-img avatar-xxl rounded-circle img-fluid" src="{% static "img/noavatar.png" %}" alt="">
-                  {% endif %}
-                </div>
-                <div class="user-info">
-                  <span class="card-title">{{ user.profile.nickname }}</span>
-                  
-                  <span class="card-text" style="color: azure; font-size: 15px;">
-                    {% if user.profile.description %}
-                      {{ user.profile.description }}
-                    {% else %}
-                      {{ user.profile.created_at }}
-                    {% endif %}
-                  </span>
-                  <p class="card-category">{% for tag in user.profile.interests.all %}#{{ tag }} {% endfor %}</p>
-                </div>
-
-              </div>
-
-          </div>
-        </div>
-
-        <div class="col-12 col-sm-6 col-lg-4">
-          <div class="card card-attention">
-              <div class="card-body user-card">
-
-                <div class="avatar avatar-xxl">
-                  {% if user.profile.avatar %}
-                    <img class="avatar-img avatar-xxl rounded-circle img-fluid" src="{{ user.profile.avatar.url }}" alt="">
-                  {% else %}
-                    <img class="avatar-img avatar-xxl rounded-circle img-fluid" src="{% static "img/noavatar.png" %}" alt="">
-                  {% endif %}
-                </div>
-                <div class="user-info">
-                  <span class="card-title">{{ user.profile.nickname }}</span>
-                  
-                  <span class="card-text" style="color: azure; font-size: 15px;">
-                    {% if user.profile.description %}
-                      {{ user.profile.description }}
-                    {% else %}
-                      {{ user.profile.created_at }}
-                    {% endif %}
-                  </span>
-                  <p class="card-category">{% for tag in user.profile.interests.all %}#{{ tag }} {% endfor %}</p>
-                </div>
-
-              </div>
-
-          </div>
-        </div>
-
         {% endfor %}
       </div>
-      <!-- </div> -->
 
       </div>
     </div>

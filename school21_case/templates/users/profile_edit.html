@@ -1,6 +1,6 @@
 {% extends "base.html" %}
-{% load add_class %}
 {% load static %}
+{% load add_class %}
 
 {% block title %}Home page{% endblock %}
 {% block description %}Home description{%endblock %}
@@ -18,9 +18,7 @@
     <div class="card-body">
       <form method="POST" enctype="multipart/form-data">
         <div class="row">
-
           {% csrf_token %}
-
           <div class="col-md-4">
             <div class="card card-attention">
 
@@ -30,9 +28,9 @@
                   {% if user.is_authenticated %}
                   <div class="avatar-img">
                     {% if user.profile.avatar %}
-                      <img src="{{ user.profile.avatar.url }}" class="rounded-circle img-fluid" id="avatar-preview">
+                      <img src="{{ user.profile.avatar.url }}" class="rounded-circle img-fluid" id="avatar">
                     {% else %}
-                      <img src="{% static 'img/noavatar.png' %}" class="rounded-circle img-fluid" id="avatar-preview">
+                      <img src="{% static 'img/noavatar.png' %}" class="rounded-circle img-fluid" id="avatar">
                     {% endif %}
                   </div>
                   {% else %}
@@ -90,7 +88,7 @@
     
               <div class="card-body">
                 {% for field in editable %}
-                <div class="row-md-4">
+                <div class="row-md-4 mb-3">
                   <div class="form-label">{{ field.label_tag }}</div>
                   {{ field|add_class:"form-control" }}
                 </div>
@@ -104,9 +102,7 @@
 
         <div class="d-flex justify-content-center">
           <div class="p-2">
-            <a href="{% url 'profile_edit' %}">
-              <button class="btn btn-success" type="submit" value="Save">Save</button>
-            </a>
+            <button class="btn btn-success" type="submit" value="Save">Save</button>
           </div>
         </div>
       </form>
@@ -114,12 +110,12 @@
 
         <div class="row">
           <div class="col-md-12">
-            {% if reg_form.errors %}
-              <div class="row">
-                {{ reg_form.errors }}
-              </div>
-            {% endif %}
             <div class="p-2">
+              {% if reg_form.errors %}
+                <div class="row">
+                  {{ reg_form.errors }}
+                </div>
+              {% endif %}
               <a href="{% url 'my_profile' %}">
                 <button class="btn btn-primary">Back</button>
               </a>
@@ -137,7 +133,7 @@
     if (file) {
       const reader = new FileReader();
       reader.onload = function(e) {
-        const avatarImg = document.getElementById('avatar-preview');
+        const avatarImg = document.getElementById('avatar');
         avatarImg.src = e.target.result;
       }
       reader.readAsDataURL(file);

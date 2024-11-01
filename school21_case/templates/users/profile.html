@@ -22,20 +22,13 @@
 
             <div class="card-body">
               <div class="avatar-container">
-                {% if user.is_authenticated %}
                 <div class="avatar avatar-xl avatar-img">
                   {% if user.profile.avatar %}
-                    <img src="{{ user.profile.avatar.url }}" alt="Avatar" class="rounded-circle img-fluid">
+                    <img src="{{ user.profile.avatar.url }}" class="rounded-circle img-fluid">
                   {% else %}
-                    <img src="{% static 'img/noavatar.png' %}" alt="Avatar" class="rounded-circle img-fluid">
+                    <img src="{% static 'img/noavatar.png' %}" class="rounded-circle img-fluid">
                   {% endif %}
                 </div>
-                {% else %}
-                <a href="{% url 'sign_up' %}">
-                  <i class="fas fa-sign-in-alt"></i>
-                  <p>Login / Register</p>
-                </a>
-                {% endif %}
               </div>
               <div class="profile-info">
                 <h2 class="card-title">{{ user.profile.nickname }}</h2>
