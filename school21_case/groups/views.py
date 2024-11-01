@@ -8,3 +8,7 @@ def my_groups(request: HttpRequest):
 
 def find_groups(request: HttpRequest):
     return render(request, "groups/find_groups.html", {"search_form": ProfileSearchForm()})
+
+def create_group(request: HttpRequest):
+    return render(request, "groups/create_group.html")
+    

@@ -4,7 +4,8 @@ from django.http import HttpRequest
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.models import User
 
-from .forms import ProfileSearchForm, LoginForm, RegistrationForm
+from .forms import ProfileSearchForm, LoginForm, RegistrationForm, ProfileEditForm
+from groups.models import Interest
 
 
 def profile(request: HttpRequest, username: str):
@@ -99,4 +100,46 @@ def my_profile(request: HttpRequest):
 
 
 def edit_profile(request: HttpRequest):
-    return render(request, "profile_edit.html")
+    profile = request.user.profile
+    if request.method == "POST":
+        form = ProfileEditForm(request.POST, instance=profile, use_required_attribute=False)
+
+        if not form.errors:
+            # print(form.data)
+            instance = form.save(commit=False)
+            tags = request.POST.getlist("interests[]")
+
+            # print(request.FILES.get("avatar"))
+            # print(form.is_multipart())
+
+            profile.avatar = request.FILES.get("avatar")
+            instance.interests.set(tags)
+
+            profile.save()
+            instance.save()
+
+            return redirect("my_profile")
+
+        print(form.errors)
+
+        return render(
+            request,
+            "users/profile_edit.html",
+            {
+                "search_form": ProfileSearchForm(),
+                "editable": form,
+                "profile": profile,
+                "interests": Interest.objects.all(),
+            },
+        )
+
+    return render(
+        request,
+        "users/profile_edit.html",
+        {
+            "search_form": ProfileSearchForm(),
+            "editable": ProfileEditForm(use_required_attribute=False, instance=request.user.profile),
+            "profile": request.user.profile,
+            "interests": Interest.objects.all(),
+        },
+    )

@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from django.core.validators import MinValueValidator, MaxValueValidator
 from django.contrib.auth.models import User
 
 
@@ -15,7 +16,7 @@ class Profile(models.Model):
     name = models.CharField(blank=True, null=True)
     surname = models.CharField(blank=True, null=True)
     lastname = models.CharField(blank=True, null=True)
-    age = models.IntegerField(blank=True, null=True)
+    age = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(99)], blank=True, null=True)
     gender = models.CharField(choices=gender_choices, null=True, blank=True)
 
     avatar = models.ImageField(upload_to="avatars/", null=True, blank=True)
