@@ -23,7 +23,7 @@
             <div class="card-body">
               <div class="avatar-container">
                 {% if user.is_authenticated %}
-                <div class="avatar-img">
+                <div class="avatar-imgg">
                   {% if user.profile.avatar %}
                     <img src="{{ user.profile.avatar.url }}" alt="Avatar" class="rounded-circle img-fluid">
                   {% else %}
@@ -117,5 +117,43 @@
     </div>
   </div>
 </div>
+<style>
+  .avatar-imgg {
+  width: 300px; /* Установите желаемую ширину */
+  height: 300px; /* Установите желаемую высоту */
+  overflow: hidden; /* Скрыть часть изображения, выходящую за пределы */
+  border-radius: 50%; /* Сделать изображение круглым */
+  position: relative; /* Для позиционирования дочерних элементов */
+}
+
+.avatar-imgg img {
+  width: 100%; /* Установите ширину изображения на 100% */
+  height: 100%; /* Установите высоту изображения на 100% */
+  object-fit: cover; /* Обеспечивает правильное соотношение сторон и обрезку */
+  position: absolute; /* Позволяет обрезать изображение */
+  top: 50%; /* Центрируем изображение по вертикали */
+  left: 50%; /* Центрируем изображение по горизонтали */
+  transform: translate(-50%, -50%); /* Центрируем изображение */
+}
+</style>
+<style>
+  .avatar-img {
+  width: 35px; /* Установите желаемую ширину */
+  height: 35px; /* Установите желаемую высоту */
+  overflow: hidden; /* Скрыть часть изображения, выходящую за пределы */
+  border-radius: 50%; /* Сделать изображение круглым */
+  position: relative; /* Для позиционирования дочерних элементов */
+}
+
+.avatar-img im {
+  width: 100%; /* Установите ширину изображения на 100% */
+  height: 100%; /* Установите высоту изображения на 100% */
+  object-fit: cover; /* Обеспечивает правильное соотношение сторон и обрезку */
+  position: absolute; /* Позволяет обрезать изображение */
+  top: 50%; /* Центрируем изображение по вертикали */
+  left: 50%; /* Центрируем изображение по горизонтали */
+  transform: translate(-50%, -50%); /* Центрируем изображение */
+}
+</style>
 
 {% endblock %}
