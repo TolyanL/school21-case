@@ -112,10 +112,12 @@ def edit_profile(request: HttpRequest):
             # print(request.FILES.get("avatar"))
             # print(form.is_multipart())
 
-            profile.avatar = request.FILES.get("avatar")
             instance.interests.set(tags)
 
-            profile.save()
+            if request.FILES.get("avatar"):
+                profile.avatar = request.FILES.get("avatar")
+                profile.save()
+
             instance.save()
 
             return redirect("my_profile")
