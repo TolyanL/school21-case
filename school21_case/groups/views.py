@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect
 from django.http import HttpRequest
 
-from .models import Interest
-from .forms import CreateGroupForm
+from .models import Group, Interest
+from .forms import CreateGroupForm, GroupSearchForm
 
 from users.forms import ProfileSearchForm
 
@@ -20,7 +20,44 @@ def my_groups(request: HttpRequest):
 
 
 def find_groups(request: HttpRequest):
-    return render(request, "groups/find_groups.html", {"search_form": ProfileSearchForm()})
+    if request.method == "POST":
+        form = GroupSearchForm(request.POST)
+        search_query = form.data
+
+        if not request.user.is_authenticated:
+            return redirect("sign_up")
+
+        name = search_query.get("group_name")
+        interests = search_query.get("interests")
+
+        groups = Group.objects.filter(name__icontains=name)
+
+        if interests:
+            groups = groups.filter(tags__id__in=interests).distinct()
+
+        return render(
+            request,
+            "groups/find_groups.html",
+            context={
+                "groups": groups.all(),
+                "search_form": ProfileSearchForm(),
+                "find_group_form": form,
+                "search_query": name,
+            },
+        )
+
+    return render(
+        request,
+        "groups/find_groups.html",
+        {
+            "search_form": ProfileSearchForm(),
+            "find_group_form": GroupSearchForm(),
+            "just_loaded": True,
+        },
+    )
+
+
+def group_detail(request: HttpRequest, group_id: int): ...
 
 
 def create_group(request: HttpRequest):

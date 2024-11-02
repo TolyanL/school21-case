@@ -4831,6 +4831,34 @@ label.error {
     color: #666!important
 }
 
+.group-input {
+    background-color: #0f2528;
+    color: #00eba1;
+    border: 1px solid #16a276;
+    border-radius: 0.25rem;
+}
+
+.group-input::placeholder {
+    color: #00eba1;
+}
+
+.group-input:focus {
+    background-color: #0f2528;
+    color: #00eba1;
+    border-color: #16a276;
+    outline: none;
+}
+
+.group-button {
+    background-color: #16a276;
+    color: #ffffff;
+    border-radius: 0.25rem;
+}
+
+.group-button:hover {
+    background-color: #00eba1;
+}
+
 .nav-search .input-group {
     border: 1px solid #16a276;
     background: #0f2528;
