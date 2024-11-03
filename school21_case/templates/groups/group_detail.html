@@ -1,0 +1,125 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Home page{% endblock %}
+{% block description %}Home description{%endblock %}
+
+{% block content %}
+
+<div class="container">
+  <div class="card">
+
+    <div class="card-body">
+      <div class="row">
+
+        <div class="banner">
+          <!-- {% if group.banner %}
+            <img src="{{ group.banner.url }}" alt="Group Banner" class="banner-image">
+          {% else %} -->
+          <img src="{% static 'img/bg-404.jpeg' %}" class="banner-image">
+          <!-- {% endif %} -->
+    
+          <div class="avatar-container-banner">
+            <div class="avatar avatar-xl banner-icon">
+              {% if group.icon %}
+                <img src="{{ group.icon.url }}" class="rounded-circle img-fluid">
+              {% else %}
+                <img src="{% static 'img/noavatar.png' %}" class="rounded-circle img-fluid">
+              {% endif %}
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-5">
+          <div class="col-md-9">
+            <div class="card card-attention">
+              <div class="card-body">
+                <div class="profile-info">
+                  <h2 class="card-title">{{ group.name }}</h2>
+                  <p style="color: aliceblue;">
+                    {{ group.created_at }}
+                  </p>
+                  <p class="card-category">Created by {{ group.created_by.username }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-9">
+            <div class="card card-attention">
+              <div class="card-header">
+                <div class="card-head-row card-tools-still-right">
+                  <h4 class="card-title">Group Members ({{ group.members.all|length }})</h4>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="avatar-group">
+                  {% for member in group.members.all %}
+                    {% if forloop.counter < 13 %}
+                      <div class="avatar avatar-xs">
+                        <img src="{{ member.profile.avatar.url }}" class="avatar-thumbnail rounded-circle border border-white">
+                      </div>
+                    {% endif %}
+                  {% endfor %}
+                  {% if group.members.count > 12 %}
+                    <div class="avatar avatar-xs">
+                      <div class="avatar-thumbnail rounded-circle border border-white d-flex align-items-center justify-content-center uncounted-members">
+                        +{{ group.members.count|add:-12 }}
+                      </div>
+                    </div>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-md">
+          <div class="col-md">
+            <div class="card card-attention">
+              <div class="card-body">
+                <h2 class="card-title">Description</h2>
+                <p style="color: #cecece;">{{ group.description }}</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md">
+            <div class="card card-attention">
+              <div class="card-header">
+                <div class="card-head-row card-tools-still-right">
+                  <h4 class="card-title">Interests</h4>
+                </div>
+              </div>
+              <div class="card-body">
+                <span class="h4 text-primary">{% for tag in group.tags.all %}#{{ tag }} {% endfor %}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      {% if group.created_by == request.user %}
+      <div class="row">
+          <div class="col-md-12">
+            <div class="d-flex justify-content-center">
+              <div class="p-2">
+                <a href="{% url 'profile_edit' %}">
+                  <button class="btn btn-primary">Edit group</button>
+                </a>
+              </div>
+              <div class="p-2">
+                <a href="{% url 'logout' %}">
+                <button class="btn btn-danger">Delete group</button>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endif %}
+        
+
+    </div>
+  </div>
+</div>
+
+{% endblock %}

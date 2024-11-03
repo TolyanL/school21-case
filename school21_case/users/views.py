@@ -21,9 +21,6 @@ def search_profile(request: HttpRequest):
     if request.method == "POST" and search_query.is_valid():
         search_query = search_query.cleaned_data
 
-        # if not request.user.is_authenticated:
-        #     return redirect("sign_up")
-
         nickname = search_query.get("nickname")
         interests = search_query.get("interests")
 

@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.views.generic import DetailView
 from django.http import HttpRequest
 from django.contrib.auth.decorators import login_required
 
@@ -26,9 +27,6 @@ def find_groups(request: HttpRequest):
     if request.method == "POST":
         form = GroupSearchForm(request.POST)
         search_query = form.data
-
-        # if not request.user.is_authenticated:
-        #     return redirect("sign_up")
 
         name = search_query.get("group_name")
         interests = search_query.get("interests")
@@ -60,8 +58,19 @@ def find_groups(request: HttpRequest):
     )
 
 
-@login_required
-def group_detail(request: HttpRequest, group_id: int): ...
+# @login_required
+# def group_detail(request: HttpRequest, group_id: int): ...
+
+
+# @login_required()
+class GroupDetailView(DetailView):
+    model = Group
+    template_name = "groups/group_detail.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["search_form"] = ProfileSearchForm()
+        return context
 
 
 @login_required
