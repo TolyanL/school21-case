@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpRequest
 
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.models import User
 
@@ -8,18 +9,20 @@ from .forms import ProfileSearchForm, LoginForm, RegistrationForm, ProfileEditFo
 from groups.models import Interest
 
 
+@login_required
 def profile(request: HttpRequest, username: str):
     return render(request, "profile.html", {"username": username})
 
 
+@login_required
 def search_profile(request: HttpRequest):
     search_query = ProfileSearchForm(request.POST)
 
     if request.method == "POST" and search_query.is_valid():
         search_query = search_query.cleaned_data
 
-        if not request.user.is_authenticated:
-            return redirect("sign_up")
+        # if not request.user.is_authenticated:
+        #     return redirect("sign_up")
 
         nickname = search_query.get("nickname")
         interests = search_query.get("interests")
@@ -95,10 +98,19 @@ def user_logout(request: HttpRequest):
     return redirect("sign_up")
 
 
+@login_required
 def my_profile(request: HttpRequest):
-    return render(request, "users/profile.html", {"user": request.user, "search_form": ProfileSearchForm()})
+    return render(
+        request,
+        "users/profile.html",
+        {
+            "user": request.user,
+            "search_form": ProfileSearchForm(),
+        },
+    )
 
 
+@login_required
 def edit_profile(request: HttpRequest):
     profile = request.user.profile
     if request.method == "POST":
@@ -122,7 +134,7 @@ def edit_profile(request: HttpRequest):
 
             return redirect("my_profile")
 
-        print(form.errors)
+        # print(form.errors)
 
         return render(
             request,

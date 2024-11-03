@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpRequest
+from django.contrib.auth.decorators import login_required
 
 from .models import Group, Interest
 from .forms import CreateGroupForm, GroupSearchForm
@@ -7,6 +8,7 @@ from .forms import CreateGroupForm, GroupSearchForm
 from users.forms import ProfileSearchForm
 
 
+@login_required
 def my_groups(request: HttpRequest):
     user = request.user
     return render(
@@ -19,13 +21,14 @@ def my_groups(request: HttpRequest):
     )
 
 
+@login_required
 def find_groups(request: HttpRequest):
     if request.method == "POST":
         form = GroupSearchForm(request.POST)
         search_query = form.data
 
-        if not request.user.is_authenticated:
-            return redirect("sign_up")
+        # if not request.user.is_authenticated:
+        #     return redirect("sign_up")
 
         name = search_query.get("group_name")
         interests = search_query.get("interests")
@@ -57,9 +60,11 @@ def find_groups(request: HttpRequest):
     )
 
 
+@login_required
 def group_detail(request: HttpRequest, group_id: int): ...
 
 
+@login_required
 def create_group(request: HttpRequest):
     if request.method == "POST":
         form = CreateGroupForm(request.POST)
