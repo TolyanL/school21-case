@@ -165,3 +165,26 @@ def edit_group(request: HttpRequest, pk: int):
             "tags": Interest.objects.all(),
         },
     )
+
+
+@login_required
+def delete_group(request: HttpRequest, pk: int):
+    group = Group.objects.get(pk=pk)
+
+    if not group or request.user != group.created_by:
+        return redirect("group_detail", pk=pk)
+
+    if request.method == "POST":
+        if request.POST.get("yes"):
+            group.delete()
+            return redirect("my_groups")
+        return redirect("group_detail", pk=pk)
+
+    return render(
+        request,
+        "groups/delete_group.html",
+        {
+            "search_form": ProfileSearchForm(),
+            "group": group,
+        },
+    )

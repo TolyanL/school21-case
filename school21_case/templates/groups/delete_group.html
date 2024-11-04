@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% load static %}
+{% load add_class %}
+
+{% block title %}Search Results{% endblock %}
+{% block description %}Search results{%endblock %}
+
+{% block content %}
+
+<div class="container">
+    <div class="card">
+      <div class="card-header">
+        <h4 class="card-title">Удаление группы</h4>
+      </div>
+      <div class="card-body">
+
+      <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="card card-attention">
+          <div class="card-header">
+            <div class="d-flex justify-content-center">
+              <h4 class="card-title text-info">Вы уверены, что хотите удалить группу <i class="card-title">{{ group.name }}</i> ?</h4>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="text-center">
+              <div>
+                <button type="submit" class="btn btn-primary text-danger mb-3" name="yes" value="yes">Yes, delete it</button>
+              </div>
+              <div>
+                <button type="submit" class="btn btn-primary" name="no" value="no">No! Bring me back!</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+
+      </div>
+    </div>
+</div>
+
+{% endblock %}
+
