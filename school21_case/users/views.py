@@ -119,9 +119,9 @@ def edit_profile(request: HttpRequest):
             tags = request.POST.getlist("interests[]")
 
             # print(request.FILES.get("avatar"))
-            # print(form.is_multipart())
 
-            instance.interests.set(tags)
+            if len(tags):
+                instance.interests.set(tags)
 
             if request.FILES.get("avatar"):
                 profile.avatar = request.FILES.get("avatar")

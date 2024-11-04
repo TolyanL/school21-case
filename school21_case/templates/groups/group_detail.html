@@ -13,18 +13,18 @@
       <div class="row">
 
         <div class="banner">
-          <!-- {% if group.banner %}
+          {% if group.banner %}
             <img src="{{ group.banner.url }}" alt="Group Banner" class="banner-image">
-          {% else %} -->
-          <img src="{% static 'img/bg-404.jpeg' %}" class="banner-image">
-          <!-- {% endif %} -->
+          {% else %}
+          <img src="{% static 'img/nobanner.png' %}" class="banner-image">
+          {% endif %}
     
           <div class="avatar-container-banner">
-            <div class="avatar avatar-xl banner-icon">
+            <div class="avatar avatar-xl banner-icon shadow-lg">
               {% if group.icon %}
-                <img src="{{ group.icon.url }}" class="rounded-circle img-fluid">
+                <img src="{{ group.icon.url }}" class="rounded-circle img-fluid border border-slimegreen">
               {% else %}
-                <img src="{% static 'img/noavatar.png' %}" class="rounded-circle img-fluid">
+                <img src="{% static 'img/noicon.png' %}" class="rounded-circle img-fluid border border-slimegreen">
               {% endif %}
             </div>
           </div>
@@ -103,7 +103,7 @@
           <div class="col-md-12">
             <div class="d-flex justify-content-center">
               <div class="p-2">
-                <a href="{% url 'profile_edit' %}">
+                <a href="{% url 'edit_group' pk=group.pk %}">
                   <button class="btn btn-primary">Edit group</button>
                 </a>
               </div>

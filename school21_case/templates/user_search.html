@@ -29,9 +29,9 @@
 
                 <div class="avatar avatar-xxl">
                   {% if user.profile.avatar %}
-                    <img class="avatar-xxl rounded-circle img-fluid" src="{{ user.profile.avatar.url }}" alt="">
+                    <img class="avatar-xxl rounded-circle" src="{{ user.profile.avatar.url }}" alt="">
                   {% else %}
-                    <img class="avatar-xxl rounded-circle img-fluid" src="{% static "img/noavatar.png" %}" alt="">
+                    <img class="avatar-xxl rounded-circle" src="{% static 'img/noavatar.png' %}" alt="">
                   {% endif %}
                 </div>
                 <div class="user-info">
@@ -39,7 +39,7 @@
                   
                   <span class="card-text" style="color: azure; font-size: 15px;">
                     {% if user.profile.description %}
-                      {{ user.profile.description }}
+                      {{ user.profile.description|truncatewords:15 }}
                     {% else %}
                       {{ user.profile.created_at }}
                     {% endif %}

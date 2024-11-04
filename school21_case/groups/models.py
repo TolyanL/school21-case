@@ -5,7 +5,9 @@ from django.contrib.auth.models import User
 class Group(models.Model):
     name = models.CharField(max_length=32, unique=True)
     description = models.CharField(max_length=256, null=True)
+
     icon = models.ImageField(upload_to="group_icons/", null=True)
+    banner = models.ImageField(upload_to="group_banners/", null=True)
 
     members = models.ManyToManyField(User, related_name="group_members", blank=True)
     created_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name="groups_created")

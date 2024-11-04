@@ -18,3 +18,9 @@ class GroupSearchForm(forms.Form):
             }
         ),
     )
+
+
+class GroupEditForm(forms.ModelForm):
+    class Meta:
+        model = Group
+        fields = ["name", "description"]

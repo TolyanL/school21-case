@@ -4,7 +4,7 @@ from django.http import HttpRequest
 from django.contrib.auth.decorators import login_required
 
 from .models import Group, Interest
-from .forms import CreateGroupForm, GroupSearchForm
+from .forms import CreateGroupForm, GroupSearchForm, GroupEditForm
 
 from users.forms import ProfileSearchForm
 
@@ -58,11 +58,6 @@ def find_groups(request: HttpRequest):
     )
 
 
-# @login_required
-# def group_detail(request: HttpRequest, group_id: int): ...
-
-
-# @login_required()
 class GroupDetailView(DetailView):
     model = Group
     template_name = "groups/group_detail.html"
@@ -85,18 +80,23 @@ def create_group(request: HttpRequest):
 
             tags = request.POST.getlist("interests[]")
 
-            # print(request.FILES.get("icon"))
-            # print(form.is_multipart())
+            # print(request.FILES)
 
             group.tags.set(tags)
             group.members.add(request.user)
+            # print(request.FILES)
+            icon = request.FILES.get("icon")
+            banner = request.FILES.get("banner")
 
-            if request.FILES.get("icon"):
-                group.icon = request.FILES.get("icon")
+            if icon:
+                group.icon = icon
+
+            if banner:
+                group.banner = banner
 
             if len(tags):
                 group.save()
-                return redirect("my_profile")
+                return redirect("my_groups")
             group.delete()
             form.add_error(None, "Please add at least one interest")
 
@@ -107,5 +107,61 @@ def create_group(request: HttpRequest):
             "search_form": ProfileSearchForm(),
             "create_form": CreateGroupForm(),
             "interests": Interest.objects.all(),
+        },
+    )
+
+
+@login_required
+def edit_group(request: HttpRequest, pk: int):
+    group = Group.objects.get(pk=pk)
+
+    if not group or request.user != group.created_by:
+        return redirect("my_groups")
+
+    if request.method == "POST":
+        form = GroupEditForm(request.POST, instance=group, use_required_attribute=False)
+
+        if not form.errors:
+            # print(form.data)
+            instance = form.save(commit=False)
+            tags = request.POST.getlist("tags[]")
+
+            # print(request.FILES)
+
+            if len(tags):
+                instance.tags.set(tags)
+
+            icon = request.FILES.get("icon")
+            banner = request.FILES.get("banner")
+
+            if icon:
+                instance.icon = icon
+            if banner:
+                instance.banner = banner
+
+            if len(instance.tags.all()) and not form.errors:
+                instance.save()
+                return redirect("group_detail", pk=pk)
+            form.add_error(None, "Please add at least one interest")
+
+        return render(
+            request,
+            "groups/edit_group.html",
+            {
+                "search_form": ProfileSearchForm(),
+                "editable": form,
+                "group": group,
+                "tags": Interest.objects.all(),
+            },
+        )
+
+    return render(
+        request,
+        "groups/edit_group.html",
+        {
+            "search_form": ProfileSearchForm(),
+            "editable": GroupEditForm(use_required_attribute=False, instance=group),
+            "group": group,
+            "tags": Interest.objects.all(),
         },
     )

@@ -21,7 +21,11 @@
               <h4 class="card-title">Banner</h4>
             </div>
             <div class="card-body banner">
+              {% if group.banner %}
+                <img src="{{ group.banner.url }}" class="rounded-circle img-fluid" id="avatar">
+              {% else %}
                 <img class="img-fluid banner-img" src="{% static 'img/nobanner.png' %}" id="banner">
+              {% endif %}
             </div>
             <input type="file" name="banner" accept="image/*" class="form-control" id="id_banner">
           </div>
@@ -36,7 +40,11 @@
                 <div class="card-body">
                   <div class="avatar-container">
                     <div class="avatar-img avatar avatar-xl">
-                      <img src="{% static 'img/noicon.png' %}" class="rounded-circle img-fluid" id="icon">
+                      {% if group.icon %}
+                        <img src="{{ group.icon.url }}" class="rounded-circle img-fluid" id="icon">
+                      {% else %}
+                        <img src="{% static 'img/noicon.png' %}" class="rounded-circle img-fluid" id="icon">
+                      {% endif %}
                     </div>
                   </div>
                   <input type="file" name="icon" accept="image/*" class="form-control" id="id_icon">
@@ -52,7 +60,7 @@
                   <h4 class="card-title">Group info</h4>
                 </div>
                 <div class="card-body">
-                  {% for field in create_form %}
+                  {% for field in editable %}
                   <div class="row-md-4 mb-3">
                     <div class="form-label">{{ field.label_tag }}</div>
                     {{ field|add_class:"form-control" }}
@@ -66,9 +74,10 @@
                   <h4 class="card-title">Group interests</h4>
                 </div>
                 <div class="card-body">
-                  {% for tag in interests %}
+                  {% for tag in tags %}
                   <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="{{ tag.id }}" id="id_{{ tag|lower }}" name="interests[]">
+                    <input class="form-check-input" type="checkbox" value="{{ tag.id }}" id="id_{{ tag|lower }}" name="tags[]"
+                    {% if tag in group.tags.all %}checked{% endif %}>
                     <label class="form-check-label" for="id_{{ tag|lower }}">
                       {{ tag.name }}
                     </label>
@@ -79,20 +88,23 @@
 
             </div>
 
-            {% if create_form.errors %}
+            {% if editable.errors %}
               <div class="row">
                 <div class="alert alert-danger">
-                  {{ create_form.non_field_errors }}
+                  {{ editable.non_field_errors }}
+                  {{ editable.errors }}
                 </div>
               </div>
             {% endif %}
             
             <div class="d-flex justify-content-center">
-              <button type="submit" class="btn btn-primary">Create</button>
+              <button type="submit" class="btn btn-primary">Save</button>
             </div>
-
           </div>
         </form>
+        <a href="{% url 'group_detail' pk=group.pk %}">
+          <button class="btn btn-primary">Back</button>
+        </a>
       </div>
     </div>
 </div>
