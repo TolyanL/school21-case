@@ -63,7 +63,7 @@
                 </div>
               </div>
               <div class="card-body">
-                {% for tag in interests %}
+                {% for tag in tags %}
                 <div class="form-check">
                   <input class="form-check-input" type="checkbox" value="{{ tag.id }}" id="id_{{ tag|lower }}" name="interests[]"
                   {% if tag in user.profile.interests.all %}checked{% endif %}>

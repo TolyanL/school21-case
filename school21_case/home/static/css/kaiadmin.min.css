@@ -4866,7 +4866,7 @@ label.error {
     background: #0e292d; */
     /* border: 1px solid #e6e7e9;
     background: #f9f9f9; */
-    border-radius: 15px
+    border-radius: 5px;
 }
 
 .nav-search .input-group:focus,.nav-search .input-group:hover {

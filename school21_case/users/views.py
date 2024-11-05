@@ -16,18 +16,18 @@ def profile(request: HttpRequest, username: str):
 
 @login_required
 def search_profile(request: HttpRequest):
-    search_query = ProfileSearchForm(request.POST)
+    search_query_raw = ProfileSearchForm(request.POST)
 
-    if request.method == "POST" and search_query.is_valid():
-        search_query = search_query.cleaned_data
+    if request.method == "POST" and search_query_raw.is_valid():
+        search_query = search_query_raw.cleaned_data
 
         nickname = search_query.get("nickname")
-        interests = search_query.get("interests")
+        tags = search_query_raw.data.getlist("tags[]")
 
         profile = User.objects.filter(profile__nickname__icontains=nickname)
 
-        if interests:
-            profile = profile.filter(profile__interests__id__in=interests).distinct()
+        if tags:
+            profile = profile.filter(profile__interests__id__in=tags).distinct()
 
         if profile:
             return render(
@@ -36,6 +36,7 @@ def search_profile(request: HttpRequest):
                 context={
                     "users": profile.all(),
                     "search_form": ProfileSearchForm(),
+                    "tags": Interest.objects.all(),
                     "search_query": nickname,
                 },
             )
@@ -61,7 +62,15 @@ def sign_up(request: HttpRequest):
                     login(request, user)
                     return redirect("home")
 
-    return render(request, "users/login.html", {"login_form": LoginForm(), "search_form": search_form})
+    return render(
+        request,
+        "users/login.html",
+        {
+            "login_form": LoginForm(),
+            "search_form": search_form,
+            "tags": Interest.objects.all(),
+        },
+    )
 
 
 def register(request: HttpRequest):
@@ -86,7 +95,15 @@ def register(request: HttpRequest):
         return render(request, "users/register.html", {"reg_form": form, "search_form": search_form})
 
     form = RegistrationForm()
-    return render(request, "users/register.html", {"reg_form": form, "search_form": search_form})
+    return render(
+        request,
+        "users/register.html",
+        {
+            "reg_form": form,
+            "search_form": search_form,
+            "tags": Interest.objects.all(),
+        },
+    )
 
 
 def user_logout(request: HttpRequest):
@@ -103,6 +120,7 @@ def my_profile(request: HttpRequest):
         {
             "user": request.user,
             "search_form": ProfileSearchForm(),
+            "tags": Interest.objects.all(),
         },
     )
 
@@ -140,7 +158,7 @@ def edit_profile(request: HttpRequest):
                 "search_form": ProfileSearchForm(),
                 "editable": form,
                 "profile": profile,
-                "interests": Interest.objects.all(),
+                "tags": Interest.objects.all(),
             },
         )
 
@@ -151,6 +169,6 @@ def edit_profile(request: HttpRequest):
             "search_form": ProfileSearchForm(),
             "editable": ProfileEditForm(use_required_attribute=False, instance=request.user.profile),
             "profile": request.user.profile,
-            "interests": Interest.objects.all(),
+            "tags": Interest.objects.all(),
         },
     )

@@ -17,6 +17,7 @@ def my_groups(request: HttpRequest):
         "groups/my_groups.html",
         {
             "search_form": ProfileSearchForm(),
+            "tags": Interest.objects.all(),
             "groups": user.group_members.all(),
         },
     )
@@ -29,18 +30,19 @@ def find_groups(request: HttpRequest):
         search_query = form.data
 
         name = search_query.get("group_name")
-        interests = search_query.get("interests")
+        tags = search_query.get("interests[]")
 
         groups = Group.objects.filter(name__icontains=name)
 
-        if interests:
-            groups = groups.filter(tags__id__in=interests).distinct()
+        if tags:
+            groups = groups.filter(tags__id__in=tags).distinct()
 
         return render(
             request,
             "groups/find_groups.html",
             context={
                 "groups": groups.all(),
+                "tags": Interest.objects.all(),
                 "search_form": ProfileSearchForm(),
                 "find_group_form": form,
                 "search_query": name,
@@ -52,6 +54,7 @@ def find_groups(request: HttpRequest):
         "groups/find_groups.html",
         {
             "search_form": ProfileSearchForm(),
+            "tags": Interest.objects.all(),
             "find_group_form": GroupSearchForm(),
             "just_loaded": True,
         },
@@ -65,6 +68,7 @@ class GroupDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["search_form"] = ProfileSearchForm()
+        context["tags"] = Interest.objects.all()
         return context
 
 
@@ -105,8 +109,8 @@ def create_group(request: HttpRequest):
         "groups/create_group.html",
         {
             "search_form": ProfileSearchForm(),
+            "tags": Interest.objects.all(),
             "create_form": CreateGroupForm(),
-            "interests": Interest.objects.all(),
         },
     )
 
@@ -185,6 +189,7 @@ def delete_group(request: HttpRequest, pk: int):
         "groups/delete_group.html",
         {
             "search_form": ProfileSearchForm(),
+            "tags": Interest.objects.all(),
             "group": group,
         },
     )
@@ -194,7 +199,6 @@ def delete_group(request: HttpRequest, pk: int):
 def join_group(request: HttpRequest, pk: int):
     group = get_object_or_404(Group, pk=pk)
     group.members.add(request.user)
-    print(group.members.all())
     return redirect("group_detail", pk=pk)
 
 
@@ -202,5 +206,4 @@ def join_group(request: HttpRequest, pk: int):
 def leave_group(request: HttpRequest, pk: int):
     group = get_object_or_404(Group, pk=pk)
     group.members.remove(request.user)
-    print(group.members.all())
     return redirect("group_detail", pk=pk)

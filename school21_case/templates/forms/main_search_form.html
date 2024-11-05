@@ -8,6 +8,22 @@
             {% for field in search_form %}
                 {{ field }}
             {% endfor %}
+            <div class="input-group-append">
+                <button class="btn btn-primary btn-border dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Интересы
+                </button>
+                <div class="dropdown-menu">
+                    {% for tag in tags %}
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="{{ tag.id }}" id="id_{{ tag|lower }}" name="tags[]"
+                        {% if tag in group.tags.all %}checked{% endif %}>
+                        <label class="form-check-label" for="id_{{ tag|lower }}">
+                        {{ tag.name }}
+                        </label>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
         </div>
     </form>
 </nav>

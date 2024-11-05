@@ -18,6 +18,22 @@
         <div class="row mt-2">
           <form class="search-widget container-fluid" action="{% url 'find_groups' %}" method="POST">
               <div class="input-group rounded">
+                <div class="input-group-append">
+                  <button class="btn btn-primary btn-border dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Интересы
+                  </button>
+                  <div class="dropdown-menu">
+                      {% for tag in tags %}
+                      <div class="form-check">
+                          <input class="form-check-input" type="checkbox" value="{{ tag.id }}" id="id_{{ tag|lower }}" name="interests[]"
+                          {% if tag in group.tags.all %}checked{% endif %}>
+                          <label class="form-check-label" for="id_{{ tag|lower }}">
+                          {{ tag.name }}
+                          </label>
+                        </div>
+                      {% endfor %}
+                    </div>
+                </div>
                   {% csrf_token %}
                   {% for field in find_group_form %}
                       {{ field|add_class:"form-control group-input" }}
