@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% load static %}
+{% load add_class %}
+
+{% block title %}Search Results{% endblock %}
+{% block description %}Search results{%endblock %}
+
+{% block content %}
+
+<div class="container">
+    <div class="card">
+      <div class="card-header">
+        <h4 class="card-title">Проверка</h4>
+      </div>
+      <div class="card-body">
+
+      <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="card card-attention">
+          <div class="card-header">
+            <div class="d-flex justify-content-center">
+              <h4 class="card-title text-info">Введите код который был отправлен на почту <i class="card-title">{{ email }}</i></h4>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="text-center">
+              <form method="POST">
+                {% csrf_token %}
+                <input type="text" name="otp" id="id_otp" required>
+                <button class="btn btn-primary" type="submit">Подтвердить</button>
+            </form>
+            {% if error %}
+            <div class="d-flex justify-content-center">
+              <h4 class="card-title text-info text-danger">{{ error }}</h4>
+            </div>
+            {% endif %}
+            </div>
+          </div>
+        </div>
+      </form>
+
+      </div>
+    </div>
+</div>
+
+{% endblock %}
+

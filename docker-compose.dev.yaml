@@ -13,7 +13,5 @@ services:
       - POSTGRES_PASSWORD=12345
       - POSTGRES_DB=case_db
 
-
-
 volumes:
   postgres_data:

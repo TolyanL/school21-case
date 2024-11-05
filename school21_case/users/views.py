@@ -1,9 +1,14 @@
+from random import randint
+
 from django.shortcuts import render, redirect
 from django.http import HttpRequest
+from django.core.mail import send_mail
 
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.models import User
+
+from school21_case.settings import EMAIL_HOST_USER
 
 from .forms import ProfileSearchForm, LoginForm, RegistrationForm, ProfileEditForm
 from groups.models import Interest
@@ -59,8 +64,19 @@ def sign_up(request: HttpRequest):
             if user_item:
                 user = authenticate(request, username=user_item.username, password=password)
                 if user:
-                    login(request, user)
-                    return redirect("home")
+                    otp = randint(1000, 999999)
+                    request.session["otp"] = otp
+                    request.session["email"] = email
+                    send_mail(
+                        "Ваш код двухфакторной аутенфикации",
+                        f"Код: {otp}",
+                        EMAIL_HOST_USER,
+                        [user.email],
+                        fail_silently=False,
+                    )
+                    return redirect("confirm_2fa")
+                    # login(request, user)
+                    # return redirect("home")
 
     return render(
         request,
@@ -69,6 +85,39 @@ def sign_up(request: HttpRequest):
             "login_form": LoginForm(),
             "search_form": search_form,
             "tags": Interest.objects.all(),
+        },
+    )
+
+
+def confirm_2fa(request: HttpRequest):
+    # print(request.POST)
+    if request.method == "POST":
+        # print(request.POST)
+        entered_otp = request.POST.get("otp")
+
+        if entered_otp == str(request.session.get("otp")):
+            user = User.objects.filter(email=request.session.get("email")).first()
+            login(request, user)
+            return redirect("home")
+        else:
+            return render(
+                request,
+                "users/confirm_2fa.html",
+                {
+                    "search_form": ProfileSearchForm(),
+                    "tags": Interest.objects.all(),
+                    "email": request.session.get("email"),
+                    "error": "Не верный код",
+                },
+            )
+
+    return render(
+        request,
+        "users/confirm_2fa.html",
+        {
+            "search_form": ProfileSearchForm(),
+            "tags": Interest.objects.all(),
+            "email": request.session.get("email"),
         },
     )
 
