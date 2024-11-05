@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import DetailView
 from django.http import HttpRequest
 from django.contrib.auth.decorators import login_required
@@ -113,7 +113,7 @@ def create_group(request: HttpRequest):
 
 @login_required
 def edit_group(request: HttpRequest, pk: int):
-    group = Group.objects.get(pk=pk)
+    group = get_object_or_404(Group, pk=pk)
 
     if not group or request.user != group.created_by:
         return redirect("my_groups")
@@ -188,3 +188,19 @@ def delete_group(request: HttpRequest, pk: int):
             "group": group,
         },
     )
+
+
+@login_required
+def join_group(request: HttpRequest, pk: int):
+    group = get_object_or_404(Group, pk=pk)
+    group.members.add(request.user)
+    print(group.members.all())
+    return redirect("group_detail", pk=pk)
+
+
+@login_required
+def leave_group(request: HttpRequest, pk: int):
+    group = get_object_or_404(Group, pk=pk)
+    group.members.remove(request.user)
+    print(group.members.all())
+    return redirect("group_detail", pk=pk)

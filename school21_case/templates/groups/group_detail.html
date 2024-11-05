@@ -57,7 +57,11 @@
                   {% for member in group.members.all %}
                     {% if forloop.counter < 13 %}
                       <div class="avatar avatar-xs">
-                        <img src="{{ member.profile.avatar.url }}" class="avatar-thumbnail rounded-circle border border-white">
+                        {% if member.profile.avatar %}
+                          <img class="avatar-thumbnail rounded-circle border border-white" src="{{ member.profile.avatar.url }}" alt="">
+                        {% else %}
+                          <img class="avatar-thumbnail rounded-circle border border-white" src="{% static 'img/noavatar.png' %}">
+                        {% endif %}
                       </div>
                     {% endif %}
                   {% endfor %}
@@ -98,25 +102,42 @@
           </div>
         </div>
 
-      {% if group.created_by == request.user %}
-      <div class="row">
+        <div class="row">
           <div class="col-md-12">
             <div class="d-flex justify-content-center">
-              <div class="p-2">
+              {% if user.is_authenticated %}
+                {% if group.created_by == request.user %}
+                  <div class="p-2">
+                    <a href="{% url 'edit_group' pk=group.pk %}">
+                      <button class="btn btn-primary">Edit group</button>
+                    </a>
+                  </div>
+                  <div class="p-2">
+                    <a href="{% url 'delete_group' pk=group.pk %}">
+                      <button class="btn btn-danger">Delete group</button>
+                    </a>
+                  </div>
+                {% else %}
+                  {% if request.user not in group.members.all %}
+                    <form action="{% url 'join_group' group.id %}" method="post">
+                      {% csrf_token %}
+                      <button class="btn btn-primary" type="submit">Подписаться</button>
+                    </form>
+                  {% else %}
+                      <form action="{% url 'leave_group' group.id %}" method="post">
+                        {% csrf_token %}
+                        <button class="btn btn-danger" type="submit">Отписаться</button>
+                      </form>
+                  {% endif %}
+                {% endif %}
+              {% else %}
                 <a href="{% url 'edit_group' pk=group.pk %}">
-                  <button class="btn btn-primary">Edit group</button>
+                  <button class="btn btn-primary">Войдите, чтобы присоединиться к группе</button>
                 </a>
-              </div>
-              <div class="p-2">
-                <a href="{% url 'delete_group' pk=group.pk %}">
-                <button class="btn btn-danger">Delete group</button>
-              </a>
+              {% endif %}
             </div>
           </div>
         </div>
-      </div>
-      {% endif %}
-        
 
     </div>
   </div>
