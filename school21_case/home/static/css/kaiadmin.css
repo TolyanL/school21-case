@@ -846,7 +846,7 @@ body {
   line-height: 60px;
   color: #333333;
   z-index: 1001;
-  font-size: 17px;
+  font-size: 20px;
   font-weight: 400;
   padding-left: 25px;
   padding-right: 25px;
@@ -2405,7 +2405,7 @@ label {
     flex-direction: row;
     align-items: center;
     cursor: pointer;
-    border-radius: 0 !important; }
+    border-radius: 10px !important; }
     .accordion .card > .card-header > .span-mode {
       margin-left: auto; }
       .accordion .card > .card-header > .span-mode:before {

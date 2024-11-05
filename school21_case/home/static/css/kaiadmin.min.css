@@ -2303,7 +2303,7 @@ body[data-background-color=dark] .border-bottom,body[data-background-color=dark]
 }
 
 .card .card-header:first-child,.card-light .card-header:first-child {
-    border-radius: 0
+    border-radius: 10px;
 }
 
 .card .card-head-row,.card-light .card-head-row {
@@ -9605,4 +9605,80 @@ body[data-background-color=dark2] .jvm-zoom-btn,body[data-background-color=dark]
     .wrapper.not-found .desc {
         font-size: 18px!important
     }
+}
+.header {
+    background-image: linear-gradient(rgba(29, 38, 51, 0.65), rgba(29, 38, 51, 0.65)), url('{% static "img/ZcTudE59X68mZUHeSVY7-1060x600.jpeg" %}');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    padding: 40px;
+    text-align: left;
+    border-radius: 15px;
+}
+.header h1 {
+    font-size: 5rem;
+    font-weight: bold;
+    color: #ffffff;
+    margin: 0px 0px 0px 12px;
+}
+.header h2 {
+    color:  #ffffff;
+    font-size: 4rem;
+    font-weight: bold;
+    margin: 0px 0px 0px 0px;
+}
+.header .gradient-bottom{ 
+    background: linear-gradient(to bottom, #36c7ec, #00eba1);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin: auto;
+}
+.header .btn {
+    background: linear-gradient(to bottom, #36c7ec, #00eba1);
+    color: #1d2633;
+    border-radius: 50px;
+    padding: 20px 40px;
+    font-size: 1.5rem;
+    margin-top: 30px;
+    font-weight: bold;
+}
+.chat-box {
+    background-color: #1d2633;
+    color: white;
+    padding: 20px;
+    border-radius: 15px;
+    margin-top: 20px;
+}
+.chat-item {
+    background-color: #17393e;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+.chat-item .text-name-grups {
+    color:  #00eba1;
+}
+.slogan {
+    color: white;
+    font-size: 3rem;
+    font-weight: bold;
+    margin: 0px 0px 0px 0px;
+}
+.slogan-small {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 0px 0px 0px 0px; 
+}
+.gradient-right{
+    background: linear-gradient(to right, #00eba1, #36c7ec);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.right-align {
+    text-align: right;
+}
+.connect-logo {
+    font-weight: bolder;
+    text-align: center;
+    font-size: 1.5rem;
 }

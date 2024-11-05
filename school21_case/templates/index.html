@@ -13,7 +13,7 @@
     <title>Школа 21</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        .header {
+         .header {
             background-image: linear-gradient(rgba(29, 38, 51, 0.65), rgba(29, 38, 51, 0.65)), url('{% static "img/ZcTudE59X68mZUHeSVY7-1060x600.jpeg" %}');
             background-size: cover;
             background-position: center;
@@ -22,68 +22,63 @@
             text-align: left;
             border-radius: 15px;
         }
-        .header h1 {
-            font-size: 4rem;
-            font-weight: bold;
-            color: #ffffff
-
-        }
-        .header h2 {
-            color:  #00eba1;
-            font-size: 3rem;
-            font-weight: bold;
-        }
-        .header .gradient{ 
-            background: linear-gradient(to bottom, #36c7ec, #00eba1);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .header .btn {
-            background: linear-gradient(to bottom, #36c7ec, #00eba1);
-            color: #1d2633;
-            border-radius: 25px;
-            padding: 10px 20px;
-            font-size: 1.2rem;
-            margin-top: 20px;
-        }
-        .chat-box {
-            background-color: #1d2633;
-            color: white;
-            padding: 20px;
-            border-radius: 15px;
-            margin-top: 20px;
-        }
-        .chat-item {
-            background-color: #17393e;
-            padding: 15px;
-            border-radius: 10px;
-            margin-bottom: 10px;
-        }
-        .chat-item .text-name-grups {
-            color:  #00eba1;
-        }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <div class="shadow"><h1>Школа 21</h1></div>
-            <h2 class="gradient">Talkie</h2>
-            <p>Блаблаблаблаблаблаблаблаблаблаблаблабл<br>
-            ыблаблаблаблаблаблаблаблаблаблаблаблабла<br>
-            фывафывафывафывафывафывафывафывафывабла<br>
-            </p>
+            <h1>Школа 21</h1>
+            <div class="container">
+                <div class="row">
+                    <div class="col-9">
+                        <div class="p-0"><h2><span class="gradient-bottom">Connect</span></h2>
+                            <p class="slogan"><span class="gradient-right">Знакомтесь</span>, <span class="gradient-right">общайтесь</span>, <span class="gradient-right">собирайтесь</span></p>   
+                            <p class="slogan-small">Всё в одном месте</p>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="p-0">
+                            <h2 class="right-align">От</h2>
+                            <div class="bg-white" style="height: 3px;"></div>
+                            <h2 class="right-align">Сбера</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <button class="btn">Войти</button>
         </div>
-        <div class="chat-box">
-            <input type="text" class="form-control mb-3" placeholder="Гитара, музыка, рисование">
-            <div class="chat-item">
-                <h5 class="text-name-grups">Гитара вправой, член влевой <span class="float-end">2 тыс.</span></h5>
-                <p>Мы клуб любителей погреть на гитаре членом, вочек нетрадиционных личностей кайф.</p>
-            </div>
-            <div class="chat-item">
-                <h5 class="text-name-grups">Гитара вправой, член влевой <span class="float-end">2 тыс.</span></h5>
-                <p>Мы клуб любителей погреть на гитаре членом, вочек нетрадиционных личностей кайф.</p>
+        <div class="">
+            <div class="card card-attention mt-4">
+                <div class="card-body">
+                    {% for group in groups %}
+                    <div class="">
+                    <div class="card card-attention">
+                        <div class="card-body user-card">
+            
+                            <div class="avatar avatar-xxl">
+                            {% if group.icon %}
+                                <img class="avatar-xxl rounded-circle" src="{{ group.icon.url }}" alt="">
+                            {% else %}
+                                <img class="avatar-xxl rounded-circle" src="{% static 'img/noicon.png' %}" alt="">
+                            {% endif %}
+                            </div>
+                            <div class="user-info">
+                            <a href="{% url 'group_detail' pk=group.pk %}"><span class="card-title">
+                            {% if group.created_by == user %}
+                                <i class="fas fa-chess-king"></i>
+                            {% endif %}
+                                {{ group.name }}</span>
+                            </a>
+                            <span class="card-text" style="color: azure; font-size: 15px;">{{ group.description|truncatewords:20 }}</span>
+                            <span class="card-text" style="color: azure; font-size: 15px;">{{ group.created_at }}</span>
+                            <p class="card-category">{% for tag in group.tags.all %}#{{ tag }} {% endfor %}</p>
+                            </div>
+            
+                        </div>
+                    </div>
+                    </div>
+                    {% endfor %}
+                </div>
             </div>
         </div>
     </div>
