@@ -28,12 +28,12 @@
                 {% csrf_token %}
                 <input type="text" name="otp" id="id_otp" required>
                 <button class="btn btn-primary" type="submit">Подтвердить</button>
-            </form>
-            {% if error %}
-            <div class="d-flex justify-content-center">
-              <h4 class="card-title text-info text-danger">{{ error }}</h4>
-            </div>
-            {% endif %}
+              </form>
+              {% if error %}
+              <div class="d-flex justify-content-center">
+                <h4 class="card-title text-info text-danger">{{ error }}</h4>
+              </div>
+              {% endif %}
             </div>
           </div>
         </div>
