@@ -63,14 +63,9 @@
                             {% endif %}
                             </div>
                             <div class="user-info">
-                            <a href="{% url 'group_detail' pk=group.pk %}"><span class="card-title">
-                            {% if group.created_by == user %}
-                                <i class="fas fa-chess-king"></i>
-                            {% endif %}
-                                {{ group.name }}</span>
+                            <a href="{% url 'group_detail' pk=group.pk %}"><span class="card-title">{{ group.name }}</span>
                             </a>
-                            <span class="card-text" style="color: azure; font-size: 15px;">{{ group.description|truncatewords:20 }}</span>
-                            <span class="card-text" style="color: azure; font-size: 15px;">{{ group.created_at }}</span>
+                            <span class="card-text" style="color: azure; font-size: 15px;">{{ group.description }}</span>
                             <p class="card-category">{% for tag in group.tags.all %}#{{ tag }} {% endfor %}</p>
                             </div>
             

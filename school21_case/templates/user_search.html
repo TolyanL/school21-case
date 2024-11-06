@@ -35,7 +35,9 @@
                   {% endif %}
                 </div>
                 <div class="user-info">
-                  <span class="card-title">{{ user.profile.nickname }}</span>
+                  <span class="card-title"></span>
+                  <a href="{% url 'profile_detail' pk=user.pk %}"><span class="card-title">{{ user.profile.nickname }}</span></a>
+
                   
                   <span class="card-text" style="color: azure; font-size: 15px;">
                     {% if user.profile.description %}

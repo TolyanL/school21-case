@@ -7,6 +7,7 @@ from django.core.mail import send_mail
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.models import User
+from django.views.generic import DetailView
 
 from school21_case.settings import EMAIL_HOST_USER
 
@@ -14,9 +15,29 @@ from .forms import ProfileSearchForm, LoginForm, RegistrationForm, ProfileEditFo
 from groups.models import Interest
 
 
-@login_required
-def profile(request: HttpRequest, username: str):
-    return render(request, "profile.html", {"username": username})
+class ProfileDetailView(DetailView):
+    model = User
+    template_name = "users/profile.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["search_form"] = ProfileSearchForm()
+        context["tags"] = Interest.objects.all()
+        return context
+
+
+# @login_required
+# def user_profile(request: HttpRequest, user_id: int):
+#     user = get_object_or_404(User, pk=user_id)
+#     return render(
+#         request,
+#         "users/profile.html",
+#         {
+#             "user": user,
+#             "search_form": ProfileSearchForm(),
+#             "tags": Interest.objects.all(),
+#         },
+#     )
 
 
 @login_required

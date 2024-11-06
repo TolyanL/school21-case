@@ -130,7 +130,7 @@
                 <div class="card-body">
                   <div class="row">
                     <div>
-                      <h2 class="h5 gradient-right">Ваши Интересы</h2>
+                      <h2 class="h5 gradient-right">Интересы</h2>
                       {% for tag in user.profile.interests.all %}
                       <span class="h4 gradient-right">#{{ tag }}</span>
                       {% if not forloop.last %}
