@@ -9626,7 +9626,7 @@ body[data-background-color=dark2] .jvm-zoom-btn,body[data-background-color=dark]
     font-size: 5rem;
     font-weight: bold;
     color: #ffffff;
-    margin: 0px 0px 0px 12px;
+    margin: 0px 0px 0px 0px;
 }
 .header h2 {
     color:  #ffffff;
