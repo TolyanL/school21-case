@@ -10,7 +10,7 @@
   <div class="card">
     <div class="card-header">
       <div class="card-head-row card-tools-still-right">
-        <h4 class="card-title">You Profile</h4>
+        <h4 class="card-title gradient-right">Мой Профиль</h4>
       </div>
     </div>
 
@@ -31,7 +31,7 @@
                 </div>
               </div>
               <div class="profile-info">
-                <h2 class="card-title">{{ user.profile.nickname }}</h2>
+                <h2 class="card-title gradient-right">{{ user.profile.nickname }}</h2>
                 <p style="color: aliceblue;">
                   {% if user.profile.description %}
                       {{ user.profile.description }}
@@ -43,80 +43,115 @@
             </div>
 
           </div>
+
+          <div class="card card-attention">
+            <div class="card-body">
+              <h2 class="h5 gradient-right">Почта</h2>
+              <span class="h4 gradient-right">{{ user.email }}</span>
+            </div>
+          </div>
         </div>
 
         <div class="col-md-8">
           <div class="card card-attention">
             <div class="card-body">
+
               <div class="row">
-                <div class="col-md-4">
+                <div class="col">
                   <div>
-                    <h2 class="text-white">Имя</h2>
-                    <span class="card-category">{{ user.profile.nickname }}</span>
+                    <h2 class="h5 gradient-right">Имя</h2>
+                    <span class="h4 text-white">{{ user.profile.name }}</span>
+                    <hr class="under-info">
                   </div>
                   <div>
-                    <h2 class="text-white">Имя</h2>
-                    <span class="card-category">{{ user.profile.nickname }}</span>
+                    <h2 class="h5 gradient-right">Фамилия</h2>
+                    <span class="h4 text-white">{{ user.profile.surname }}</span>
+                    <hr class="under-info">
                   </div>
                   <div>
-                    <h2 class="text-white">Имя</h2>
-                    <span class="card-category">{{ user.profile.nickname }}</span>
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div>
-                    <h2 class="text-white">Имя</h2>
-                    <span class="card-category">{{ user.profile.nickname }}</span>
-                  </div>
-                  <div>
-                    <h2 class="text-white">Имя</h2>
-                    <span class="card-category">{{ user.profile.nickname }}</span>
-                  </div>
-                  <div>
-                    <h2 class="text-white">Имя</h2>
-                    <span class="card-category">{{ user.profile.nickname }}</span>
+                    <h2 class="h5 gradient-right">Отчество</h2>
+                    <span class="h4 text-white">{{ user.profile.lastname }}</span>
                   </div>
                 </div>
-              </div>
-              <!-- <div class="form-group">
-                <label for="first_name">Имя:</label>
-                <input type="text" class="form-control" id="first_name" value="{{ user.profile.name|default:"" }}" readonly>
+                <div class="col">
+                  <div>
+                    <h2 class="h5 gradient-right">Telegram</h2>
+                    <span class="h4 text-white">{{ user.profile.nickname_tg }}</span>
+                    <hr class="under-info"">
+                  </div>
+                  <div>
+                    <h2 class="h5 gradient-right">Discord</h2>
+                    <span class="h4 text-white">{{ user.profile.nickname_ds }}</span>
+                    <hr class="under-info">
+                  </div>
+                  <div>
+                    <h2 class="h5 gradient-right">Создан</h2>
+                    <span class="h4 text-white">{{ user.profile.created_at|date:"d.m.Y" }}</span>
+                  </div>
+                </div>
+                <div class="row-md-3 mt-4">
+                  <hr class="under-info" style="width: 100%;">
+                  <h2 class="h5 gradient-right">Учится в</h2>
+                  <span class="h5 text-white">{{ user.profile.study_at }}</span>
+                </div>
               </div>
 
-              <div class="form-group">
-                <label for="last_name">Фамилия:</label>
-                <input type="text" class="form-control" id="last_name" value="{{ user.profile.surname|default:"" }}" readonly>
-              </div>
-              <div class="form-group">
-                <label for="middle_name">Отчество:</label>
-                <input type="text" class="form-control" id="middle_name" value="{{ user.profile.lastname|default:"" }}" readonly>
-              </div>
-              <div class="form-group">
-                <label for="telegram_nickname">Ник в Telegram:</label>
-                <input type="text" class="form-control" id="telegram_nickname" value="{{ user.profile.nickname_tg|default:"" }}" readonly>
-              </div>
-              <div class="form-group">
-                <label for="platform_nickname">Ник на платформе:</label>
-                <input type="text" class="form-control" id="platform_nickname" value="{{ user.profile.nickname_ds|default:"" }}" readonly>
-              </div> -->
             </div>
           </div>
+
+          <div class="row">
+
+            <div class="col">
+              <div class="card card-attention">
+                <div class="card-body">
+                  <div class="row">
+                      <div>
+                        <h2 class="h5 text-white gradient-right">Имя</h2>
+                        <span class="h4 text-white">{{ user.profile.name }}</span>
+                        <hr class="under-info" style="width: 50%;">
+                      </div>
+                      <div>
+                        <h2 class="h5 text-white gradient-right">Фамилия</h2>
+                        <span class="h4 text-white">{{ user.profile.surname }}</span>
+                        <hr class="under-info" style="width: 60%;">
+                      </div>
+                      <div>
+                        <h2 class="h5 text-white gradient-right">Отчество</h2>
+                        <span class="h4 text-white">{{ user.profile.lastname }}</span>
+                        <hr class="under-info" style="width: 70%;">
+                      </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col">
+              <div class="card card-attention">
+                <div class="card-body">
+                  <div class="row">
+                    <div>
+                      <h2 class="h5 gradient-right">Ваши Интересы</h2>
+                      {% for tag in user.profile.interests.all %}
+                      <span class="h4 gradient-right">#{{ tag }}</span>
+                      {% if not forloop.last %}
+                        <hr class="under-info" style="width: 25%;">
+                      {% endif %}
+                      {% endfor %}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
         </div>
       </div>
 
       <div class="row">
         <div class="col-md-12">
-          <div class="card card-attention">
-            <div class="card-body">
-              <div class="form-group">
-                <label for="email">Email:</label>
-                <input type="email" class="form-control" id="email" value="{{ user.email }}" readonly>
-              </div>
-            </div>
-          </div>
 
           <div class="d-flex justify-content-center">
-
             <div class="p-2">
               <a href="{% url 'profile_edit' %}">
                 <button class="btn btn-primary">Edit profile</button>
@@ -127,12 +162,6 @@
                 <button class="btn btn-danger">Logout</button>
               </a>
             </div>
-            <div class="p-2">
-              <a href="{% url 'profile_edit' %}">
-                <button class="btn btn-danger">...</button>
-              </a>
-            </div>
-
         </div>
       </div>
 

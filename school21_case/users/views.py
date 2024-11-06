@@ -181,24 +181,21 @@ def edit_profile(request: HttpRequest):
         form = ProfileEditForm(request.POST, instance=profile, use_required_attribute=False)
 
         if not form.errors:
-            # print(form.data)
             instance = form.save(commit=False)
             tags = request.POST.getlist("interests[]")
 
-            # print(request.FILES.get("avatar"))
-
-            if len(tags):
+            if 0 < len(tags) <= 5:
                 instance.interests.set(tags)
+            else:
+                form.add_error(None, "Вы можете выбрать не более 5 интересов.")
 
             if request.FILES.get("avatar"):
                 profile.avatar = request.FILES.get("avatar")
                 profile.save()
 
-            instance.save()
-
-            return redirect("my_profile")
-
-        # print(form.errors)
+            if not form.errors:
+                instance.save()
+                return redirect("my_profile")
 
         return render(
             request,

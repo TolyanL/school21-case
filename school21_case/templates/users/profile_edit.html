@@ -113,7 +113,11 @@
             <div class="p-2">
               {% if reg_form.errors %}
                 <div class="row">
-                  {{ reg_form.errors }}
+                  {% if reg_form.non_field_errors %}
+                      {{ reg_form.non_field_errors }}
+                  {% else %}
+                      {{ reg_form.errors }}
+                  {% endif %}
                 </div>
               {% endif %}
               <a href="{% url 'my_profile' %}">

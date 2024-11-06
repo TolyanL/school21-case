@@ -2303,7 +2303,9 @@ body[data-background-color=dark] .border-bottom,body[data-background-color=dark]
 }
 
 .card .card-header:first-child,.card-light .card-header:first-child {
-    border-radius: 10px;
+    /* border-radius: 10px; */
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
 }
 
 .card .card-head-row,.card-light .card-head-row {
@@ -5085,6 +5087,11 @@ label.error {
 
 .badge-info {
     background: #48abf7
+}
+
+.under-info {
+    border-top: 1px solid #00e39c;
+    width: 65%;
 }
 
 .badge-success {
