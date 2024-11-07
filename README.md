@@ -69,12 +69,12 @@ Create backup (static & db)
 
 ### Via Makefile
 ```bash
-make -B backup
+make
 ```
 
 ### Manual
 ```bash
-mkdir backup && cd backup
+mkdir backup
 ```
 ```bash
 cd school21_case
