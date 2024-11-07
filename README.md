@@ -4,6 +4,7 @@ Hello programmers 👋🎃!
 ## 📚 Table of contents:
 1. [Installation](#installation)
 2. [Update to latest stable version](#update)
+3. [Make backups](#backup)
 
 
 ## Installation
