@@ -65,6 +65,13 @@ python manage.py migrate
 
 ## Backup
 Create backup (static & db)
+
+### Via Makefile
+```bash
+make -B backup
+```
+
+### Manual
 ```bash
 cd ..
 mkdir backup && cd backup
