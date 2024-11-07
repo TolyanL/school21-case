@@ -73,9 +73,9 @@ make -B backup
 
 ### Manual
 ```bash
-cd ..
 mkdir backup && cd backup
 ```
 ```bash
+cd school21_case
 python manage.py archive
 ```
