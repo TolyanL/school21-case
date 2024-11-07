@@ -3730,6 +3730,13 @@ label {
     border-width: 2px
 }
 
+.edit-field {
+    border-color: #0c664a;
+    color: #00eba1;
+    background-color: #0f2528 ;
+    border: var(--bs-border-width) solid #0c664a;
+}
+
 .form-control:focus {
     border-color: #3e93ff
 }

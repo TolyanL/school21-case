@@ -4,6 +4,7 @@ __pycache__/
 *$py.class
 
 school21_case/media/*
+backup/*
 
 # C extensions
 *.so

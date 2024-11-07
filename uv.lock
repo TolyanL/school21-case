@@ -28,6 +28,18 @@ wheels = [
 ]
 
 [[package]]
+name = "django-archive"
+version = "0.2.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "django" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/f8/26/1e771025998fcaa6d81e10138573f47ac7ac2a49c7de20cc8a175279edf3/django_archive-0.2.0.tar.gz", hash = "sha256:f3072272c79ea24c766a5046f5aee7c0a1ba09559e4ca608f217da44fe4b1ddc", size = 4103 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/44/2e/b224dcb256cd2f882a3849cc244e66992fd6a49e9540ed4fc077ffab8755/django_archive-0.2.0-py3-none-any.whl", hash = "sha256:0026922afa77c8a39d8fa589b7def5e5d1e7eb6343af27d8b732a499c794dab0", size = 6821 },
+]
+
+[[package]]
 name = "django-debug-toolbar"
 version = "4.4.6"
 source = { registry = "https://pypi.org/simple" }
@@ -167,6 +179,7 @@ version = "0.1.0"
 source = { virtual = "." }
 dependencies = [
     { name = "django" },
+    { name = "django-archive" },
     { name = "django-debug-toolbar" },
     { name = "pillow" },
     { name = "psycopg2-binary" },
@@ -175,6 +188,7 @@ dependencies = [
 [package.metadata]
 requires-dist = [
     { name = "django", specifier = "==5.1.2" },
+    { name = "django-archive" },
     { name = "django-debug-toolbar", specifier = ">=4.4.6" },
     { name = "pillow", specifier = ">=11.0.0" },
     { name = "psycopg2-binary", specifier = ">=2.9.10" },

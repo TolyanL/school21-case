@@ -61,4 +61,10 @@ git pull
 ```bash
 python manage.py makemigrations
 python manage.py migrate
+
+
+## Backup
+1. Create backup (static & db)
+```bash
+python manage.py archive
 ```

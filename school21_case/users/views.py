@@ -26,20 +26,6 @@ class ProfileDetailView(DetailView):
         return context
 
 
-# @login_required
-# def user_profile(request: HttpRequest, user_id: int):
-#     user = get_object_or_404(User, pk=user_id)
-#     return render(
-#         request,
-#         "users/profile.html",
-#         {
-#             "user": user,
-#             "search_form": ProfileSearchForm(),
-#             "tags": Interest.objects.all(),
-#         },
-#     )
-
-
 @login_required
 def search_profile(request: HttpRequest):
     search_query_raw = ProfileSearchForm(request.POST)
@@ -55,19 +41,19 @@ def search_profile(request: HttpRequest):
         if tags:
             profile = profile.filter(profile__interests__id__in=tags).distinct()
 
-        if profile:
-            return render(
-                request,
-                "user_search.html",
-                context={
-                    "users": profile.all(),
-                    "search_form": ProfileSearchForm(),
-                    "tags": Interest.objects.all(),
-                    "search_query": nickname,
-                },
-            )
+        # if profile:
+        return render(
+            request,
+            "user_search.html",
+            context={
+                "users": profile.all(),
+                "search_form": ProfileSearchForm(),
+                "tags": Interest.objects.all(),
+                "search_query": nickname,
+            },
+        )
 
-    return redirect("home")
+    # return redirect("home")
 
 
 def sign_up(request: HttpRequest):

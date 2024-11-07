@@ -40,7 +40,7 @@
                   </a>
                   {% endif %}
                 </div>
-                <input type="file" name="avatar" accept="image/*" class="form-control" id="id_avatar">
+                <input class="form-control edit-field mb-3" type="file" name="avatar" accept="image/*" id="id_avatar">
 
                 <div class="profile-info">
                   <h2 class="card-title">{{ user.profile.nickname }}</h2>
@@ -67,8 +67,8 @@
                 <div class="form-check">
                   <input class="form-check-input" type="checkbox" value="{{ tag.id }}" id="id_{{ tag|lower }}" name="interests[]"
                   {% if tag in user.profile.interests.all %}checked{% endif %}>
-                  <label class="form-check-label" for="id_{{ tag|lower }}">
-                    {{ tag.name }}
+                  <label class="form-check-label gradient-right" for="id_{{ tag|lower }}">
+                    {{ tag }}
                   </label>
                 </div>
                 {% endfor %}
@@ -89,8 +89,8 @@
               <div class="card-body">
                 {% for field in editable %}
                 <div class="row-md-4 mb-3">
-                  <div class="form-label">{{ field.label_tag }}</div>
-                  {{ field|add_class:"form-control" }}
+                  <div class="form-label gradient-right">{{ field.label_tag }}</div>
+                  {{ field|add_class:"form-control edit-field" }}
                 </div>
                 {% endfor %}
               </div>
@@ -102,7 +102,7 @@
 
         <div class="d-flex justify-content-center">
           <div class="p-2">
-            <button class="btn btn-success" type="submit" value="Save">Save</button>
+            <button class="btn btn-primary" type="submit" value="Save">Save</button>
           </div>
         </div>
       </form>
@@ -120,9 +120,11 @@
                   {% endif %}
                 </div>
               {% endif %}
-              <a href="{% url 'my_profile' %}">
-                <button class="btn btn-primary">Back</button>
-              </a>
+              <div class="d-flex justify-content-end">
+                <a href="{% url 'my_profile' %}">
+                  <button class="btn btn-primary">Back</button>
+                </a>
+              </div>
             </div>
           </div>
         </div>

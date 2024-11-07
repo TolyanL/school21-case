@@ -13,14 +13,15 @@
         <div class="card-head-row card-tools-still-right">
           <h4 class="card-title">Users</h4>
         </div>
+        {% if users %}
         <p class="card-category">
           Results for {{ search_query }}
         </p>
+        {% endif %}
       </div>
       <div class="card-body">
         <div class="row">
-          <!-- <div class="col-12"> -->
-
+        {% if users %}
         {% for user in users %}
 
         <div class="col-12 col-sm-6 col-lg-4">
@@ -54,8 +55,12 @@
           </div>
         </div>
         {% endfor %}
+        {% else %}
+        <div class="text-center mb-3">
+          <h4 class="card-title gradient-right">По вашему запросу <i>{{ search_query }}</i> ничего не найдено</h4>
+        </div>
+        {% endif %}
       </div>
-      <!-- </div> -->
 
       </div>
     </div>
