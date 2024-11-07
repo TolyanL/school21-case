@@ -12,7 +12,7 @@ class ProfileSearchForm(forms.Form):
         widget=forms.TextInput(
             attrs={
                 "class": "form-control input-field",
-                "placeholder": "Enter nickname...",
+                "placeholder": "Введите ник пользователя...",
             }
         ),
     )

@@ -39,7 +39,7 @@
                   <p style="color: aliceblue;">
                     {{ group.created_at }}
                   </p>
-                  <p class="card-category">Created by {{ group.created_by.username }}</p>
+                  <p class="card-category">Создана {{ group.created_by.username }}</p>
                 </div>
               </div>
             </div>
@@ -49,7 +49,7 @@
             <div class="card card-attention">
               <div class="card-header">
                 <div class="card-head-row card-tools-still-right">
-                  <h4 class="card-title">Group Members ({{ group.members.all|length }})</h4>
+                  <h4 class="card-title">Участники группы ({{ group.members.all|length }})</h4>
                 </div>
               </div>
               <div class="card-body">
@@ -82,7 +82,7 @@
           <div class="col-md">
             <div class="card card-attention">
               <div class="card-body">
-                <h2 class="card-title">Description</h2>
+                <h2 class="card-title">Описание</h2>
                 <p style="color: #cecece;">{{ group.description }}</p>
               </div>
             </div>
@@ -92,7 +92,7 @@
             <div class="card card-attention">
               <div class="card-header">
                 <div class="card-head-row card-tools-still-right">
-                  <h4 class="card-title">Interests</h4>
+                  <h4 class="card-title">Интересы</h4>
                 </div>
               </div>
               <div class="card-body">
@@ -109,12 +109,12 @@
                 {% if group.created_by == request.user %}
                   <div class="p-2">
                     <a href="{% url 'edit_group' pk=group.pk %}">
-                      <button class="btn btn-primary">Edit group</button>
+                      <button class="btn btn-primary">Редактировать группу</button>
                     </a>
                   </div>
                   <div class="p-2">
                     <a href="{% url 'delete_group' pk=group.pk %}">
-                      <button class="btn btn-danger">Delete group</button>
+                      <button class="btn btn-danger">удалить группу</button>
                     </a>
                   </div>
                 {% else %}

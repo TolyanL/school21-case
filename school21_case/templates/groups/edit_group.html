@@ -18,7 +18,7 @@
           {% csrf_token %}
           <div class="card card-attention">
             <div class="card-header">
-              <h4 class="card-title">Banner</h4>
+              <h4 class="card-title">Баннер</h4>
             </div>
             <div class="card-body banner">
               {% if group.banner %}
@@ -35,7 +35,7 @@
 
               <div class="card card-attention">
                 <div class="card-header">
-                  <h4 class="card-title">Icon</h4>
+                  <h4 class="card-title">Аватар</h4>
                 </div>
                 <div class="card-body">
                   <div class="avatar-container">
@@ -57,7 +57,7 @@
 
               <div class="card card-attention"> 
                 <div class="card-header">
-                  <h4 class="card-title">Group info</h4>
+                  <h4 class="card-title">Информация о группе</h4>
                 </div>
                 <div class="card-body">
                   {% for field in editable %}
@@ -71,7 +71,7 @@
 
               <div class="card card-attention"> 
                 <div class="card-header">
-                  <h4 class="card-title">Group interests</h4>
+                  <h4 class="card-title">Интересы</h4>
                 </div>
                 <div class="card-body">
                   {% for tag in tags %}
@@ -98,12 +98,12 @@
             {% endif %}
             
             <div class="d-flex justify-content-center">
-              <button type="submit" class="btn btn-primary">Save</button>
+              <button type="submit" class="btn btn-primary">Сохранить</button>
             </div>
           </div>
         </form>
         <a href="{% url 'group_detail' pk=group.pk %}">
-          <button class="btn btn-primary">Back</button>
+          <button class="btn btn-primary">Назад</button>
         </a>
       </div>
     </div>

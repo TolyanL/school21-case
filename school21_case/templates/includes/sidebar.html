@@ -28,63 +28,62 @@
         <li class="nav-item">
           <a href="{% url 'home' %}">
             <i class="fas fa-home"></i>
-            <p>Home</p>
+            <p>Главная</p>
           </a>
         </li>
         <li class="nav-item">
           <a data-bs-toggle="collapse" href="#groups">
             <i class="fas fa-users"></i>
-            <p>Groups</p>
+            <p>Группы</p>
             <span class="caret"></span>
           </a>
           <div class="collapse" id="groups">
             <ul class="nav nav-collapse">
               <li>
                 <a href="{% url 'find_groups' %}">
-                  <span class="sub-item">Find Groups</span>
+                  <span class="sub-item">Найти группы</span>
                 </a>
               </li>
               <li>
                 <a href="{% url 'my_groups' %}">
-                  <span class="sub-item">My Groups</span>
+                  <span class="sub-item">Мои группы</span>
                   <span class="badge badge-success">{{ request.user.group_members.all|length }}</span>
                 </a>
               </li>
               <li>
                 <a href="{% url 'create_group' %}">
-                  <span class="sub-item">Create Group</span>
+                  <span class="sub-item">Создать группу</span>
                 </a>
               </li>
             </ul>
           </div>
         </li>
 
-        <li class="nav-item">
+        <!-- <li class="nav-item">
           <a data-bs-toggle="collapse" href="#people">
             <i class="fas fa-user-friends"></i>
             <p>People</p>
           </a>
-        </li>
+        </li> -->
 
-        
         <li class="nav-item">
-          <a href="../../documentation/index.html">
+          <a href="https://21-school.ru/">
             <i class="fas fa-globe"></i>
-            <p>Out Site</p>
+            <p>Наш сайт</p>
           </a>
         </li>
 
         <li class="nav-item">
           <a href="../../documentation/index.html">
             <i class="fab fa-sticker-mule"></i>
-            <p>Help</p>
+            <p>Помощь</p>
           </a>
         </li>
 
         <li class="nav-item">
           <a href="widgets.html">
             <i class="far fa-question-circle"></i>
-            <p>About</p>
+            <p>О проекте</p>
           </a>
         </li>
         
@@ -98,7 +97,7 @@
                 <img src="{% static 'img/noavatar.png' %}"class="avatar-thumbnail rounded-circle border border-slimegreen">
               {% endif %}
             </div>
-            <p style="margin-left: 12px;">My profile</p>
+            <p style="margin-left: 12px;">Мой профиль</p>
           </a>
         {% else %}
           <a href="{% url "sign_up" %}">

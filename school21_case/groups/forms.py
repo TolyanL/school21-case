@@ -14,7 +14,7 @@ class GroupSearchForm(forms.Form):
         widget=forms.TextInput(
             attrs={
                 "class": "form-control input-field",
-                "placeholder": "Enter a group name...",
+                "placeholder": "Введите название группы...",
             }
         ),
     )

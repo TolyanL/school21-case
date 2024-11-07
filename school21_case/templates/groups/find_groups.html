@@ -47,9 +47,9 @@
 
         {% if not just_loaded %}
           {% if groups %}
-          <p class="card-category">Results for <i>{{ search_query }}</i></p>
+          <p class="card-category">Результаты поиска по запросу <i>{{ search_query }}</i></p>
           {% else %}
-          <p class="card-category text-danger">Nothing found for <i>{{ search_query }}</i></p>
+          <p class="card-category text-danger">По вашему запросу <i>{{ search_query }}</i> ничего не найдено</p>
           {% endif %}
         {% endif %}
 
