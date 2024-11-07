@@ -9649,41 +9649,30 @@ body[data-background-color=dark2] .jvm-zoom-btn,body[data-background-color=dark]
     margin-top: 30px;
     font-weight: bold;
 }
-.chat-box {
-    background-color: #1d2633;
-    color: white;
-    padding: 20px;
-    border-radius: 15px;
-    margin-top: 20px;
-}
-.chat-item {
-    background-color: #17393e;
-    padding: 15px;
-    border-radius: 10px;
-    margin-bottom: 10px;
-}
-.chat-item .text-name-grups {
-    color:  #00eba1;
-}
+
 .slogan {
     color: white;
-    font-size: 3rem;
+    font-size: 2.7rem;
     font-weight: bold;
     margin: 0px 0px 0px 0px;
 }
+
 .slogan-small {
     font-size: 1.5rem;
     font-weight: bold;
     margin: 0px 0px 0px 0px; 
 }
+
 .gradient-right{
     background: linear-gradient(to right, #00eba1, #36c7ec);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
+
 .right-align {
     text-align: right;
 }
+
 .connect-logo {
     font-weight: bolder;
     text-align: center;

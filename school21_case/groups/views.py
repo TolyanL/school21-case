@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import DetailView
 from django.http import HttpRequest
 from django.contrib.auth.decorators import login_required
+from django.db.models import Count
 
 from .models import Group, Interest
 from .forms import CreateGroupForm, GroupSearchForm, GroupEditForm
@@ -49,6 +50,7 @@ def find_groups(request: HttpRequest):
             },
         )
 
+    groups = Group.objects.annotate(num_members=Count("members")).order_by("-num_members").all()
     return render(
         request,
         "groups/find_groups.html",
@@ -57,6 +59,7 @@ def find_groups(request: HttpRequest):
             "tags": Interest.objects.all(),
             "find_group_form": GroupSearchForm(),
             "just_loaded": True,
+            "groups": groups,
         },
     )
 

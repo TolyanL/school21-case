@@ -5,66 +5,65 @@
 {% block description %}Home description{% endblock %}
 
 {% block content %}
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Школа 21</title>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body>
-    <div class="container-fluid">
-        <div class="header" style="background-image: linear-gradient(rgba(29, 38, 51, 0.65), rgba(29, 38, 51, 0.65)), url('{% static 'img/ZcTudE59X68mZUHeSVY7-1060x600.jpeg' %}');">
-            <div class="container">
-                <h1>Школа 21</h1>
-                <div class="row align-items-center">
-                    <div class="col-md-9 col-12">
-                        <div class="p-0">
-                            <h2><span class="gradient-bottom">Connect</span></h2>
-                            <p class="slogan"><span class="gradient-right">Знакомьтесь</span>, <span class="gradient-right">общайтесь</span>, <span class="gradient-right">собирайтесь</span></p>
-                            <p class="slogan-small">Всё в одном месте</p>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-12">
-                        <div class="p-0">
-                            <h2 class="right-align">От</h2>
-                            <div class="bg-white" style="height: 3px; width: 100%;"></div>
-                            <h2 class="right-align">Сбера</h2>
-                        </div>
+<div class="container-fluid">
+    <div class="header" style="background-image: linear-gradient(rgba(29, 38, 51, 0.65), rgba(29, 38, 51, 0.65)), url('{% static 'img/back-main.jpeg' %}');">
+        <div class="container">
+            <h1>Школа 21</h1>
+            <div class="row align-items-center">
+                <div class="col-md-9 col-12">
+                    <div class="p-0">
+                        <h2><span class="gradient-bottom">Connect</span></h2>
+                        <p class="slogan"><span class="gradient-right">Знакомьтесь</span>, <span class="gradient-right">общайтесь</span>, <span class="gradient-right">собирайтесь</span></p>
+                        <p class="slogan-small">Всё в одном месте</p>
                     </div>
                 </div>
-                <button class="btn btn-primary mt-3">Войти</button>
+                <div class="col-md-3 col-12">
+                    <div class="p-0">
+                        <h2 class="right-align">От</h2>
+                        <div class="bg-white" style="height: 3px; width: 100%;"></div>
+                        <h2 class="right-align">Сбера</h2>
+                    </div>
+                </div>
             </div>
+            <a href="{% url 'sign_up' %}">
+                <button class="btn btn-primary mt-3">Войти</button>
+            </a>
         </div>
-        <div class="mt-4">
-            <div class="card">
-                <div class="card-body">
-                    {% for group in groups %}
-                    <div class="mb-3">
-                        <div class="card card-attention">
-                            <div class="card-body user-card d-flex align-items-center">
-                                <div class="avatar avatar-xxl me-3">
-                                    {% if group.icon %}
-                                        <img class="avatar-xxl rounded-circle" src="{{ group.icon.url }}" alt="">
-                                    {% else %}
-                                        <img class="avatar-xxl rounded-circle" src="{% static 'img/noicon.png' %}" alt="">
-                                    {% endif %}
-                                </div>
-                                <div class="user-info">
-                                    <a href="{% url 'group_detail' pk=group.pk %}" class="text-decoration-none"><span class="card-title">{{ group.name }}</span></a>
-                                    <span class="card-text d-block" style="color: azure; font-size: 15px;">{{ group.description }}</span>
-                                    <p class="card-category">{% for tag in group.tags.all %}#{{ tag }} {% endfor %}</p>
-                                </div>
+    </div>
+    <div class="mt-4">
+        <div class="card">
+            <div class="card-body">
+                {% for group in groups|slice:"7" %}
+                <div class="mb-3">
+                    <div class="card card-attention">
+                        <div class="card-body user-card d-flex align-items-center">
+                            <div class="avatar avatar-xxl me-3">
+                                {% if group.icon %}
+                                    <img class="avatar-xxl rounded-circle" src="{{ group.icon.url }}" alt="">
+                                {% else %}
+                                    <img class="avatar-xxl rounded-circle" src="{% static 'img/noicon.png' %}" alt="">
+                                {% endif %}
+                            </div>
+                            <div class="user-info">
+                                <a href="{% url 'group_detail' pk=group.pk %}" class="text-decoration-none"><span class="card-title">{{ group.name }}</span></a>
+                                <span class="card-text d-block" style="color: azure; font-size: 15px;">{{ group.description|truncatewords:30 }}</span>
+                                <span class="card-category" style="font-size: 20px;"><i class="fas fa-users"></i> {{ group.members.all|length }}</span>
+                                <p class="card-category">{% for tag in group.tags.all %}#{{ tag }} {% endfor %}</p>
+                            </div>
+                            <div class="col">
+                                <p class="card-category"></p>
                             </div>
                         </div>
                     </div>
-                    {% endfor %}
+                </div>
+                {% endfor %}
+                <div class="d-flex justify-content-center">
+                    <a href="{% url 'find_groups' %}">
+                        <button class="btn btn-primary">Показать больше</button>
+                    </a>
                 </div>
             </div>
         </div>
     </div>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+</div>
 {% endblock %}
