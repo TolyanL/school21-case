@@ -19,7 +19,7 @@ git clone https://github.com/TolyanL/school21-case.git
 ```bash
 make launch
 ```
-This will install all requirements and will automatically start the server
+This will install all requirements and will automatically start the server see [Makefile functions](#makefile-functions) for more information
 
 
 ## Installation (Manual)
@@ -72,7 +72,7 @@ python manage.py runserver
 | install | Install requirements |
 | db | Starts database |
 | db_down | Downs database |
-| migrate | Create migrations and apply it |
+| migrate | Create migrations and apply they |
 
 
 ## Update
