@@ -1,8 +1,8 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block title %}Home page{% endblock %}
-{% block description %}Home description{%endblock %}
+{% block title %}Группа {{ group.name }}{% endblock %}
+{% block description %}{{ group.description|truncatewords:15 }}{%endblock %}
 
 {% block content %}
 

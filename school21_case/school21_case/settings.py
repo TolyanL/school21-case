@@ -1,8 +1,11 @@
 import os
 from pathlib import Path
 
+from dotenv import load_dotenv
 from django_archive import archivers
 
+
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -11,7 +14,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-m8@6hk%1ru&^wlv)5hwta-#v%c3$th7@qeq-8)zijnqf4#+4-!"
+SECRET_KEY = os.environ.get("SECRET_KEY")  # "django-insecure-m8@6hk%1ru&^wlv)5hwta-#v%c3$th7@qeq-8)zijnqf4#+4-!"
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = True
@@ -21,7 +24,7 @@ DEBUG = DJANGO_ENV == "development"
 ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
 
 INTERNAL_IPS = ["127.0.0.1"]
-CSRF_TRUSTED_ORIGINS = ["https://fortnitegg.ru", "https://www.fortnitegg.ru"]
+CSRF_TRUSTED_ORIGINS = ["http://127.0.0.1", "http://localhost"]
 
 # Application definition
 
@@ -32,7 +35,6 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    # "dbbackup",
     "django_archive",
     "home",
     "users",
@@ -85,11 +87,11 @@ WSGI_APPLICATION = "school21_case.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "case_db",
-        "USER": "case_db",
-        "PASSWORD": 12345,
-        "HOST": "localhost",
-        "PORT": 5432,
+        "NAME": os.environ.get("DB_NAME"),  # "case_db",
+        "USER": os.environ.get("DB_USER"),  # "case_db",
+        "PASSWORD": os.environ.get("DB_PASSWORD"),  # 12345,
+        "HOST": os.environ.get("DB_HOST", default="localhost"),  # "localhost",
+        "PORT": os.environ.get("DB_PORT", default=5431),  # 5432,
     }
 }
 
@@ -120,12 +122,11 @@ AUTH_PASSWORD_VALIDATORS = [
 LOGIN_URL = "/users/login"
 
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-EMAIL_HOST = "smtp.gmail.com"
+EMAIL_HOST = os.environ.get("EMAIL_HOST")  # "smtp.gmail.com"
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = "timofey2007l@gmail.com"
-EMAIL_HOST_PASSWORD = "arjk dimq dkzt zfkw"
-
+EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER")  # "timofey2007l@gmail.com"
+EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD")  # "arjk dimq dkzt zfkw"
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
