@@ -1,16 +1,16 @@
 run: db
-	python school21_case/manage.py runserver
+	python3 school21_case/manage.py runserver
 
 launch: install db migrate
-	python school21_case/manage.py runserver
+	python3 school21_case/manage.py runserver
 
 backup:
 	mkdir -p backup
-	python school21_case/manage.py archive
+	python3 school21_case/manage.py archive
 
 
 install:
-	python -m venv .venv
+	python3 -m venv .venv
 	source .venv/bin/activate
 	pip install -r requirements.txt
 
@@ -21,6 +21,6 @@ db_down:
 	docker compose -f docker-compose.dev.yaml down
 
 migrate:
-	python school21_case/manage.py makemigrations
-	python school21_case/manage.py migrate
+	python3 school21_case/manage.py makemigrations
+	python3 school21_case/manage.py migrate
 
