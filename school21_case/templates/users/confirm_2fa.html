@@ -2,8 +2,8 @@
 {% load static %}
 {% load add_class %}
 
-{% block title %}Search Results{% endblock %}
-{% block description %}Search results{%endblock %}
+{% block title %}Вход{% endblock %}
+{% block description %}Проверка{%endblock %}
 
 {% block content %}
 
@@ -19,22 +19,24 @@
         <div class="card card-attention">
           <div class="card-header">
             <div class="d-flex justify-content-center">
-              <h4 class="card-title text-info">Введите код который был отправлен на почту <i class="card-title">{{ email }}</i></h4>
+              <h4 class="card-title text-info">Введите код который был отправлен на почту <i class="card-title gradient-right">{{ email }}</i></h4>
             </div>
           </div>
           <div class="card-body">
-            <div class="text-center">
               <form method="POST">
                 {% csrf_token %}
-                <input type="text" name="otp" id="id_otp" required>
-                <button class="btn btn-primary" type="submit">Подтвердить</button>
+                <div class="col-md-4 ms-auto me-auto">
+                  <input class="form-control input-field text-center type="text" name="otp" id="id_otp" required>
+                  <div class="text-center">
+                    <button class="btn btn-primary mt-3" type="submit">Подтвердить</button>
+                  </div>
+                </div>
               </form>
               {% if error %}
               <div class="d-flex justify-content-center">
                 <h4 class="card-title text-info text-danger">{{ error }}</h4>
               </div>
               {% endif %}
-            </div>
           </div>
         </div>
       </form>

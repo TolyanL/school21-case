@@ -2,8 +2,14 @@
 {% load static %}
 {% load replace %}
 
-{% block title %}Home page{% endblock %}
-{% block description %}Home description{%endblock %}
+{% block title %}
+  {% if request.user.password == user.password %}
+    Мой профиль
+  {% else %}
+    Профиль студента {{ user.username }}
+  {% endif %}
+{% endblock %}
+{% block description %}{{ user.profile.description|default:""|truncatewords:20 }}{%endblock %}
 
 {% block content %}
 
@@ -11,7 +17,11 @@
   <div class="card">
     <div class="card-header">
       <div class="card-head-row card-tools-still-right">
+        {% if request.user.password == user.password %}
         <h4 class="card-title gradient-right">Мой Профиль</h4>
+        {% else %}
+        <h4 class="card-title gradient-right">Профиль {{ user.username }}</h4>
+        {% endif %}
       </div>
     </div>
 

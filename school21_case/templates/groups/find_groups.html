@@ -2,8 +2,15 @@
 {% load static %}
 {% load add_class %}
 
-{% block title %}Search Results{% endblock %}
-{% block description %}Search results{%endblock %}
+{% block title %}Поиск групп{% endblock %}
+{% block description %}
+{% if just_loaded %}
+Найдите группу по названию или интересам
+{% else %}
+Результаты поиска
+{% endif %}
+Результаты поиска по запросу {{ search_query }}
+{%endblock %}
 
 {% block content %}
 
