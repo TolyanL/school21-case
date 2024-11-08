@@ -2,8 +2,8 @@
 Hello programmers 👋🎃!
 
 ## 📚 Table of contents:
-1. [Installation (via Makefile)](##installation-via-makefile)
-2. [Installation (Manual)](##installation-manual)
+1. [Installation (via Makefile)](#installation-via-makefile)
+2. [Installation (Manual)](#installation-manual)
 3. [Makefile functions](#makefile-functions)
 4. [Update to latest stable version](#update)
 5. [Make backups](#backup)
