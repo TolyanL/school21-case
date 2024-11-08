@@ -1,12 +1,12 @@
-backup:
-	mkdir -p backup
-	python school21_case/manage.py archive
-
 run: db
 	python school21_case/manage.py runserver
 
 launch: install db migrate
 	python school21_case/manage.py runserver
+
+backup:
+	mkdir -p backup
+	python school21_case/manage.py archive
 
 
 install:
