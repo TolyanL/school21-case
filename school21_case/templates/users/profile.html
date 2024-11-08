@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load replace %}
 
 {% block title %}Home page{% endblock %}
 {% block description %}Home description{%endblock %}
@@ -166,7 +167,7 @@
           {% else %}
             {% if user.profile.nickname_tg %}
             <div class="d-flex justify-content-center">
-              <a href="https://t.me/{{ user.profile.nickname_tg }}">
+              <a href="https://t.me/{{ user.profile.nickname_tg|replace:'@,' }}">
                 <button class="btn btn-primary"><i class="fab fa-telegram-plane"></i> Написать в Telegram</button>
               </a>
             </div>

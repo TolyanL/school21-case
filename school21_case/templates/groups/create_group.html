@@ -10,7 +10,7 @@
 <div class="container">
     <div class="card">
       <div class="card-header">
-        <h4 class="card-title">Создать группу</h4>
+        <h4 class="card-title gradient-right">Создать группу</h4>
       </div>
       <div class="card-body">
 
@@ -18,7 +18,7 @@
           {% csrf_token %}
           <div class="card card-attention">
             <div class="card-header">
-              <h4 class="card-title">Баннер</h4>
+              <h4 class="card-title gradient-right">Баннер</h4>
             </div>
             <div class="card-body banner">
                 <img class="img-fluid banner-img" src="{% static 'img/nobanner.png' %}" id="banner">
@@ -31,7 +31,7 @@
 
               <div class="card card-attention">
                 <div class="card-header">
-                  <h4 class="card-title">Аватар</h4>
+                  <h4 class="card-title gradient-right">Аватар</h4>
                 </div>
                 <div class="card-body">
                   <div class="avatar-container">
@@ -49,7 +49,7 @@
 
               <div class="card card-attention"> 
                 <div class="card-header">
-                  <h4 class="card-title">Информация о группе</h4>
+                  <h4 class="card-title gradient-right">Информация о группе</h4>
                 </div>
                 <div class="card-body">
                   {% for field in create_form %}
@@ -63,13 +63,13 @@
 
               <div class="card card-attention"> 
                 <div class="card-header">
-                  <h4 class="card-title">Интересы группы</h4>
+                  <h4 class="card-title gradient-right">Интересы группы</h4>
                 </div>
                 <div class="card-body">
                   {% for tag in tags %}
                   <div class="form-check">
                     <input class="form-check-input" type="checkbox" value="{{ tag.id }}" id="id_{{ tag|lower }}" name="interests[]">
-                    <label class="form-check-label" for="id_{{ tag|lower }}">
+                    <label class="form-check-label gradient-right" for="id_{{ tag|lower }}">
                       {{ tag.name }}
                     </label>
                   </div>

@@ -1,7 +1,4 @@
-from django import template
-
-
-register = template.Library()
+from .register_lib import register
 
 
 @register.filter
