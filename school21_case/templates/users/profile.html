@@ -47,7 +47,7 @@
                   {% if user.profile.description %}
                       {{ user.profile.description }}
                     {% else %}
-                      No description
+                      Нет описания
                     {% endif %}
                 </p>
               </div>
@@ -71,28 +71,28 @@
                 <div class="col">
                   <div>
                     <h2 class="h5 gradient-right">Имя</h2>
-                    <span class="h4 text-white">{{ user.profile.name }}</span>
+                    <span class="h4 text-white">{{ user.profile.name|default:"-" }}</span>
                     <hr class="under-info">
                   </div>
                   <div>
                     <h2 class="h5 gradient-right">Фамилия</h2>
-                    <span class="h4 text-white">{{ user.profile.surname }}</span>
+                    <span class="h4 text-white">{{ user.profile.surname|default:"-" }}</span>
                     <hr class="under-info">
                   </div>
                   <div>
                     <h2 class="h5 gradient-right">Отчество</h2>
-                    <span class="h4 text-white">{{ user.profile.lastname }}</span>
+                    <span class="h4 text-white">{{ user.profile.lastname|default:"-" }}</span>
                   </div>
                 </div>
                 <div class="col">
                   <div>
                     <h2 class="h5 gradient-right">Telegram</h2>
-                    <span class="h4 text-white">{{ user.profile.nickname_tg }}</span>
+                    <span class="h4 text-white">{{ user.profile.nickname_tg|default:"-" }}</span>
                     <hr class="under-info"">
                   </div>
                   <div>
                     <h2 class="h5 gradient-right">Discord</h2>
-                    <span class="h4 text-white">{{ user.profile.nickname_ds }}</span>
+                    <span class="h4 text-white">{{ user.profile.nickname_ds|default:"-" }}</span>
                     <hr class="under-info">
                   </div>
                   <div>
@@ -103,7 +103,7 @@
                 <div class="row-md-3 mt-4">
                   <hr class="under-info" style="width: 100%;">
                   <h2 class="h5 gradient-right">Учится в</h2>
-                  <span class="h5 text-white">{{ user.profile.study_at }}</span>
+                  <span class="h5 text-white">{{ user.profile.study_at|default:"-" }}</span>
                 </div>
               </div>
 
@@ -118,17 +118,17 @@
                   <div class="row">
                       <div>
                         <h2 class="h5 text-white gradient-right">Имя</h2>
-                        <span class="h4 text-white">{{ user.profile.name }}</span>
+                        <span class="h4 text-white">{{ user.profile.name|default:"-" }}</span>
                         <hr class="under-info" style="width: 50%;">
                       </div>
                       <div>
                         <h2 class="h5 text-white gradient-right">Фамилия</h2>
-                        <span class="h4 text-white">{{ user.profile.surname }}</span>
+                        <span class="h4 text-white">{{ user.profile.surname|default:"-" }}</span>
                         <hr class="under-info" style="width: 60%;">
                       </div>
                       <div>
                         <h2 class="h5 text-white gradient-right">Отчество</h2>
-                        <span class="h4 text-white">{{ user.profile.lastname }}</span>
+                        <span class="h4 text-white">{{ user.profile.lastname|default:"-" }}</span>
                         <hr class="under-info" style="width: 70%;">
                       </div>
                   </div>
