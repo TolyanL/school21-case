@@ -16,10 +16,29 @@ git clone https://github.com/TolyanL/school21-case.git
 ```
 
 ### Run command
+### 1. Install requirements
+#### Uv
+  ```bash
+  uv sync
+  source .venv/bin/activate
+  ```
+  #### Poetry
+  ```bash
+  poetry shell
+  poetry install
+  ```
+  #### Pip
+  ```bash
+  python -m venv .venv
+  source .venv/bin/activate
+  pip install -r requirements.txt
+  ```
+
+### 2. Run Makefile
 ```bash
 make launch
 ```
-This will install all requirements and will automatically start the server see [Makefile functions](#makefile-functions) for more information
+This will install all requirements and will automatically start the server see [Makefile functions](#makefile-functions) for more information.
 
 
 ## Installation (Manual)
