@@ -15,8 +15,7 @@ Hello programmers 👋🎃!
 git clone https://github.com/TolyanL/school21-case.git
 ```
 
-### Run command
-### 1. Install requirements
+### 2. Install requirements
 #### Uv
   ```bash
   uv sync
@@ -34,7 +33,7 @@ git clone https://github.com/TolyanL/school21-case.git
   pip install -r requirements.txt
   ```
 
-### 2. Run Makefile
+### 3. Run Makefile
 ```bash
 make launch
 ```
