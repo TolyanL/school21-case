@@ -9685,3 +9685,24 @@ body[data-background-color=dark2] .jvm-zoom-btn,body[data-background-color=dark]
     text-align: center;
     font-size: 1.5rem;
 }
+
+.site-pagination {
+    text-align: center;
+}
+
+.site-pagination a, .site-pagination span {
+    width: 33px;
+    height: 33px;
+    padding-top: 7px;
+    text-align: center;
+    display: inline-block;
+    border-radius: 15%;
+    color: #00e39c;
+    margin-right: 10px;
+    margin-right: 5px;
+    margin-left: 5px;
+  }
+
+.site-pagination .active {
+    background: #17393e;
+}

@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Группа {{ group.name }}{% endblock %}
+{% block description %}{{ group.description|truncatewords:15 }}{%endblock %}
+
+{% block content %}
+
+<div class="container">
+  <div class="card">
+    <div class="card-header">
+      <div class="card-head-row card-tools-still-right">
+        <h4 class="card-title gradient-right">Участники группы</h4>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="row">
+
+          <div class="col">
+            <div class="card card-attention">
+              <div class="card-body">
+                  {% for member in members %}
+                  <div class="mb-3">
+                      <div class="card card-attention">
+                          <div class="card-body user-card d-flex align-items-center">
+                              <div class="avatar avatar-xxl me-3">
+                                  {% if member.profile.avatar %}
+                                      <img class="avatar-xxl rounded-circle" src="{{ member.profile.avatar.url }}">
+                                  {% else %}
+                                      <img class="avatar-xxl rounded-circle" src="{% static 'img/noavatar.png' %}">
+                                  {% endif %}
+                              </div>
+                              <div class="user-info">
+                                  <a href="{% url 'profile_detail' pk=member.pk %}" class="text-decoration-none">
+                                    <span class="card-title">
+                                      {{ member.profile.nickname }}
+                                      {% if request.user == member %}
+                                        (Вы)
+                                      {% endif %}
+                                    </span>
+                                  </a>
+                                  <span class="card-text d-block" style="color: azure; font-size: 15px;">{{ member.profile.description|default:"Описание отстутствует"|truncatewords:15 }}</span>
+                                  <p class="card-category">{% for tag in member.profile.interests.all %}#{{ tag }} {% endfor %}</p>
+                              </div>
+                              <div class="col">
+                                  <p class="card-category"></p>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                  {% endfor %}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row-md">
+            <div class="col">
+              <div class="site-pagination p-3">
+                {% if page_obj.has_previous %}
+                    {% if page_obj.previous_page_number > 1 %}
+                    <a href="?page=1">1</a>
+                    {% endif %}
+                    <a href="?page={{ page_obj.previous_page_number }}">{{ page_obj.previous_page_number }}</a>
+                {% endif %}
+            
+                <span class="active">{{ page_obj.number }}</span>
+            
+                {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number }}">{{ page_obj.next_page_number }}</a>
+                    {% if page_obj.next_page_number < page_obj.paginator.num_pages %}
+                        <a href="?page={{ page_obj.paginator.num_pages }}">{{ page_obj.paginator.num_pages }}</a>
+                    {% endif %}
+                {% endif %}
+            </div>
+            </div>
+            <div class="col">
+              <div class="d-flex justify-content-center">
+                <a href="{% url 'group_detail' pk=group_pk %}">
+                  <button class="btn btn-primary">Назад</button>
+                </a>
+              </div>
+            </div>
+        </div>
+
+    </div>
+  </div>
+</div>
+
+{% endblock %}

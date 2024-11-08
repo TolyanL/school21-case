@@ -49,7 +49,7 @@
             <div class="card card-attention">
               <div class="card-header">
                 <div class="card-head-row card-tools-still-right">
-                  <h4 class="card-title">Участники группы ({{ group.members.all|length }})</h4>
+                  <h4 class="card-title gradient-right">Участники группы ({{ group.members.all|length }})</h4>
                 </div>
               </div>
               <div class="card-body">
@@ -73,6 +73,11 @@
                     </div>
                   {% endif %}
                 </div>
+                <div class="d-flex justify-content-center mt-4">
+                  <a href="{% url 'group_members' pk=group.pk %}">
+                    <button class="btn btn-primary">Все Участники</button>
+                  </a>
+                </div>
               </div>
             </div>
           </div>
@@ -82,7 +87,7 @@
           <div class="col-md">
             <div class="card card-attention">
               <div class="card-body">
-                <h2 class="card-title">Описание</h2>
+                <h2 class="card-title gradient-right">Описание</h2>
                 <p style="color: #cecece;">{{ group.description }}</p>
               </div>
             </div>
@@ -92,11 +97,11 @@
             <div class="card card-attention">
               <div class="card-header">
                 <div class="card-head-row card-tools-still-right">
-                  <h4 class="card-title">Интересы</h4>
+                  <h4 class="card-title gradient-right">Интересы</h4>
                 </div>
               </div>
               <div class="card-body">
-                <span class="h4 text-primary">{% for tag in group.tags.all %}#{{ tag }} {% endfor %}</span>
+                <span class="h4 gradient-right">{% for tag in group.tags.all %}#{{ tag }} {% endfor %}</span>
               </div>
             </div>
           </div>

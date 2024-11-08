@@ -41,10 +41,9 @@ def search_profile(request: HttpRequest):
         if tags:
             profile = profile.filter(profile__interests__id__in=tags).distinct()
 
-        # if profile:
         return render(
             request,
-            "user_search.html",
+            "users/user_search.html",
             context={
                 "users": profile.all(),
                 "search_form": ProfileSearchForm(),

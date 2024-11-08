@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.views.generic import DetailView
+from django.views.generic import DetailView, ListView
 from django.http import HttpRequest
 from django.contrib.auth.decorators import login_required
 from django.db.models import Count
+from django.contrib.auth.models import User
 
 from .models import Group, Interest
 from .forms import CreateGroupForm, GroupSearchForm, GroupEditForm
@@ -72,6 +73,24 @@ class GroupDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         context["search_form"] = ProfileSearchForm()
         context["tags"] = Interest.objects.all()
+        return context
+
+
+class GroupMembers(ListView):
+    model = User
+    template_name = "groups/group_members.html"
+    context_object_name = "members"
+    paginate_by = 5
+
+    def get_queryset(self):
+        group_id = self.kwargs.get("pk")
+        return User.objects.filter(group_members=group_id)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["search_form"] = ProfileSearchForm()
+        context["tags"] = Interest.objects.all()
+        context["group_pk"] = self.kwargs.get("pk")
         return context
 
 

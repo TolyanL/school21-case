@@ -5,6 +5,7 @@ from .views import (
     find_groups,
     create_group,
     GroupDetailView,
+    GroupMembers,
     edit_group,
     join_group,
     leave_group,
@@ -13,6 +14,7 @@ from .views import (
 urlpatterns = [
     path("my-groups", my_groups, name="my_groups"),
     path("detail/<int:pk>", GroupDetailView.as_view(), name="group_detail"),
+    path("detail/<int:pk>/members", GroupMembers.as_view(), name="group_members"),
     path("edit/<int:pk>", edit_group, name="edit_group"),
     path("delete/<int:pk>", delete_group, name="delete_group"),
     path("join/<int:pk>", join_group, name="join_group"),
