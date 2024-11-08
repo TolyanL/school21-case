@@ -2,18 +2,33 @@
 Hello programmers 👋🎃!
 
 ## 📚 Table of contents:
-1. [Installation](#installation)
-2. [Update to latest stable version](#update)
-3. [Make backups](#backup)
+1. [Installation (via Makefile)](##installation-via-makefile)
+2. [Installation (Manual)](##installation-manual)
+3. [Makefile functions](#makefile-functions)
+4. [Update to latest stable version](#update)
+5. [Make backups](#backup)
 
 
-## Installation
+## Installation (via Makefile)
 ### 1. Clone repo
 ```bash
 git clone https://github.com/TolyanL/school21-case.git
 ```
 
-### 2. Install requirements
+### Run command
+```bash
+make launch
+```
+This will install all requirements and will automatically start the server
+
+
+## Installation (Manual)
+### 1. Clone repo
+```bash
+git clone https://github.com/TolyanL/school21-case.git
+```
+
+### 1. Install requirements
   #### Uv
   ```bash
   uv sync
@@ -31,12 +46,12 @@ git clone https://github.com/TolyanL/school21-case.git
   pip install -r requirements.txt
   ```
 
-### 3. Run Docker container (development)
+### 2. Run Docker container (development)
 ```
 docker compose -f docker-compose.dev.yaml up -d --build
 ```
 
-### 4. Run server
+### 3. Run server
 ```bash
 cd school21_case
 ```
@@ -45,6 +60,19 @@ python manage.py makemigrations
 python manage.py migrate
 python manage.py runserver
 ```
+
+
+## Makefile functions
+| Function | Description |
+| ------ | ------ |
+| run | Start docker compose & run server |
+| launch | First project launch (install requirement, start docker and server, and make migrations) |
+| backup | Do database and static files backup |
+|  |  |
+| install | Install requirements |
+| db | Starts database |
+| db_down | Downs database |
+| migrate | Create migrations and apply it |
 
 
 ## Update
@@ -69,7 +97,7 @@ Create backup (static & db)
 
 ### Via Makefile
 ```bash
-make
+make backup
 ```
 
 ### Manual
