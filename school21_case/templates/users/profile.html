@@ -148,9 +148,9 @@
         </div>
       </div>
 
-      {% if request.user.password == user.password %}
       <div class="row">
         <div class="col-md-12">
+          {% if request.user.password == user.password %}
           <div class="d-flex justify-content-center">
             <div class="p-2">
               <a href="{% url 'profile_edit' %}">
@@ -162,9 +162,18 @@
                 <button class="btn btn-danger">Выйти</button>
               </a>
             </div>
+          </div>
+          {% else %}
+            {% if user.profile.nickname_tg %}
+            <div class="d-flex justify-content-center">
+              <a href="https://t.me/{{ user.profile.nickname_tg }}">
+                <button class="btn btn-primary"><i class="fab fa-telegram-plane"></i> Написать в Telegram</button>
+              </a>
+            </div>
+            {% endif %}
+          {% endif %}
         </div>
       </div>
-      {% endif %}
 
     </div>
   </div>
