@@ -17,3 +17,26 @@ def home(request: HttpRequest):
             "groups": groups,
         },
     )
+
+
+
+def about(request: HttpRequest):
+    return render(
+        request,
+        "index.html",
+        {
+            "search_form": ProfileSearchForm(),
+            "tags": Interest.objects.all(),
+        },
+    )
+
+
+def help_(request: HttpRequest):
+    return render(
+        request,
+        "index.html",
+        {
+            "search_form": ProfileSearchForm(),
+            "tags": Interest.objects.all(),
+        },
+    )
