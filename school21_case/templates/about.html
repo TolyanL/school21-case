@@ -5,7 +5,100 @@
 {% block description %}Главаная страница портала Школа 21 Connect{% endblock %}
 
 {% block content %}
-<div class="container-fluid">
+<div class="container">
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card card-attention">
+                        <div class="card-body">
+                            <h2 class="card-title gradient-right main-title">Введение</h2>
+                            <p class="main-text">В 2024 году в Белгороде была открыта «Школа 21», ставшая десятым кампусом в России. Методика обучения в школе основана на принципе peer-to-peer (равный равному), где участники могут выступать как учителями, так и учениками. В связи с необходимостью улучшения процесса обучения и сокращения времени на поиск участников для взаимных проверок проектов, была предложена разработка дополнительной платформы.</p>
+                        </div>
+                    </div>
+                </div>
 
+                <div class="col-md-12">
+                    <div class="card card-attention">
+                        <div class="card-body">
+                            <h2 class="card-title gradient-right main-title">Цели и задачи</h2>
+                            <p class="main-text">Основной целью разработки платформы является создание удобного инструмента для взаимодействия участников, который позволит им получать информацию друг о друге по никам. Для достижения этой цели были определены следующие задачи:</p>
+                            <ul>
+                                <li class="main-text">Реализация формы регистрации пользователей.</li>
+                                <li class="main-text">Создание окна авторизации с обязательным использованием двухфакторной аутентификации (2FA).</li>
+                                <li class="main-text">Обеспечение возможности редактирования профиля пользователя.</li>
+                                <li class="main-text">Реализация функции поиска пользователей по нику, ФИО и интересам.</li>
+                                <li class="main-text">Создание групп по интересам с возможностью приглашения других пользователей.</li>
+                                <li class="main-text">Разработка административной панели для модерации пользователей и групп.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <div class="card card-attention">
+                        <div class="card-body">
+                            <h2 class="card-title gradient-right main-title">Функционал платформы</h2>
+                            <h4 class="main-subtitle">1. Форма регистрации</h4>
+                            <p class="main-text">Пользователи могут зарегистрироваться, указав следующие данные:</p>
+                            <ul>
+                                <li class="main-text">ФИО</li>
+                                <li class="main-text">Пол</li>
+                                <li class="main-text">Возраст</li>
+                                <li class="main-text">Ник в Telegram</li>
+                                <li class="main-text">Ник на платформе</li>
+                            </ul>
+                            <p class="main-text">Все данные сохраняются в базе данных.</p>
+
+                            <h4 class="main-subtitle">2. Окно авторизации</h4>
+                            <p class="main-text">Платформа включает окно авторизации, где пользователи должны пройти двухфакторную аутентификацию с использованием электронной почты.</p>
+
+                            <h4 class="main-subtitle">3. Редактирование профиля</h4>
+                            <p class="main-text">Пользователи имеют возможность редактировать свой профиль, добавляя интересы и дополнительную личную информацию.</p>
+
+                            <h4 class="main-subtitle">4. Поиск пользователей</h4>
+                            <p class="main-text">Реализована функция поиска, доступная только авторизованным пользователям. Поиск может осуществляться по нику, ФИО и интересам.</p>
+
+                            <h4 class="main-subtitle">5. Группы по интересам</h4>
+                            <p class="main-text">Пользователи могут создавать группы по интересам и приглашать в них других участников, имеющих схожие интересы.</p>
+
+                            <h4 class="main-subtitle">6. Административная панель</h4>
+                            <p class="main-text">Разработана административная панель для модерации пользователей и групп, что позволяет поддерживать порядок на платформе.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <div class="card card-attention">
+                        <div class="card-body">
+                            <h2 class="card-title gradient-right main-title">Технические требования</h2>
+                            <p class="main-text">База данных должна поддерживать функции ACID (атомарность, согласованность, изолированность, долговечность), WAL (журнал записи) и PITR (восстановление до точки времени).</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <div class="card card-attention">
+                        <div class="card-body">
+                            <h2 class="card-title gradient-right main-title">Визуальное оформление</h2>
+                            <p class="main-text">Платформа оформлена в фирменных цветах «Школы 21», что обеспечивает единый стиль и узнаваемость.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <div class="card card-attention">
+                        <div class="card-body">
+                            <h2 class="card-title gradient-right main-title">Заключение</h2>
+                            <p class="main-text">Разработка дополнительной платформы для «Школы 21» в Белгороде направлена на улучшение взаимодействия между участниками и оптимизацию процесса обучения. Реализованный функционал отвечает современным требованиям и обеспечивает удобство использования.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
 </div>
+
+  
 {% endblock %}

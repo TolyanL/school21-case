@@ -9706,3 +9706,18 @@ body[data-background-color=dark2] .jvm-zoom-btn,body[data-background-color=dark]
 .site-pagination .active {
     background: #17393e;
 }
+
+
+.main-title {
+    font-size: 30px;
+}
+
+.main-subtitle {
+    font-size: 20px;
+    color: white !important;
+}
+
+.main-text {
+    font-size: 17px;
+    color: white !important;
+}
