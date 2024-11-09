@@ -6930,4 +6930,15 @@ body {
       margin: 0 0 0 auto;
   }
 }
+
+.main-text {
+  font-size: 45px !important; 
+  font-weight: bold !important;
+  text-shadow: 
+      3px 3px 4px rgba(0, 0, 0, 0.025), 
+      -3px -3px 4px rgba(0, 0, 0, 0.025), 
+      -3px 3px 4px rgba(0, 0, 0, 0.025),
+      3px -3px 4px rgba(0, 0, 0, 0.025),;
+}
+
 /*# sourceMappingURL=kaiadmin.css.map */
