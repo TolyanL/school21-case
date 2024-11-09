@@ -23,7 +23,7 @@ def home(request: HttpRequest):
 def about(request: HttpRequest):
     return render(
         request,
-        "index.html",
+        "about.html",
         {
             "search_form": ProfileSearchForm(),
             "tags": Interest.objects.all(),
@@ -34,7 +34,7 @@ def about(request: HttpRequest):
 def help_(request: HttpRequest):
     return render(
         request,
-        "index.html",
+        "help.html",
         {
             "search_form": ProfileSearchForm(),
             "tags": Interest.objects.all(),
