@@ -15,25 +15,7 @@ Hello programmers 👋🎃!
 git clone https://github.com/TolyanL/school21-case.git
 ```
 
-### 2. Install requirements
-#### Uv
-  ```bash
-  uv sync
-  source .venv/bin/activate
-  ```
-  #### Poetry
-  ```bash
-  poetry shell
-  poetry install
-  ```
-  #### Pip
-  ```bash
-  python -m venv .venv
-  source .venv/bin/activate
-  pip install -r requirements.txt
-  ```
-
-### 3. Run Makefile
+### 2. Run Makefile
 ```bash
 make launch
 ```
