@@ -5,7 +5,6 @@ __pycache__/
 
 school21_case/media/*
 backup/*
-migrations
 
 # C extensions
 *.so
