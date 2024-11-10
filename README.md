@@ -21,6 +21,13 @@ make launch
 ```
 This will install all requirements and will automatically start the server see [Makefile functions](#makefile-functions) for more information.
 
+### 3. Create admin
+```bash
+python school21_case/manage.py createsuperuser
+```
+
+### 4. Create interests
+
 
 ## Installation (Manual)
 ### 1. Clone repo
@@ -60,6 +67,13 @@ python manage.py makemigrations
 python manage.py migrate
 python manage.py runserver
 ```
+
+### 3. Create admin
+```bash
+python school21_case/manage.py createsuperuser
+```
+
+### 4. Create interests
 
 
 ## Makefile functions
