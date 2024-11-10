@@ -23,6 +23,7 @@ This will install all requirements and will automatically start the server see [
 
 ### 3. Create admin
 ```bash
+source .venv/bin/activate
 python school21_case/manage.py createsuperuser
 ```
 
@@ -70,6 +71,7 @@ python manage.py runserver
 
 ### 5. Create admin
 ```bash
+source .venv/bin/activate
 python school21_case/manage.py createsuperuser
 ```
 
