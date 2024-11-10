@@ -62,8 +62,8 @@
                 <div class="card-body">
                   {% for field in editable %}
                   <div class="row-md-4 mb-3">
-                    <div class="form-label">{{ field.label_tag }}</div>
-                    {{ field|add_class:"form-control" }}
+                    <div class="form-label gradient-right">{{ field.label_tag }}</div>
+                    {{ field|add_class:"form-control edit-field" }}
                   </div>
                   {% endfor %}
                 </div>
@@ -78,7 +78,7 @@
                   <div class="form-check">
                     <input class="form-check-input" type="checkbox" value="{{ tag.id }}" id="id_{{ tag|lower }}" name="tags[]"
                     {% if tag in group.tags.all %}checked{% endif %}>
-                    <label class="form-check-label" for="id_{{ tag|lower }}">
+                    <label class="form-check-label gradient-right" for="id_{{ tag|lower }}">
                       {{ tag.name }}
                     </label>
                   </div>

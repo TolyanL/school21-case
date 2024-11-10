@@ -3,8 +3,8 @@ from django.contrib.auth.models import User
 
 
 class Group(models.Model):
-    name = models.CharField(max_length=32, unique=True)
-    description = models.CharField(max_length=256, null=True)
+    name = models.CharField(max_length=32, unique=True, verbose_name="Название")
+    description = models.CharField(max_length=256, null=True, verbose_name="Описание")
 
     icon = models.ImageField(upload_to="group_icons/", null=True)
     banner = models.ImageField(upload_to="group_banners/", null=True)

@@ -54,8 +54,8 @@
                 <div class="card-body">
                   {% for field in create_form %}
                   <div class="row-md-4 mb-3">
-                    <div class="form-label">{{ field.label_tag }}</div>
-                    {{ field|add_class:"form-control" }}
+                    <div class="form-label gradient-right">{{ field.label_tag }}</div>
+                    {{ field|add_class:"form-control edit-field" }}
                   </div>
                   {% endfor %}
                 </div>
