@@ -35,7 +35,7 @@ python school21_case/manage.py createsuperuser
 git clone https://github.com/TolyanL/school21-case.git
 ```
 
-### 1. Install requirements
+### 2. Install requirements
   #### Uv
   ```bash
   uv sync
@@ -53,12 +53,12 @@ git clone https://github.com/TolyanL/school21-case.git
   pip install -r requirements.txt
   ```
 
-### 2. Run Docker container (development)
+### 3. Run Docker container (development)
 ```
 docker compose -f docker-compose.dev.yaml up -d --build
 ```
 
-### 3. Run server
+### 4. Run server
 ```bash
 cd school21_case
 ```
@@ -68,12 +68,12 @@ python manage.py migrate
 python manage.py runserver
 ```
 
-### 3. Create admin
+### 5. Create admin
 ```bash
 python school21_case/manage.py createsuperuser
 ```
 
-### 4. Create interests
+### 6. Create interests
 
 
 ## Makefile functions
