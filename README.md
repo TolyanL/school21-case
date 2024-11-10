@@ -1,6 +1,8 @@
 # 🟢 School21 Case
 Hello programmers 👋🎃!
 
+**Link to video & files: https://disk.yandex.ru/d/Zuya4Q_JgYQuKQ**
+
 ## 📚 Table of contents:
 1. [Installation (via Makefile)](#installation-via-makefile)
 2. [Installation (Manual)](#installation-manual)
