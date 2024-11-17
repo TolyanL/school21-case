@@ -20,12 +20,14 @@
             <div class="card-header">
               <h4 class="card-title">Баннер</h4>
             </div>
-            <div class="card-body banner">
-              {% if group.banner %}
-                <img src="{{ group.banner.url }}" class="rounded-circle img-fluid" id="avatar">
-              {% else %}
-                <img class="img-fluid banner-img" src="{% static 'img/nobanner.png' %}" id="banner">
-              {% endif %}
+            <div class="card-body">
+              <div class="banner">
+                {% if group.banner %}
+                  <img class="img-fluid banner-img" src="{{ group.banner.url }}" id="banner">
+                {% else %}
+                  <img class="img-fluid banner-img" src="{% static 'img/nobanner.png' %}" id="banner">
+                {% endif %}
+              </div>
             </div>
             <input type="file" name="banner" accept="image/*" class="form-control" id="id_banner">
           </div>

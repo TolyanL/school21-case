@@ -2092,7 +2092,7 @@ body[data-background-color=dark] .border-bottom,body[data-background-color=dark]
 
 .avatar-xs {
     width: 1.95rem;
-    height: 1.95rem
+    height: 1.95rem;
 }
 
 .avatar-xs .border {
@@ -2158,6 +2158,7 @@ body[data-background-color=dark] .border-bottom,body[data-background-color=dark]
     height: 5.2rem
 }
 
+
 .avatar-xl .border {
     border-width: 4px!important
 }
@@ -2176,7 +2177,8 @@ body[data-background-color=dark] .border-bottom,body[data-background-color=dark]
 
 .avatar-xxl {
     width: 5.325rem;
-    height: 5.325rem
+    height: 5.325rem;
+    object-fit: cover;
 }
 
 .avatar-xxl .border {
@@ -4949,12 +4951,12 @@ label.error {
     padding: 0;
     overflow: hidden;
 }
-
+*/
 .banner-img {
     height: 100%;
     width: 100%;
     object-fit: cover;
-} */
+}
 
 .border-slimegreen {
     border-color: #00eba1 !important;
@@ -4977,14 +4979,31 @@ label.error {
     width: 100%;
 }
 
+.icon-img {
+    border-radius: 50%;
+    overflow: hidden;
+    width: 150px;
+    height: 150px;
+    justify-content: center;
+    align-items: center;
+}
+
 .avatar-img {
     border-radius: 50%;
     overflow: hidden;
     width: 250px;
     height: 250px;
+    justify-content: center;
+    align-items: center;
 }
 
 .avatar-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.icon-img img {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -4995,7 +5014,9 @@ label.error {
     overflow: hidden;
     width: 100%;
     height: 27px;
+    object-fit: cover;
 }
+
 
 .input-group {
     display: flex;

@@ -35,9 +35,9 @@
               <div class="avatar-container">
                 <div class="avatar avatar-xl avatar-img">
                   {% if user.profile.avatar %}
-                    <img src="{{ user.profile.avatar.url }}" class="rounded-circle img-fluid">
+                    <img src="{{ user.profile.avatar.url }}" class="rounded-circle img-fluid border border-slimegreen">
                   {% else %}
-                    <img src="{% static 'img/noavatar.png' %}" class="rounded-circle img-fluid">
+                    <img src="{% static 'img/noavatar.png' %}" class="rounded-circle img-fluid border border-slimegreen">
                   {% endif %}
                 </div>
               </div>

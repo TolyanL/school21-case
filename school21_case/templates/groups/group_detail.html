@@ -18,9 +18,9 @@
           {% else %}
           <img src="{% static 'img/nobanner.png' %}" class="banner-image">
           {% endif %}
-    
+        
           <div class="avatar-container-banner">
-            <div class="avatar avatar-xl banner-icon shadow-lg">
+            <div class="avatar avatar-xl banner-icon icon-img shadow-lg">
               {% if group.icon %}
                 <img src="{{ group.icon.url }}" class="rounded-circle img-fluid border border-slimegreen">
               {% else %}
@@ -58,9 +58,9 @@
                     {% if forloop.counter < 13 %}
                       <div class="avatar avatar-xs">
                         {% if member.profile.avatar %}
-                          <img class="avatar-thumbnail rounded-circle border border-white" src="{{ member.profile.avatar.url }}" alt="">
+                          <img class="avatar-thumbnail rounded-circle border border-slimegreen" src="{{ member.profile.avatar.url }}" alt="">
                         {% else %}
-                          <img class="avatar-thumbnail rounded-circle border border-white" src="{% static 'img/noavatar.png' %}">
+                          <img class="avatar-thumbnail rounded-circle border border-slimegreen" src="{% static 'img/noavatar.png' %}">
                         {% endif %}
                       </div>
                     {% endif %}

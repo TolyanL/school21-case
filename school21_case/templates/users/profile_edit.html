@@ -26,11 +26,11 @@
               <div class="card-body">
                 <div class="avatar-container">
                   {% if user.is_authenticated %}
-                  <div class="avatar-img">
+                  <div class="avatar avatar-xl avatar-img">
                     {% if user.profile.avatar %}
-                      <img src="{{ user.profile.avatar.url }}" class="rounded-circle img-fluid" id="avatar">
+                      <img src="{{ user.profile.avatar.url }}" class="rounded-circle img-fluid border border-slimegreen" id="avatar">
                     {% else %}
-                      <img src="{% static 'img/noavatar.png' %}" class="rounded-circle img-fluid" id="avatar">
+                      <img src="{% static 'img/noavatar.png' %}" class="rounded-circle img-fluid border border-slimegreen" id="avatar">
                     {% endif %}
                   </div>
                   {% else %}
