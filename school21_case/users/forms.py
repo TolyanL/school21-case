@@ -7,7 +7,7 @@ from .models import Profile
 
 
 class ProfileSearchForm(forms.Form):
-    nickname = forms.CharField(
+    query = forms.CharField(
         max_length=32,
         widget=forms.TextInput(
             attrs={

@@ -2,6 +2,7 @@ from random import randint
 
 from django.shortcuts import render, redirect
 from django.http import HttpRequest
+from django.db.models import Q
 from django.core.mail import send_mail
 
 from django.contrib.auth.decorators import login_required
@@ -33,10 +34,15 @@ def search_profile(request: HttpRequest):
     if request.method == "POST" and search_query_raw.is_valid():
         search_query = search_query_raw.cleaned_data
 
-        nickname = search_query.get("nickname")
+        query = search_query.get("query")
         tags = search_query_raw.data.getlist("tags[]")
 
-        profile = User.objects.filter(profile__nickname__icontains=nickname)
+        profile = User.objects.filter(
+            Q(profile__nickname__icontains=query)
+            | Q(profile__name__icontains=query)
+            | Q(profile__surname__icontains=query)
+            | Q(profile__lastname__icontains=query)
+        )
 
         if tags:
             profile = profile.filter(profile__interests__id__in=tags).distinct()
@@ -48,11 +54,14 @@ def search_profile(request: HttpRequest):
                 "users": profile.all(),
                 "search_form": ProfileSearchForm(),
                 "tags": Interest.objects.all(),
-                "search_query": nickname,
+                "search_query": query,
             },
         )
-
-    # return redirect("home")
+    return render(
+        request,
+        "users/user_search.html",
+        context={"search_form": ProfileSearchForm(), "tags": Interest.objects.all()},
+    )
 
 
 def sign_up(request: HttpRequest):
@@ -81,8 +90,6 @@ def sign_up(request: HttpRequest):
                         fail_silently=False,
                     )
                     return redirect("confirm_2fa")
-                    # login(request, user)
-                    # return redirect("home")
 
     return render(
         request,
@@ -96,9 +103,7 @@ def sign_up(request: HttpRequest):
 
 
 def confirm_2fa(request: HttpRequest):
-    # print(request.POST)
     if request.method == "POST":
-        # print(request.POST)
         entered_otp = request.POST.get("otp")
 
         if entered_otp == str(request.session.get("otp")):

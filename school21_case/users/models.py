@@ -4,7 +4,7 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 from django.contrib.auth.models import User
 
 
-gender_choices = [("male", "Male"), ("female", "Female")]
+gender_choices = [("мужской", "Мужской"), ("женский", "Женский")]
 
 
 class Profile(models.Model):
