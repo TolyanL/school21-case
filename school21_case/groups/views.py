@@ -150,7 +150,8 @@ def edit_group(request: HttpRequest, pk: int):
             if len(tags):
                 if len(tags) > 5:
                     form.add_error(None, "Вы можете добавить не более 5 интересов.")
-                instance.tags.set(tags)
+                else:
+                    instance.tags.set(tags)
             else:
                 form.add_error(None, "Добавьте хотя бы один интерес.")
 
@@ -165,6 +166,8 @@ def edit_group(request: HttpRequest, pk: int):
             if not form.errors:
                 instance.save()
                 return redirect("group_detail", pk=pk)
+
+        print(form.errors)
 
         return render(
             request,

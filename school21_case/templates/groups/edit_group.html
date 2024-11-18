@@ -93,8 +93,11 @@
             {% if editable.errors %}
               <div class="row">
                 <div class="alert alert-danger">
-                  {{ editable.non_field_errors }}
-                  {{ editable.errors }}
+                  {% if editable.non_field_errors %}
+                    {{ editable.non_field_errors }}
+                  {% else %}
+                    {{ editable.errors }}
+                  {% endif %}
                 </div>
               </div>
             {% endif %}
