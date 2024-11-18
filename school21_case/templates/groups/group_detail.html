@@ -36,10 +36,8 @@
               <div class="card-body">
                 <div class="profile-info">
                   <h2 class="card-title">{{ group.name }}</h2>
-                  <p style="color: aliceblue;">
-                    {{ group.created_at }}
-                  </p>
-                  <p class="card-category">Создана {{ group.created_by.username }}</p>
+                  <p style="color: aliceblue;">{{ group.created_at }}</p>
+                  <p class="card-category">Создана <a class="card-category" href="{% url 'profile_detail' pk=group.created_by.pk %}">{{ group.created_by.username }}</a></p>
                 </div>
               </div>
             </div>
@@ -47,12 +45,14 @@
 
           <div class="col-md-9">
             <div class="card card-attention">
-              <div class="card-header">
+              <!-- <div class="card-header">
                 <div class="card-head-row card-tools-still-right">
                   <h4 class="card-title gradient-right">Участники группы ({{ group.members.all|length }})</h4>
                 </div>
-              </div>
+              </div> -->
               <div class="card-body">
+                <h2 class="card-title gradient-right">Участники группы ({{ group.members.all|length }})</h2>
+                <hr class="under-info" style="width: 65%;">
                 <div class="avatar-group">
                   {% for member in group.members.all %}
                     {% if forloop.counter < 13 %}
@@ -88,7 +88,7 @@
             <div class="card card-attention">
               <div class="card-body">
                 <h2 class="card-title gradient-right">Описание</h2>
-                <hr class="under-info" style="width: 60%;">
+                <hr class="under-info" style="width: 50%;">
                 <p style="color: #cecece;">{{ group.description }}</p>
               </div>
             </div>
@@ -96,12 +96,14 @@
 
           <div class="col-md">
             <div class="card card-attention">
-              <div class="card-header">
+              <!-- <div class="card-header">
                 <div class="card-head-row card-tools-still-right">
                   <h4 class="card-title gradient-right">Интересы</h4>
                 </div>
-              </div>
+              </div> -->
               <div class="card-body">
+                <h2 class="card-title gradient-right">Интересы</h2>
+                <hr class="under-info" style="width: 75%;">
                 <span class="h4 gradient-right">{% for tag in group.tags.all %}#{{ tag }} {% endfor %}</span>
               </div>
             </div>
