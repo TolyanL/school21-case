@@ -150,7 +150,7 @@ def register(request: HttpRequest):
                 login(request, user)
                 return redirect("home")
 
-            form.add_error("email", "User with this email already exists")
+            form.add_error("email", "Полььзователь с таким адресом электронной почты уже существует.")
 
         return render(request, "users/register.html", {"reg_form": form, "search_form": search_form})
 

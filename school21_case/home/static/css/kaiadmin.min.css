@@ -2301,7 +2301,8 @@ body[data-background-color=dark] .border-bottom,body[data-background-color=dark]
 .card .card-header,.card-light .card-header {
     padding: 1rem 1.25rem;
     background-color: #1d2633;
-    border-bottom: 1px solid #ebecec!important
+    /* border-bottom: 1px solid #ebecec !important; */
+    border-bottom: 1px solid #00eba1 !important;
 }
 
 .card .card-header:first-child,.card-light .card-header:first-child {
@@ -4946,12 +4947,6 @@ label.error {
     background-color: gainsboro;
 }
 
-/* .banner {
-    height: 200px; 
-    padding: 0;
-    overflow: hidden;
-}
-*/
 .banner-img {
     height: 100%;
     width: 100%;

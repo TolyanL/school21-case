@@ -99,18 +99,14 @@ def create_group(request: HttpRequest):
     if request.method == "POST":
         form = CreateGroupForm(request.POST)
         if not form.errors:
-            # print(form.data)
             group = form.save(commit=False)
             group.created_by = request.user
             group.save()
 
             tags = request.POST.getlist("interests[]")
 
-            # print(request.FILES)
-
             group.tags.set(tags)
             group.members.add(request.user)
-            # print(request.FILES)
             icon = request.FILES.get("icon")
             banner = request.FILES.get("banner")
 
@@ -148,14 +144,15 @@ def edit_group(request: HttpRequest, pk: int):
         form = GroupEditForm(request.POST, instance=group, use_required_attribute=False)
 
         if not form.errors:
-            # print(form.data)
             instance = form.save(commit=False)
             tags = request.POST.getlist("tags[]")
 
-            # print(request.FILES)
-
             if len(tags):
+                if len(tags) > 5:
+                    form.add_error(None, "Вы можете добавить не более 5 интересов.")
                 instance.tags.set(tags)
+            else:
+                form.add_error(None, "Добавьте хотя бы один интерес.")
 
             icon = request.FILES.get("icon")
             banner = request.FILES.get("banner")
@@ -165,10 +162,9 @@ def edit_group(request: HttpRequest, pk: int):
             if banner:
                 instance.banner = banner
 
-            if len(instance.tags.all()) and not form.errors:
+            if not form.errors:
                 instance.save()
                 return redirect("group_detail", pk=pk)
-            form.add_error(None, "Please add at least one interest")
 
         return render(
             request,
