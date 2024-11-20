@@ -80,7 +80,7 @@ class GroupMembers(ListView):
     model = User
     template_name = "groups/group_members.html"
     context_object_name = "members"
-    paginate_by = 5
+    paginate_by = 6
 
     def get_queryset(self):
         group_id = self.kwargs.get("pk")
@@ -166,8 +166,6 @@ def edit_group(request: HttpRequest, pk: int):
             if not form.errors:
                 instance.save()
                 return redirect("group_detail", pk=pk)
-
-        print(form.errors)
 
         return render(
             request,

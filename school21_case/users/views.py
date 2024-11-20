@@ -1,6 +1,6 @@
 from random import randint
 
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpRequest
 from django.db.models import Q
 from django.core.mail import send_mail
@@ -8,7 +8,7 @@ from django.core.mail import send_mail
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.models import User
-from django.views.generic import DetailView
+from django.views.generic import DetailView, ListView
 
 from school21_case.settings import EMAIL_HOST_USER
 
@@ -150,7 +150,7 @@ def register(request: HttpRequest):
                 login(request, user)
                 return redirect("home")
 
-            form.add_error("email", "Полььзователь с таким адресом электронной почты уже существует.")
+            form.add_error("email", "Пользователь с таким адресом электронной почты уже существует.")
 
         return render(request, "users/register.html", {"reg_form": form, "search_form": search_form})
 
@@ -229,3 +229,48 @@ def edit_profile(request: HttpRequest):
             "tags": Interest.objects.all(),
         },
     )
+
+
+class FriendsListView(ListView):
+    template_name = "users/friends.html"
+    context_object_name = "friends"
+    paginate_by = 6
+
+    def get_queryset(self):
+        profile_id = self.kwargs.get("pk")
+        user = get_object_or_404(User, pk=profile_id)
+        return user.profile.friends.all()
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["search_form"] = ProfileSearchForm()
+        context["tags"] = Interest.objects.all()
+        context["profile_pk"] = self.kwargs.get("pk")
+        return context
+
+
+@login_required
+def add_friend(request: HttpRequest, pk: int):
+    user = get_object_or_404(User, pk=pk)
+    if request.user != user:
+        request.user.profile.friends.add(user.profile)
+        user.profile.friends.add(request.user.profile)
+    return redirect("profile_detail", pk=pk)
+
+
+@login_required
+def remove_friend(request: HttpRequest, pk: int):
+    user = get_object_or_404(User, pk=pk)
+    if request.user != user:
+        request.user.profile.friends.remove(user.profile)
+        user.profile.friends.remove(request.user.profile)
+    return redirect("profile_detail", pk=pk)
+
+
+@login_required
+def remove_list_friend(request: HttpRequest, pk: int):
+    user = get_object_or_404(User, pk=pk)
+    if request.user != user:
+        request.user.profile.friends.remove(user.profile)
+        user.profile.friends.remove(request.user.profile)
+    return redirect("friends_list", pk=request.user.profile.id + 1)

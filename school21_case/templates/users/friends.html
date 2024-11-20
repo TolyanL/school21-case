@@ -10,42 +10,43 @@
   <div class="card">
     <div class="card-header">
       <div class="card-head-row card-tools-still-right">
-        <h4 class="card-title gradient-right">Участники группы</h4>
+        <h4 class="card-title gradient-right">
+          {% if request.user.password == user.password %}
+          Мои друзья {{ friends.all|length }}
+          {% else %}
+          Друзья пользователя {{ user.profile.nickname }}
+          {% endif %}
+        </h4>
       </div>
     </div>
     <div class="card-body">
       <div class="row">
         <div class="col">
-
-          {% for member in members %}
+          {% for friend in friends %}
             <div class="card card-attention">
               <div class="card-body user-card d-flex align-items-center">
                 <div class="avatar avatar-xxl me-3">
-                  {% if member.profile.avatar %}
-                    <img class="avatar-xxl rounded-circle" src="{{ member.profile.avatar.url }}">
+                  {% if friend.avatar %}
+                    <img class="avatar-xxl rounded-circle" src="{{ friend.avatar.url }}">
                   {% else %}
                     <img class="avatar-xxl rounded-circle" src="{% static 'img/noavatar.png' %}">
                   {% endif %}
                 </div>
                 <div class="user-info">
-                  <a href="{% url 'profile_detail' pk=member.pk %}" class="text-decoration-none">
+                  <a class="text-decoration-none" href="{% url 'profile_detail' pk=friend.pk|add:'1' %}" >
                     <span class="card-title">
-                      {{ member.profile.nickname }}
-                      {% if request.user == member %}
-                        (Вы)
-                      {% endif %}
+                      {{ friend.nickname }}
                     </span>
                   </a>
-                  <span class="card-text d-block" style="color: azure; font-size: 15px;">{{ member.profile.description|default:"Описание отстутствует"|truncatewords:15 }}</span>
-                  <p class="card-category">{% for tag in member.profile.interests.all %}#{{ tag }} {% endfor %}</p>
-                </div>
-                <div class="col">
-                  <p class="card-category"></p>
+                  <span class="card-text d-block" style="color: azure; font-size: 15px;">
+                    {{ friend.description|default:"Описание отстутствует"|truncatewords:15 }}
+                  </span>
+                  <p class="card-category">{% for tag in friend.interests.all %}#{{ tag }} {% endfor %}</p>
+                  <a class="card-category mt-2" href="{% url 'remove_lfriend' pk=friend.pk|add:'1' %}"><i class="far fa-trash-alt"></i> Удалить из друзей</a>
                 </div>
               </div>
             </div>
           {% endfor %}
-
         </div>
       </div>
 
@@ -67,11 +68,11 @@
                       <a href="?page={{ page_obj.paginator.num_pages }}">{{ page_obj.paginator.num_pages }}</a>
                   {% endif %}
               {% endif %}
-            </div>
+          </div>
           </div>
           <div class="col">
             <div class="d-flex justify-content-center">
-              <a href="{% url 'group_detail' pk=group_pk %}">
+              <a href="{% url 'profile_detail' pk=profile_pk %}">
                 <button class="btn btn-primary">Назад</button>
               </a>
             </div>

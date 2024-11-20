@@ -31,12 +31,13 @@ class Profile(models.Model):
         "groups.Interest", related_name="related_profiles", blank=True, verbose_name="Интересы"
     )
     groups = models.ManyToManyField("groups.Group", related_name="groups", blank=True, verbose_name="Группы")
+    friends = models.ManyToManyField("self", blank=True, verbose_name="Друзья")
+
+    def get_absolute_url(self):
+        return reverse("profile", args=[str(self.id)])
 
     is_active = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
-
-    def get_absolute_url(self):
-        return reverse("profile", args=[str(self.nickname)])
 
     def __str__(self):
         return self.user.username

@@ -30,7 +30,6 @@
 
         <div class="col-md-4">
           <div class="card card-attention">
-
             <div class="card-body">
               <div class="avatar-container">
                 <div class="avatar avatar-xl avatar-img">
@@ -43,24 +42,70 @@
               </div>
               <div class="profile-info">
                 <h2 class="card-title gradient-right">{{ user.profile.nickname }}</h2>
-                <p style="color: aliceblue;">
-                  {% if user.profile.description %}
-                      {{ user.profile.description }}
-                    {% else %}
-                      Нет описания
-                    {% endif %}
-                </p>
+                <p style="color: aliceblue;">{{ user.profile.description|default:"Нет описания" }}</p>
               </div>
             </div>
-
           </div>
 
+          <div class="card card-attention">
+            <div class="card-body">
+              <h2 class="h5 gradient-right">
+                <a href="{% url 'friends_list' pk=user.pk %}">
+                  <i class="fas fa-user-friends"></i>
+                  {% if user.profile.friends.all|length %}
+                  Друзья {{ user.profile.friends.all|length }}
+                  {% else %}
+                    {% if request.user.password == user.password %}
+                    У вас пока еще нет друзей
+                    {% else %}
+                    У пользователя пока нет друзей
+                    {% endif %}
+                  {% endif %}
+                </a>
+              </h2>
+              <div class="avatar-group">
+                {% for friend in user.profile.friends.all %}
+                  {% if forloop.counter < 13 %}
+                    <div class="avatar avatar-xs">
+                      {% if friend.avatar %}
+                        <img class="avatar-thumbnail rounded-circle border border-slimegreen" src="{{ friend.avatar.url }}" alt="">
+                      {% else %}
+                        <img class="avatar-thumbnail rounded-circle border border-slimegreen" src="{% static 'img/noavatar.png' %}">
+                      {% endif %}
+                    </div>
+                  {% endif %}
+                {% endfor %}
+                {% if user.profile.friends.count > 12 %}
+                  <div class="avatar avatar-xs">
+                    <div class="avatar-thumbnail rounded-circle border border-white d-flex align-items-center justify-content-center uncounted-members">
+                      +{{ user.profile.friends.count|add:-12 }}
+                    </div>
+                  </div>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+
+          {% if request.user.password == user.password %}
           <div class="card card-attention">
             <div class="card-body">
               <h2 class="h5 gradient-right">Почта</h2>
               <span class="h4 card-title">{{ user.email }}</span>
             </div>
           </div>
+          {% else %}
+          <div class="d-flex justify-content-center mb-4">
+            {% if user.profile in request.user.profile.friends.all %}
+            <a href="{% url 'remove_friend' pk=user.pk %}">
+              <button class="btn btn-danger"><i class="fas fa-user-slash"></i> Удалить из друзей</button>
+            </a>
+            {% else %}
+            <a href="{% url 'add_friend' pk=user.pk %}">
+              <button class="btn btn-primary"><i class="fas fa-user-plus"></i> Добавить в друзья</button>
+            </a>
+            {% endif %}
+          </div>
+          {% endif %}
         </div>
 
         <div class="col-md-8">
@@ -129,7 +174,6 @@
                       <div>
                         <h2 class="h5 text-white gradient-right">Отчество</h2>
                         <span class="h4 text-white">{{ user.profile.lastname|default:"-" }}</span>
-                        <hr class="under-info" style="width: 70%;">
                       </div>
                   </div>
                 </div>

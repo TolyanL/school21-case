@@ -16,11 +16,6 @@ class ProfileSearchForm(forms.Form):
             }
         ),
     )
-    # intersets = forms.ModelMultipleChoiceField(
-    #     label="Interests",
-    #     queryset=apps.get_model("groups.Interest").objects.all(),
-    #     required=False,
-    # )
 
 
 class LoginForm(forms.Form):
@@ -55,4 +50,5 @@ class ProfileEditForm(forms.ModelForm):
             "groups",
             "interests",
             "avatar",
+            "friends",
         ]
