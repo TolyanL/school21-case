@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 {% load replace %}
+{% load divide %}
 
 {% block title %}
   {% if request.user.password == user.password %}
@@ -20,7 +21,7 @@
         {% if request.user.password == user.password %}
         <h4 class="card-title gradient-right">Мой Профиль</h4>
         {% else %}
-        <h4 class="card-title gradient-right">Профиль {{ user.username }}</h4>
+        <h4 class="card-title gradient-right"><i class="fas fa-address-book"></i> Профиль {{ user.username }}</h4>
         {% endif %}
       </div>
     </div>
@@ -89,7 +90,7 @@
           {% if request.user.password == user.password %}
           <div class="card card-attention">
             <div class="card-body">
-              <h2 class="h5 gradient-right">Почта</h2>
+              <h2 class="h5 gradient-right"><i class="fas fa-envelope"></i> Почта</h2>
               <span class="h4 card-title">{{ user.email }}</span>
             </div>
           </div>
@@ -131,23 +132,23 @@
                 </div>
                 <div class="col">
                   <div>
-                    <h2 class="h5 gradient-right">Telegram</h2>
+                    <h2 class="h5 gradient-right"><i class="fab fa-telegram"></i> Telegram</h2>
                     <span class="h4 text-white">{{ user.profile.nickname_tg|default:"-" }}</span>
                     <hr class="under-info"">
                   </div>
                   <div>
-                    <h2 class="h5 gradient-right">Discord</h2>
+                    <h2 class="h5 gradient-right"><i class="fab fa-discord"></i> Discord</h2>
                     <span class="h4 text-white">{{ user.profile.nickname_ds|default:"-" }}</span>
                     <hr class="under-info">
                   </div>
                   <div>
-                    <h2 class="h5 gradient-right">Создан</h2>
+                    <h2 class="h5 gradient-right"><i class="fas fa-calendar"></i> Создан</h2>
                     <span class="h4 text-white">{{ user.profile.created_at|date:"d.m.Y" }}</span>
                   </div>
                 </div>
                 <div class="row-md-3 mt-4">
                   <hr class="under-info" style="width: 100%;">
-                  <h2 class="h5 gradient-right">Учится в</h2>
+                  <h2 class="h5 gradient-right"><i class="fas fa-graduation-cap"></i> Учится в</h2>
                   <span class="h5 text-white">{{ user.profile.study_at|default:"-" }}</span>
                 </div>
               </div>
@@ -161,20 +162,26 @@
               <div class="card card-attention">
                 <div class="card-body">
                   <div class="row">
-                      <div>
-                        <h2 class="h5 text-white gradient-right">Имя</h2>
-                        <span class="h4 text-white">{{ user.profile.name|default:"-" }}</span>
-                        <hr class="under-info" style="width: 50%;">
-                      </div>
-                      <div>
-                        <h2 class="h5 text-white gradient-right">Фамилия</h2>
-                        <span class="h4 text-white">{{ user.profile.surname|default:"-" }}</span>
-                        <hr class="under-info" style="width: 60%;">
-                      </div>
-                      <div>
-                        <h2 class="h5 text-white gradient-right">Отчество</h2>
-                        <span class="h4 text-white">{{ user.profile.lastname|default:"-" }}</span>
-                      </div>
+                    <div class="col">
+                      <h2 class="h5 text-white gradient-right"><i class="fas fa-users"></i> Группы 
+                        {% if user.group_members.all|length > 6%}
+                        {{ user.group_members.all|length }}
+                        {% endif %}
+                      </h2>
+                      <hr class="under-info" style="width: 50%;">
+                      {% for group in user.group_members.all|slice:":6" %}
+                        <span class="h4 text-white">{{ group.name }}</span>
+                        {% if not forloop.last %}
+                        <hr class="under-info" style="width: {{ 75|divide:forloop.counter|add:'10' }}%;">
+                        {% else %}
+                          {% if user.group_members.all|length > 6 %}
+                            <div class="d-flex justify-content-center">
+                              <span class="h4 gradient-right">. . .</span>
+                            </div>
+                          {% endif %}
+                        {% endif %}
+                      {% endfor %}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -185,7 +192,7 @@
                 <div class="card-body">
                   <div class="row">
                     <div>
-                      <h2 class="h5 gradient-right">Интересы</h2>
+                      <h2 class="h5 gradient-right"><i class="fas fa-clipboard-list"></i> Интересы</h2>
                       {% for tag in user.profile.interests.all %}
                       <span class="h4 gradient-right">#{{ tag }}</span>
                       {% if not forloop.last %}
@@ -209,12 +216,12 @@
           <div class="d-flex justify-content-center">
             <div class="p-2">
               <a href="{% url 'profile_edit' %}">
-                <button class="btn btn-primary">Редактировать Профиль</button>
+                <button class="btn btn-primary"><i class="fas fa-edit"></i> Редактировать Профиль</button>
               </a>
             </div>
             <div class="p-2">
               <a href="{% url 'logout' %}">
-                <button class="btn btn-danger">Выйти</button>
+                <button class="btn btn-danger">Выйти <i class="fas fa-door-open"></i></button>
               </a>
             </div>
           </div>

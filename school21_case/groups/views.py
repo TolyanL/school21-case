@@ -118,6 +118,7 @@ def create_group(request: HttpRequest):
 
             if len(tags):
                 group.save()
+                request.user.profile.groups.add(group)
                 return redirect("my_groups")
             group.delete()
             form.add_error(None, "Please add at least one interest")
@@ -200,6 +201,7 @@ def delete_group(request: HttpRequest, pk: int):
     if request.method == "POST":
         if request.POST.get("yes"):
             group.delete()
+            request.user.profile.groups.remove(group)
             return redirect("my_groups")
         return redirect("group_detail", pk=pk)
 
@@ -218,6 +220,7 @@ def delete_group(request: HttpRequest, pk: int):
 def join_group(request: HttpRequest, pk: int):
     group = get_object_or_404(Group, pk=pk)
     group.members.add(request.user)
+    request.user.profile.groups.add(group)
     return redirect("group_detail", pk=pk)
 
 
@@ -225,4 +228,5 @@ def join_group(request: HttpRequest, pk: int):
 def leave_group(request: HttpRequest, pk: int):
     group = get_object_or_404(Group, pk=pk)
     group.members.remove(request.user)
+    request.user.profile.groups.remove(group)
     return redirect("group_detail", pk=pk)

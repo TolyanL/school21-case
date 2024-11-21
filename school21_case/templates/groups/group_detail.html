@@ -51,7 +51,7 @@
                 </div>
               </div> -->
               <div class="card-body">
-                <h2 class="card-title gradient-right">Участники группы ({{ group.members.all|length }})</h2>
+                <h2 class="card-title gradient-right"><i class="fas fa-users"></i> Участники группы ({{ group.members.all|length }})</h2>
                 <hr class="under-info" style="width: 65%;">
                 <div class="avatar-group">
                   {% for member in group.members.all %}
@@ -75,7 +75,7 @@
                 </div>
                 <div class="d-flex justify-content-center mt-4">
                   <a href="{% url 'group_members' pk=group.pk %}">
-                    <button class="btn btn-primary">Все Участники</button>
+                    <button class="btn btn-primary"><i class="fas fa-align-left"></i> Все Участники</button>
                   </a>
                 </div>
               </div>
@@ -87,7 +87,7 @@
           <div class="col-md">
             <div class="card card-attention">
               <div class="card-body">
-                <h2 class="card-title gradient-right">Описание</h2>
+                <h2 class="card-title gradient-right"><i class="fas fa-book-open"></i> Описание</h2>
                 <hr class="under-info" style="width: 50%;">
                 <p style="color: #cecece;">{{ group.description }}</p>
               </div>
@@ -102,7 +102,7 @@
                 </div>
               </div> -->
               <div class="card-body">
-                <h2 class="card-title gradient-right">Интересы</h2>
+                <h2 class="card-title gradient-right"><i class="fas fa-clipboard-list"></i> Интересы</h2>
                 <hr class="under-info" style="width: 75%;">
                 <span class="h4 gradient-right">{% for tag in group.tags.all %}#{{ tag }} {% endfor %}</span>
               </div>

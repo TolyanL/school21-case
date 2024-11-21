@@ -19,7 +19,7 @@
     <div class="card card-round">
       <div class="card-header">
         <div class="card-head-row card-tools-still-right">
-          <h4 class="card-title gradient-right">Поиск Групп</h4>
+          <h4 class="card-title gradient-right"><i class="fas fa-search"></i> Поиск Групп</h4>
         </div>
 
         <div class="row mt-2">
@@ -54,9 +54,9 @@
 
         {% if not just_loaded %}
           {% if groups %}
-          <p class="card-category">Результаты поиска по запросу <i>{{ search_query }}</i></p>
+          <p class="card-category"><i class="fas fa-search-plus"></i> Результаты поиска по запросу <i>{{ search_query }}</i></p>
           {% else %}
-          <p class="card-category text-danger">По вашему запросу <i>{{ search_query }}</i> ничего не найдено</p>
+          <p class="card-category text-danger"><i class="fas fa-search-minus"></i> По вашему запросу <i>{{ search_query }}</i> ничего не найдено</p>
           {% endif %}
         {% endif %}
 
@@ -93,7 +93,7 @@
           {% endfor %}
           {% else %}
           <div class="text-center mb-3">
-            <h4 class="card-title gradient-right">Популярные Группы</h4>
+            <h4 class="card-title gradient-right"><i class="fas fa-user-astronaut"></i> Популярные Группы</h4>
           </div>
           {% for group in groups %}
             <div class="row-12 row-sm-6 row-lg-4">
