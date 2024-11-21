@@ -19,8 +19,8 @@ class ProfileSearchForm(forms.Form):
 
 
 class LoginForm(forms.Form):
-    email = forms.EmailField(label="Email", widget=forms.EmailInput)
-    password = forms.CharField(label="Password", widget=forms.PasswordInput)
+    email = forms.EmailField(label="Электоронная почта", widget=forms.EmailInput)
+    password = forms.CharField(label="Пароль", widget=forms.PasswordInput)
 
 
 class RegistrationForm(UserCreationForm):
