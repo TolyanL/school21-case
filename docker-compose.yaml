@@ -32,7 +32,7 @@ services:
 
   case_db:
     container_name: case_db
-    image: postgres:15
+    image: postgres:17
     volumes:
       - case_data:/var/lib/postgresql/data/
     networks:
