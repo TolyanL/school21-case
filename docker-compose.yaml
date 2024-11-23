@@ -1,9 +1,7 @@
-version: '3.8'
-
 networks:
     traefik-net:
       name: traefik-net
-      external: true
+      external: false
     case-net:
       name: case-net
       driver: bridge
@@ -16,7 +14,7 @@ services:
         DJANGO_ENV: production
     restart: unless-stopped
     container_name: case_web
-    command: gunicorn school21_case.wsgi:application --bind 0.0.0.0:8000 --workers=4 --log-file=- --worker-tmp-dir='/dev/shm'
+    command: gunicorn school21_case/school21_case.wsgi:application --bind 0.0.0.0:8000 --workers=4 --log-file=- --worker-tmp-dir='/dev/shm'
     volumes:
       - django-media:/code/media
       - django-static:/code/static

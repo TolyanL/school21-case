@@ -1,4 +1,4 @@
-FROM python:3.10.7-slim-bullseye AS development_build
+FROM python:3.12.3-slim-bullseye AS development_build
 
 # `DJANGO_ENV` arg is used to make prod / dev builds:
 ARG DJANGO_ENV \
@@ -78,7 +78,6 @@ RUN --mount=type=cache,target="$POETRY_CACHE_DIR" \
   # Install deps:
   && poetry run pip install -U pip \
   && poetry install \
-    $(if [ "$DJANGO_ENV" = 'production' ]; then echo '--only main'; fi) \
     --no-interaction --no-ansi --sync
 
 # Running as non-root user:

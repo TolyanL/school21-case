@@ -1,3 +1,9 @@
+[tool.poetry]
+name = "your_project_name"
+version = "0.1.0"
+description = "A short description of your project"
+authors = ["Your Name <you@example.com>"]
+
 [project]
 name = "school21-case"
 version = "0.1.0"
@@ -14,5 +20,7 @@ dependencies = [
     "requests>=2.32.3",
 ]
 
-[tool.poetry]
-package-mode = false
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+

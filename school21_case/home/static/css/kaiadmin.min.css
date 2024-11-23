@@ -9737,3 +9737,7 @@ body[data-background-color=dark2] .jvm-zoom-btn,body[data-background-color=dark]
     font-size: 17px;
     color: white !important;
 }
+.btn-hover-gray:hover {
+    background-color: gray;
+    color: white; 
+}
