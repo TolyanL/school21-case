@@ -9,14 +9,14 @@ networks:
       driver: bridge
 
 services:
-  fortnitegg_web:
+  case_web:
     build:
       target: production_build
       args:
         DJANGO_ENV: production
     restart: unless-stopped
     container_name: case_web
-    command: gunicorn school12_case.wsgi:application --bind 0.0.0.0:8000 --workers=4 --log-file=- --worker-tmp-dir='/dev/shm'
+    command: gunicorn school21_case.wsgi:application --bind 0.0.0.0:8000 --workers=4 --log-file=- --worker-tmp-dir='/dev/shm'
     volumes:
       - django-media:/code/media
       - django-static:/code/static
@@ -24,23 +24,23 @@ services:
       - case-net
     environment:
       - DJANGO_ENV=production
-      - DB_HOST=fortnitegg_db
-      - DB_PORT=5432
-      - DB_NAME=fortnitegg_db
-      - DB_USER=fortnitegg_db
-      - DB_PASSWORD=12345
+      - DB_HOST=${DB_HOST}
+      - DB_PORT=${DB_PORT}
+      - DB_NAME=${DB_NAME}
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
 
   case_db:
     container_name: case_db
-    image: postgres:17
+    image: postgres:15
     volumes:
       - case_data:/var/lib/postgresql/data/
     networks:
       - case-net
     environment:
-      - POSTGRES_USER=fortnitegg_db
-      - POSTGRES_PASSWORD=12345
-      - POSTGRES_DB=fortnitegg_db
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_DB=${DB_NAME}
 
   case_nginx:
     build: ./nginx
@@ -53,74 +53,7 @@ services:
       - ./nginx/letsencrypt:/usr/share/nginx/html/letsencrypt:rw
     labels:
       - traefik.enable=true
-      - traeversion: '3.8'
-
-networks:
-    traefik-net:
-      name: traefik-net
-      external: true
-    casee-net:
-      name: case-net
-      driver: bridge
-
-services:
-  fortnitegg_web:
-    build:
-      target: production_build
-      args:
-        DJANGO_ENV: production
-    restart: unless-stopped
-    container_name: fortnitegg_web
-    command: gunicorn fortnitenews.wsgi:application --bind 0.0.0.0:8000 --workers=4 --log-file=- --worker-tmp-dir='/dev/shm'
-    volumes:
-      - django-media:/code/media
-      - django-static:/code/static
-    networks:
-      - fortnite-net
-    environment:
-      - DJANGO_ENV=production
-      - DB_HOST=fortnitegg_db
-      - DB_PORT=5432
-      - DB_NAME=fortnitegg_db
-      - DB_USER=fortnitegg_db
-      - DB_PASSWORD=12345
-
-  case_db:
-    container_name: fortnitegg_db
-    image: postgres:15
-    volumes:
-      - case_data:/var/lib/postgresql/data/
-    networks:
-      - case-net
-    environment:
-      - POSTGRES_USER=fortnitegg_db
-      - POSTGRES_PASSWORD=12345
-      - POSTGRES_DB=fortnitegg_db
-
-  fortnitegg_nginx:
-    build: ./nginx
-    volumes:
-      - django-media:/code/media
-      - django-static:/code/static
-      - ./nginx/ssl:/etc/nginx/ssl
-      - ./nginx/config:/etc/nginx/config
-      - ./nginx/nginx.conf:/etc/nginx/conf.d/nginx.conf
-      - ./nginx/letsencrypt:/usr/share/nginx/html/letsencrypt:rw
-    labels:
-      - traefik.enable=true
-      # - traefik.http.routers.nginx.rule=Host(``) || Host(`www.`)
-      - traefik.http.services.nginx.loadbalancer.server.port=80
-    networks:
-      - case-net
-      - traefik-net
-    container_name: case_nginx
-    depends_on:
-      - case_db
-
-volumes:
-  django-media:
-  django-static:
-  fortnitegg_data:fik.http.routers.nginx.rule=Host(`fortnitegg.ru`) || Host(`www.fortnitegg.ru`)
+      - traefik.http.routers.nginx.rule=Host(`case.ru`) || Host(`www.case.ru`)
       - traefik.http.services.nginx.loadbalancer.server.port=80
     networks:
       - case-net
